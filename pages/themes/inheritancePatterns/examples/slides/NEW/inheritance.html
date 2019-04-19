@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Prototype Pattern</title>
+</head>
+<body>
+
+<script type="text/javascript">
+	var examples = {
+		'prototypeChain': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var obj = {
+				name: 'Ada'
+			};
+			console.dir(obj);
+
+			obj.__proto__ = {
+				id : 1,
+			}
+
+			console.log(`id: ${obj.id}`);
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'prototypalInheritanceOfObjectLiteralsUsingConstructors': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			// create 'Car' constructor
+			var Car = function(manufacturer, speed){
+				this.manufacturer = manufacturer || undefined;
+				this.speed= speed || 100;
+			}
+			Car.prototype= {
+				drive: function(){
+					if (this.wings >= 2){
+						console.log(`Flying wiht ${this.speed} km/h`);
+					}else{
+						console.log(`Driving wiht ${this.speed} km/h`);
+					}
+				}
+			}
+
+			// create 'Ford' constructor
+			var Ford = function( speed){
+				var manufacturer = 'Ford';
+				// use the parent constructor
+				Car.apply(this, [manufacturer, speed]);
+			}
+			// set the prototype chain
+			Ford.prototype.__proto__ = Car.prototype;
+
+			// create 'ford' object
+			var ford = new Ford(200);
+
+			// create 'theFordOfPesho' object
+			var theFordOfPesho = new Ford(300);
+			theFordOfPesho.wings = 2;
+
+
+			ford.drive();
+			theFordOfPesho.drive();
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'prototypalInheritanceOfObjectLiteralsUsingDunderProto': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			// create 'car' object
+			var car = {
+				manufacturer: undefined,
+				speed: 100,
+				drive: function(){
+					if (this.wings >= 2){
+						console.log(`Flying wiht ${this.speed} km/h`);
+					}else{
+						console.log(`Driving wiht ${this.speed} km/h`);
+					}
+				}
+			}
+
+			// create the 'ford' object
+			var ford = {
+				// make 'ford' to inherit from 'car'
+				__proto__ : car,
+				manufacturer: "Ford",
+				speed: 200,
+			}
+
+			// create 'theFordOfPesho' object
+			var theFordOfPesho = {
+				// make 'theFordOfPesho' to inherit from 'ford'
+				__proto__ : ford,
+				wings: 2,
+				speed: 300,
+			}
+
+			ford.drive();
+			theFordOfPesho.drive();
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'prototypalInheritanceOfObjectLiteralsUsingObjectCreate': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			// create 'car' object
+			var car = {
+				manufacturer: undefined,
+				speed: 100,
+				drive: function(){
+					if (this.wings >= 2){
+						console.log(`Flying wiht ${this.speed} km/h`);
+					}else{
+						console.log(`Driving wiht ${this.speed} km/h`);
+					}
+				}
+			}
+			// create 'ford' and make it to inherit from 'car'
+			var ford = Object.create( car, {
+				manufacturer: {value: "Ford"},
+				speed: {value: 200},
+			})
+
+			// create 'theFordOfPesho' and make it to inherit from 'ford'
+			var theFordOfPesho = Object.create(ford, {
+				wings: {value: 2},
+				speed: {value: 300},
+			})
+
+			ford.drive();
+			theFordOfPesho.drive();
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'prototypalInheritanceOfObjectConstructors': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			// Animal constructor
+			var Animal = function(food){
+				this.food = food;
+			}
+			Animal.prototype.eat = function(){
+				console.log(`${this.name} is eating ${this.food}`);
+			}
+
+			// Cat constructor
+			var Cat = function(name, food){
+				// reuse the Animal Constructor
+				Animal.call(this, food);
+				this.name = name || 'Tom';
+			}
+			// Cat objects will inherit from Animal.prototype
+			Cat.prototype = Object.create(Animal.prototype);
+
+			// Cat instance
+			var tom = new Cat('Tom', 'cheese');
+			tom.eat();
+
+
+
+
+
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'multiplePrototypalInheritanceByConstructor': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			// CarConstructor()
+			var CarConstructor = function() {};
+			CarConstructor.prototype = {
+				drive: function(){
+					console.log(`${this.model} is driving with ${this.speed} km/h!`);
+				}
+			}
+
+			// FerrariConstructor(model, speed)
+			var FerrariConstructor = function(){
+				this.model = model || 'A Ferarri Constructor';
+				this.speed = speed || 300;
+			};
+			FerrariConstructor.prototype = {
+				manufacturer: 'Ferrari',
+
+			}
+			// FerrariConstructor objects will inherits from CarConstructor().prototype
+			FerrariConstructor.prototype.__proto__ = CarConstructor.prototype;
+
+			// FordConstructor()
+			var FordConstructor = function(model, speed){
+				this.model = model || 'A Ford Constructor';
+				this.speed = speed || 300;
+			};
+			FordConstructor.prototype = {
+				manufacturer: "Ford",
+				fly:  function(){
+					if(this.canFly){
+						console.log(`${this.model} is flying with ${this.speed} km/h :)`);
+					}else{
+						console.log(`Sorry, I still can not fly :(`);
+					}
+				}
+			}
+			// FordConstructor objects will inherits from CarConstructor().prototype
+			FordConstructor.prototype.__proto__ = CarConstructor.prototype;
+
+			// var focusElectric = new FordConstructor() {
+			// 	model: {value: 'Focus Electric'},
+			// 	battery: {value: '33.5 kWh'},
+			// 	speed: {value: 135},
+			// 	canFly: {value: false},
+			// })
+			// var flivver = Object.create(fordProto, {
+			// 	model: {value: 'Flivver'},
+			// 	speed: {value: 145},
+			// 	canFly: {value: true},
+			// })
+
+
+			// ferrariProto.drive();
+			// focusElectric.drive();
+			// flivver.drive();
+			// flivver.fly();
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'multiplePrototypalInheritanceByObjectCreate': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var carProto = {
+				drive: function(){
+					console.log(`${this.model} is driving with ${this.speed} km/h!`);
+				}
+			}
+
+			var ferrariProto = Object.create(carProto, {
+				manufacturer: {value: 'Ferrari'},
+				model: {value: 'A Ferarri Prototype'},
+				speed: {value: 300},
+			})
+
+
+			var fordProto = Object.create(carProto);
+			fordProto.manufacturer= "Ford";
+			fordProto.model = 'A Ford Prototype';
+			fordProto.fly = function(){
+				if(this.canFly){
+					console.log(`${this.model} is flying with ${this.speed} km/h :)`);
+				}else{
+					console.log(`Sorry, I still can not fly :(`);
+				}
+			}
+
+
+			var focusElectric = Object.create(fordProto, {
+				model: {value: 'Focus Electric'},
+				battery: {value: '33.5 kWh'},
+				speed: {value: 135},
+				canFly: {value: false},
+			})
+			var flivver = Object.create(fordProto, {
+				model: {value: 'Flivver'},
+				speed: {value: 145},
+				canFly: {value: true},
+			})
+
+
+			ferrariProto.drive();
+			focusElectric.drive();
+			flivver.drive();
+			flivver.fly();
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+	}
+
+	examples.prototypalInheritanceOfObjectConstructors();
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>bindTHIS</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+	var makeA = function(id){
+		var obj = {};
+		obj.id = id;
+
+		makeA.i++;
+		console.log("makeA.i:", makeA.i);
+		return obj;
+	}
+
+
+
+	makeA.i = makeA.i || 0;
+	var a1 = makeA(1);
+	var a2 = makeA(1);
+	var a3 = makeA(1);
+	var a4 = makeA(1);
+
+
+</script>
+</html>

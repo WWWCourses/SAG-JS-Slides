@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>/home/nemsys/projects/freelance/courses/ProgressBG/JS2/public/pages/themes/OOPinJS/examples/tmp/__proto__-constructor-prototype.html</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+	var AppleMaker = function(id, price){
+		this.id = id,
+		this.price = price;
+	}
+
+	console.clear();
+	var apple1 = new AppleMaker(1, [1,1.5]);
+	var apple2 = new AppleMaker(2, [2,2.5]);
+
+	// Object's __proto__ is == Object Constructor prototype
+	console.log("apple1.__proto__ === AppleMaker.prototype",
+		         apple1.__proto__ === AppleMaker.prototype);
+
+
+
+
+
+	AppleMaker.prototype.logMe = function(){
+		console.log("AppleMaker: ", AppleMaker);
+	}
+
+
+</script>
+</html>

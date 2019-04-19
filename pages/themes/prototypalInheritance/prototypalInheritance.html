@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>prototypalInheritance</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<!-- css & themes include -->
+	<link rel="stylesheet" href="../../../lib/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../../../outfit/css/themes/projector.css" id="theme">
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? '../../../lib/reveal.js/css/print/pdf.css' : '../../../lib/reveal.js/css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+	<!-- CUSTOM -->
+	<base target="_blank">
+</head>
+<body>
+	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+		<div class="top_links">
+			<a class="home_link" href="/ProgressBG-JS-Advanced_React/index.html#Course_Intro" target="_top"><i class="fa fa-home"></i></a>
+			<span class="help_link"><i class="fa fa-question"></i></span>
+			<div class="help_text">
+				<div><span>N/Спейс</span><span>следващ слайд</span></div>
+				<div><span>P</span><span>предишен слайд</span></div>
+				<div><span>O</span><span>всички слайдове</span></div>
+				<div><span>ctrl+left click</span><span>увеличава елемента</span></div>
+			</div>
+		</div>
+		<div class="footer theme_switch">
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/dark.css'); return false;">Dark</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/light.css'); return false;">Light</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/projector.css'); return false;">Projector</a>
+		</div>
+		<div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>OOP - Inheritance in JavaScript</h1></section>
+<section data-transition="zoom">
+	<div class="copyright">
+		<div class="note">
+			<p>Created for</p>
+		</div>
+		<div class="company">
+			<a href="http://progressbg.net/kurs-po-web-design/">
+				<img style="height:80%" src="../../../outfit/images/logos/ProgressBG_logo_529_127.png">
+			</a>
+		</div>
+		<div class="author">
+			<span>Iva E. Popova, 2018-2019,</span>
+			<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+		</div>
+	</div>
+</section>
+
+<section><h2>Classical (class-based) Inheritance vs. Prototypal Inheritance</h2>
+	<section><h3>Classical  (class-based) Inheritance</h3>
+		<p class="note">Classes inherits from classes!</p>
+		<a href="images/class-basedInheritance.png"><img src="images/class-basedInheritance.png" style="height: 60vh;"></a>
+	</section>
+	<section><h3>Classical (class-based) Inheritance</h3>
+		<dl class="fa">
+			<dt>The inheritance is based on copies! I.e. when a child class inherits its parents members, they are actually <span class="note">copied</span> to the child class.</dt>
+			<dt>The Cons?</dt>
+			<dd>Gorilla / Banana problem</dd>
+			<dd>Tight Coupling Problem</dd>
+			<dd>Duplication by Necessity Problem</dd>
+		</dl>
+	</section>
+	<section><h3>Prototypal Inheritance</h3>
+		<dl class="fa">
+			<dt>Objects inherits from objects!</dt>
+		</dl>
+		<p><a href="images/prototypalInheritance.png"><img src="images/prototypalInheritance.png"></a></p>
+	</section>
+	<section><h3>Prototypal Inheritance</h3>
+		<dl class="fa">
+			<dt>The inheritance is based on <span class="note"> a prototype chain</span>! As a result, each child will be able to <span class="note">access by reference</span> its prototype.</dt>
+			<dt>Pros?</dt>
+			<dd>Changing prototype definitions dynamically!</dd>
+		</dl>
+	</section>
+</section>
+
+<section><h2>Let's got deep - what's in a object?</h2>
+	<section><h3>at Object Literal</h3>
+		<pre><code rel="JS" class="js">
+			var car = {};
+		</code></pre>
+		<img src="images/objectCreationInternals.png">
+	</section>
+	<section style="font-size: .8em;"><h3>at  Constructor (what  does it do?)</h3>
+		<pre><code rel="JS" class="js">
+			var Car = function(){};
+			var ford = new Car();
+			var BMV = new Car();
+		</code></pre>
+		<a href="images/whatNewDo.png"><img src="images/whatNewDo.png" style="height: 55vh;"></a>
+	</section>
+	<section style="font-size: .8em"><h3>at  Factory</h3>
+		<pre><code rel="JS" class="js">
+			var carFactory = function(){ return {} }
+			var ford = carFactory();
+			var BMV = carFactory();
+		</code></pre>
+		<a href="images/whatFactoryDo.png"><img src="images/whatFactoryDo.png" style="height: 55vh;"></a>
+	</section>
+	<section><h3>Factory vs Constructor</h3>
+		<pre><code rel="JS" class="js">
+			function CarConstructor(){};
+
+			CarConstructor.prototype.sayHello=function(){
+				console.log(`Hello from CarConstructor.prototype`);
+			}
+			// creating objects with Constructor will set the "__proto__" to the Constructor.prototype
+			var constructedCar = new CarConstructor();
+
+			constructedCar.sayHello();
+			//Hello from CarConstructor.prototype
+
+			function CarFactory(){
+				return {}
+			};
+			CarFactory.prototype.sayHello=function(){
+				console.log(`Hello from CarFactory.prototype`);
+			}
+			// creating objects with factory will NOT set the "__proto__" to the Factory.prototype
+			var fabricatedCar = CarFactory();
+
+			fabricatedCar.sayHello();
+			//TypeError: fabricatedCar.sayHello is not a function
+		</code></pre>
+	</section>
+</section>
+
+<section><h2>Classical (class-based) Inheritance in JavaScript</h2>
+	<section><h3>example</h3>
+		<pre><code rel="JS" class="js">
+			// create 'Car' constructor
+			var Car = function(manufacturer, speed){
+				this.manufacturer = manufacturer || undefined;
+				this.speed= speed || 100;
+			}
+			Car.prototype= {
+				drive: function(){
+					if (this.wings >= 2){
+						console.log(`Flying wiht ${this.speed} km/h`);
+					}else{
+						console.log(`Driving wiht ${this.speed} km/h`);
+					}
+				}
+			}
+
+			// create 'Ford' constructor
+			var Ford = function( speed){
+				var manufacturer = 'Ford';
+				// use the parent constructor
+				Car.apply(this, [manufacturer, speed]);
+			}
+			// set the prototype chain
+			Ford.prototype.__proto__ = Car.prototype;
+
+			// create 'ford' object
+			var ford = new Ford(200);
+
+			// create 'theFordOfPesho' object
+			var theFordOfPesho = new Ford(300);
+			theFordOfPesho.wings = 2;
+
+
+			ford.drive();
+			theFordOfPesho.drive();
+		</code></pre>
+	</section>
+	<section><h3>diagram</h3>
+		<a href="images/prototypalInheritanceOfObjectLiteralsUsingConstructors.png"><img src="images/prototypalInheritanceOfObjectLiteralsUsingConstructors.png"></a>
+	</section>
+</section>
+
+<section><h2>Prototypal Inheritance in JavaScript</h2>
+	<section><h3>The Prototype Chain</h3>
+	<dl class="fa">
+		<dt>Each JavaScript object has a <span class="note">prototype object</span></dt>
+		<dt>An object "inherits" - i.e. has access to all members of its prototype.</dt>
+		<dt>An object prototype is just an object, so it can also have prototype from which to inherit from.</dt>
+		<dt>This is known as the <span class="note">prototype chain!</span></dt>
+	</dl>
+	</section>
+	<section style="font-size: .6em;"><h3>Prototypal Inheritance of Object Literals using '__proto__'  - example</h3>
+		<pre style="width: 100%"><code rel="JS" class="js">
+			// create 'car' object
+			var car = {
+				manufacturer: undefined,
+				speed: 100,
+				drive: function(){
+					if (this.wings >= 2){
+						console.log(`Flying wiht ${this.speed} km/h`);
+					}else{
+						console.log(`Driving wiht ${this.speed} km/h`);
+					}
+				}
+			}
+
+			// create the 'ford' object
+			var ford = {
+				// make 'ford' to inherit from 'car'
+				__proto__ : car,
+				manufacturer: "Ford",
+				speed: 200,
+			}
+
+			// create 'theFordOfPesho' object
+			var theFordOfPesho = {
+				// make 'theFordOfPesho' to inherit from 'ford'
+				__proto__ : ford,
+				wings: 2,
+				speed: 300,
+			}
+
+			ford.drive();
+			theFordOfPesho.drive();
+		</code></pre>
+	</section>
+	<section><h3 style="font-size: .8em;">Prototypal Inheritance of Object Literals using '__proto__' - notes</h3>
+		<dl class="fa">
+			<dt>Be careful when using <code>__proto__</code></dt>
+			<dd><a class="advanced" href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer#Prototype_mutation">Prototype_mutation on MDN</a></dd>
+			<dt>Do not use <code>__proto__</code> outside of object literals!</dt>
+		</dl>
+	</section>
+	<section><h3>Prototypal Inheritance of Object Literals using '__proto__'  - diagram</h3>
+		<a href="images/prototypalInheritanceOfObjectLiteralsUsingDunderProto.png"><img src="images/prototypalInheritanceOfObjectLiteralsUsingDunderProto.png"></a>
+	</section>
+	<section style="font-size: .8em;"><h3>Prototypal Inheritance of Object Literals using Object.create() - example</h3>
+		<pre><code rel="JS" class="js">
+			// create 'car' object
+			var car = {
+				manufacturer: undefined,
+				speed: 100,
+				drive: function(){
+					if (this.wings >= 2){
+						console.log(`Flying wiht ${this.speed} km/h`);
+					}else{
+						console.log(`Driving wiht ${this.speed} km/h`);
+					}
+				}
+			}
+			// create 'ford' and make it to inherit from 'car'
+			var ford = Object.create( car, {
+				manufacturer: {value: "Ford"},
+				speed: {value: 200},
+			})
+
+			// create 'theFordOfPesho' and make it to inherit from 'ford'
+			var theFordOfPesho = Object.create(ford, {
+				wings: {value: 2},
+				speed: {value: 300},
+			})
+
+			ford.drive();
+			theFordOfPesho.drive();
+		</code></pre>
+	</section>
+	<section style="font-size: .7em;"><h3>Prototypal Inheritance of Object Literals using Object.create() - diagram</h3>
+		<a href="images/prototypalInheritanceOfObjectLiteralsUsingObjectCreate.png"><img src="images/prototypalInheritanceOfObjectLiteralsUsingObjectCreate.png" style="height: 55vh;"></a>
+		<dl class="fa">
+			<dt>Yes, the diagram is identical with the one with '<code>__proto__</code>'</dt>
+			<dt class="note">It's better and safe to use <code>Object.create() </code> aproach, instead of '<code>__proto__</code>'</dt>
+		</dl>
+	</section>
+	<section><h3>Prototypal Inheritance of constructed objects</h3>
+		<pre><code rel="JS" class="js">
+			// Animal constructor
+			var Animal = function(food){
+				this.food = food;
+			}
+			Animal.prototype.eat = function(){
+				console.log(`${this.name} is eating ${this.food}`);
+			}
+
+			// Cat constructor
+			var Cat = function(name, food){
+				// reuse the Animal Constructor
+				Animal.call(this, food);
+				this.name = name || 'Tom';
+			}
+			// Cat objects will inherit from Animal.prototype
+			Cat.prototype = Object.create(Animal.prototype);
+
+			// Cat instance
+			var tom = new Cat('Tom', 'cheese');
+			tom.eat();
+		</code></pre>
+	</section>
+
+	<!-- <section><h3>Prototypal Inheritance - How it works?</h3>
+		<img src="images/Prototype Inheritance.png">
+	</section> -->
+</section>
+
+<!-- <section><h2>Inheritance with Classes in ES6</h2>
+	<dl class="fa">
+		<dt>Live Demo</dt>
+		<dt>Reference: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes">Classes @MDN</a></dt>
+	</dl>
+</section> -->
+
+<section data-min="5"><h1>Reference</h1></section>
+<section><h2>Reference</h2>
+	<section><h3><a href="https://hackernoon.com/understand-nodejs-javascript-object-inheritance-proto-prototype-class-9bd951700b29">More on __proto__, [[prototype]] and prototype</a></h3>
+		<a href="https://hackernoon.com/understand-nodejs-javascript-object-inheritance-proto-prototype-class-9bd951700b29"><img src="images/theChickenOrTheEgg.jpeg" style="height: 50vh;"></a>
+	</section>
+</section>
+
+<section data-min="5"><h1>Exercises</h1></section>
+<section><h2>Exercises</h2>
+  <section style="font-size:.6em;" id="DeveloperManagerPersonTaskDescription"><h3>Developer_Manager_Person - task description</h3>
+  	<dl class="fa">
+  		<dt>Create a <span class="note">Person Constructor</span> with following fields:</dt>
+  		<dd><code class="note">name</code>: string</dd>
+  		<dd><code class="note">age</code>: numbers</dd>
+  		<dd><code class="note">greet</code>: function, which prints out 'Hi, I'm ${this.name} and I'm ${this.age} years old'</dd>
+  		<dt>Create a <span class="note">Developer Constructor</span> with following fields:</dt>
+  		<dd><code class="note">name</code>: string</dd>
+  		<dd><code class="note">age</code>: numbers</dd>
+  		<dd><code class="note">skillset</code>: array of a developer skillsets</dd>
+  		<dt>Create a <span class="note">Manager Constructor</span> with following fields:</dt>
+  		<dd><code class="note">name</code>: string</dd>
+  		<dd><code class="note">age</code>: numbers</dd>
+  		<dd><code class="note">managees</code>: array of managee developers</dd>
+  		<dt class="note">The Developer and Manager objects should inherit from Person the <code>greet</code> method</dt>
+  	</dl>
+  </section>
+  <section style="font-size:.6em;" id="DeveloperManagerPersonCodeTemplate"><h3>Developer_Managaer_Person - code template</h3>
+  	<p>You can use the next code template to bootstrap your solution:</p>
+  	<pre><code rel="JS" class="js">
+  		// Person constructor
+  		let Person = function(name, age){
+  		  // your code here ...
+  		}
+  		// Person methods
+  		// your code here ...
+
+  		// Manager constructor
+  		let Manager = function(name, age, managees){
+  		  // your code here ...
+  		}
+  		// Manager objects should inherit all methods from Person:
+  		// your code here ...
+
+  		// Developer constructor
+  		let Developer = function(name, age, skillset){
+  		  // your code here ...
+  		}
+  		// Developer objects should inherit all methods from Person:
+  		// your code here ...
+
+  		// Developer instance
+  		let maria = new Developer('Maria Popova', 23, ['Python', 'Machine Learning']);
+  		let pesho = new Developer('Petar Petrov', 19, ['JavaScript', 'Angular', 'React', 'Vue']);
+
+  		// Manager instance
+  		let gates = new Manager('Bill Gates', 43, [maria, pesho]);
+
+  		// use the objects:
+  		maria.greet();
+  		pesho.greet();
+  		gates.greet();
+  	</code></pre>
+  </section>
+  <section style="font-size:.6em;" id="DeveloperManagerPersonExpectedResults"><h3>Developer_Managaer_Person - expected results</h3>
+  	<pre><code rel="JS" class="js">
+  		Hi, I'm Maria Popova and I'm 23 years old
+
+  		Hi, I'm Petar Petrov and I'm 19 years old
+
+  		Hi, I'm Bill Gates and I'm 43 years old
+  	</code></pre>
+  </section>
+  <section style="font-size:.6em;"><h3>Developer_Manager_Person - advanced task description</h3>
+  	<dl class="fa">
+  		<dt>Overwrite the <code>greet()</code> method for Developer and Manager objects, such that the same code execution as given in the <a href="#DeveloperManagerPersonCodeTemplate">previous template</a> will produce next output:</dt>
+  	</dl>
+  	<pre><code rel="JS" class="js">
+  		Hi, I'm Maria Popova and I'm 23 years old
+  		  I know Python,Machine Learning
+
+  		Hi, I'm Petar Petrov and I'm 19 years old
+  		  I know JavaScript,Angular,React,Vue
+
+  		Hi, I'm Bill Gates and I'm 43 years old
+  		    I manage Maria Popova,Petar Petrov,
+  	</code></pre>
+  </section>
+</section>
+
+<!-- <section data-notes="20min"><h2>SectionTitle</h2>
+		<section>
+				<aside class="notes">
+						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+				</aside>
+		</section>
+	</section> -->
+
+	<section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
+		<p>These slides are based on</p>
+		<p>customised version of </p>
+		<p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+		<p>framework</p>
+	</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+</div>
+</div>
+<!-- Custom processing -->
+<script src="../../../outfit/js/slides.js"></script>
+<!-- external scripts -->
+<script src="../../../lib/reveal.js/lib/js/head.min.js"></script>
+<script src="../../../lib/reveal.js/js/reveal.js"></script>
+<!-- init reveal -->
+<script>
+	// Full list of configuration options available at:
+	// https://github.com/hakimel/reveal.js#configuration
+	var highlightjsTabSize = '  ';
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		slideNumber: 'c/t',
+		keyboard: true,
+		history: true,
+		center: true,
+		// width: 1024,
+		// width: '100%',
+		// height: 860,
+		height: '100%',
+		// Bounds for smallest/largest possible scale to apply to content
+		minScale: .5,
+		maxScale: 1,
+		// slide transition
+		transition: 'concave', // none/fade/slide/convex/concave/zoom
+		// Factor of the display size that should remain empty around the content
+		margin: 0.1,
+		// shift+maous click to zoom in/out element
+		zoomKey: 'ctrl',
+		// theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+		// transition: Reveal.getQueryHash().transition || 'default'
+		// Optional reveal.js plugins
+		dependencies: [
+		{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+		{ src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		{ src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad(); } },
+		{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+		{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
+		]
+	});
+</script>
+</body>
+</html>

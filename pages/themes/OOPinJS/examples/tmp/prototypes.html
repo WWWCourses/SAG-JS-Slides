@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>prototypes</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+	var appleFactory = function( color, prices){
+		var self = {};
+
+		// private members
+		var secret = "abracadabra";
+
+		// public members
+		self.color = color;
+		self.prices = prices;
+
+
+		self.calcMinPrice = function(){
+			return	Math.min( ...self.prices);
+		};
+		self.openSezam = function( secret ){
+			console.log("openSezam secret: ", secret);
+
+		}
+
+
+		return	self;
+	}
+
+	var apple1 = appleFactory("red", [1, 2, 3]);
+	var apple2 = appleFactory("red", [1, 2, 3]);
+	console.log("apple1:", apple1);
+	console.log("apple1.secret:", apple1.secret);
+
+	apple1.openSezam( "now" );
+	console.log("apple1.secret:", apple1.secret);
+</script>
+</html>

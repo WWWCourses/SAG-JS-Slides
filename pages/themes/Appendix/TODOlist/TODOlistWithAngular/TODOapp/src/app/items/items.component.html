@@ -1,0 +1,5 @@
+<h1>The {{title}} section</h1>
+<!-- <div *ngFor="let item of items">
+	<li>{{item.content}}, {{item.checked}}</li>
+</div> -->
+<item *ngFor="let item of items" [item]="item"></item>

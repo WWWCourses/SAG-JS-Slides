@@ -1,0 +1,13 @@
+h1{
+	margin: 0;
+	padding: 0;
+}
+/*>>> li*/
+/*:host >>> li*/
+/*:host could be skipped - check specs...;*/
+li{
+	list-style-type: none;
+}
+
+.red{background: red;}
+.f2{font-size: 2em;}

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>slidesExamples</title>
+</head>
+<body>
+
+<script type="text/javascript">
+	var singelton = {
+		'cachingTheSingularInstance': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			function Car(name, speed) {
+				// check for existing instance
+				if (typeof Car.instance === "object"){
+					return Car.instance;
+				}
+
+				// set instance properties
+				this.name = name || 'Car';
+				this.speed = speed || 180;
+
+				// cache the instance
+				Car.instance = this;
+			}
+
+			// lets try to create 2 instances
+			var car1 = new Car('car1', 200);
+			var car2 = new Car('car2', 300);
+
+			// test if we have ONLY ONE instance:
+			console.log(car1 === car2);
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'instanceInAClosure': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			function Car(name, speed) {
+				// cache the instance
+				var instance = this;
+
+				// set instance properties
+				this.name = name || 'Car';
+				this.speed = speed || 180;
+
+				// rewrite the constructor
+				Car = function(){
+					return instance;
+				};
+			}
+
+			// lets try to create 2 instances
+			var car1 = new Car('car1', 200);
+			var car2 = new Car('car2', 300);
+
+			// test if we have ONLY ONE instance:
+			console.log(car1 === car2);
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+	};
+
+	var modules = {
+		'asLiteral': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var myModule = {
+				config: {
+					encoding: 'UTF8',
+					maxLength: '2048'
+				},
+
+				log: function(value, msg){
+					msg?
+						console.log(`${msg}: ${value}\n\n`):
+						console.log(`${value}\n\n`);
+
+				}
+			}
+
+			var m = myModule;
+
+			for( conf in m.config){
+				m.log( m.config[conf], conf);
+			}
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'theModulePattern': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var myModule = (function(){
+				// private
+				var config = {
+					encoding: 'UTF8',
+					maxLength: '2048'
+				};
+
+				var log = function(value, msg){
+					msg?
+						console.log(`${msg}: ${value}\n\n`):
+						console.log(`${value}\n\n`);
+
+				};
+
+				// API
+				var showConfig =  function(){
+					for( c in this.config ){
+						this.log(this.config[c], this.config)
+					}
+				}
+
+				return {
+					showConfig: showConfig
+				}
+			})();
+
+			myModule.showConfig();
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		}
+	}
+
+	var builder = {
+		'tournament': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var Event = (function () {
+				function Event(name) {
+					this.name = name;
+				}
+				return Event;
+			})();
+			var Westeros = {};
+
+			Westeros.Event = Event;
+			var Prize = (function () {
+				function Prize(name) {
+					this.name = name;
+				}
+				return Prize;
+			})();
+			Westeros.Prize = Prize;
+			var Attendee = (function () {
+				function Attendee(name) {
+					this.name = name;
+				}
+				return Attendee;
+			})();
+			Westeros.Attendee = Attendee;
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+	};
+
+	var factory = {
+		'simpleFactory': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			// aux constructors
+			function AudioPlayer(name){
+			  this.name = name;
+			  this.play = ()=>{
+			    console.log(`${this.name} is playing on Audio Player!`);
+			  }
+			}
+			function VideoPlayer(name){
+			  this.name = name;
+			  this.play = ()=>{
+			    console.log(`${this.name} is playing on Video Player!`);
+			  }
+			}
+
+			// the factory
+			function mediaPlayerMaker(name) {
+			  if(name.match(/\.(?:mp3|ogg|flack)$/i) ){
+			    return new AudioPlayer(name);
+			  }else if (name.match(/\.(?:mp4|avi|divx)$/i)) {
+			    return new VideoPlayer(name);
+			  }
+			}
+
+			// the instancies
+			const player1 = mediaPlayerMaker('time_lapse.mp3');
+			const player2 = mediaPlayerMaker('micahel_nyman_band_live.avi');
+
+			// the usage
+			player1.play();
+			player2.play();
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'encapsulated':function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var accountFactory = function(balance){
+				// private members
+				var balance = balance;
+
+				// public
+				var obj = {
+					getBalance: ()=>console.log(`Balnace = ${balance}`),
+					setBalance: (b)=>balance = b,
+				};
+
+				return obj;
+			}
+
+			var obj1 = accountFactory(999999999);
+			obj1.getBalance();
+
+			// let's try to change the balance directly:
+			obj1.balance = 0;
+			obj1.getBalance();
+
+			// let's try to change the balance through the setter:
+			obj1.setBalance(0);
+			obj1.getBalance();
+		}
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+	}
+
+	factory.encapsulated();
+</script>
+</body>
+</html>

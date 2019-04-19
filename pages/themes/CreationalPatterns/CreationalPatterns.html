@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CreationalPatterns</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<!-- css & themes include -->
+	<link rel="stylesheet" href="../../../lib/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../../../outfit/css/themes/projector.css" id="theme">
+	<!-- Printing and PDF exports -->    <script>        var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? '../../../lib/reveal.js/css/print/pdf.css' : '../../../lib/reveal.js/css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+	<!-- CUSTOM -->
+	<base target="_blank">
+</head>
+<body>
+	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+		<div class="top_links">
+			<a class="home_link" href="/ProgressBG-JS-Advanced_React/index.html#CreationalPatterns" target="_top"><i class="fa fa-home"></i></a>
+			<span class="help_link" href="#"><i class="fa fa-question"></i></span>
+			<div class="help_text">
+				<div><span>N/Space</span><span>Next Slide</span></div>
+				<div><span>P</span><span>Previous Slide</span></div>
+				<div><span>O</span><span>Slides Overview</span></div>
+				<div><span>ctrl+left click</span><span>Zoom Element</span></div>
+			</div>
+		</div>
+		<div class="footer theme_switch">
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/dark.css'); return false;">Dark</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/light.css'); return false;">Light</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/projector.css'); return false;">Projector</a>
+		</div>
+		<div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>Design Patterns Overview.<br>Creational Patterns.</h1></section>
+<section data-transition="zoom">
+	<div class="copyright">
+		<div class="note">
+			<p>Created for</p>
+		</div>
+		<div class="company">
+			<a href="http://progressbg.net/kurs-po-web-design/">
+				<img style="height:80%" src="../../../outfit/images/logos/ProgressBG_logo_529_127.png">
+			</a>
+		</div>
+		<div class="author">
+			<span>Iva E. Popova, 2018-2019,</span>
+			<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+		</div>
+	</div>
+</section>
+
+
+<section data-min="5"><h1>What are design patterns?</h1></section>
+<section><h2>What are design patterns?</h2>
+  <section><h3>History</h3>
+  	<p>From the 1977 book on architecture: "A Pattern Language: Towns, Buildings, Construction"</p>
+  	<blockquote class="note">Each pattern describes a
+				problem that occurs over and over again in our environment, and then describes the core of the solution to that problem, in such a way that you can use this solution a million times over, without ever doing it the same way twice.
+			</blockquote>
+  </section>
+  <section><h3>In computer science</h3>
+  	<dl class="fa">
+  		<dt>The Gang Of Four book:</dt>
+  		<dd><a href="https://www.oreilly.com/library/view/design-patterns-elements/0201633612/">"Design Patterns: Elements of Reusable Object-Oriented Software"</a> by Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides</dd>
+  	</dl>
+  </section>
+</section>
+
+<section data-min="5"><h1>Creational design patterns</h1></section>
+<section><h2>Creational design patterns</h2>
+  <section><h3>About</h3>
+  	<dl class="fa">
+  		<dt>Creational design patterns focus on object creation mechanisms</dt>
+  		<dt>Summaries best practices for object creation suitable for different, common, situations</dt>
+  		<dt>Removes the potential complexity in a project</dt>
+  		<dt>Some of the patterns that fall under this category are: Factory, Abstract, Prototype, Singleton and Builder</dt>
+  	</dl>
+  </section>
+  <section><h3>Create new object</h3>
+  	<dl class="fa">
+  		<dt>Three main ways in JS:</dt>
+  	</dl>
+  	<pre><code rel="JS" class="js">
+  			// by object literal
+  			const obj1 = {}
+
+  			// by Object.create method
+  			const obj2 = Object.create(null);
+
+  			// by Object constructor
+  			const obj3 = new Object()
+  		</code></pre>
+  </section>
+
+</section>
+
+<section data-min="5"><h1>The Factory Pattern</h1></section>
+<section data-notes="2h"><h2>The Factory Pattern</h2>
+	<section><h3>The Factory Pattern</h3>
+		<dl class="fa">
+			<dt>The Factory Pattern deals with the problem of creating objects (we can think of them as 'products') without the need to specify the exact class of object being created.</dt>
+			<dt>I.e. this pattern abstracts the object creation:</dt>
+			<dt>It offers great flexibility and implementation independence.</dt>
+		</dl>
+	</section>
+	<section><h3>Factory Pattern - example</h3>
+		<pre><code rel="JS" class="js">
+			"use strict";
+
+			// aux constructors
+			function AudioPlayer(name){
+			  this.name = name;
+			  this.play = ()=>{
+			    console.log(`${this.name} is playing on Audio Player!`);
+			  }
+			}
+			function VideoPlayer(name){
+			  this.name = name;
+			  this.play = ()=>{
+			    console.log(`${this.name} is playing on Video Player!`);
+			  }
+			}
+
+			// the factory
+			function mediaPlayerMaker(name) {
+			  if(name.match(/\.(?:mp3|ogg|flack)$/i) ){
+			    return new AudioPlayer(name);
+			  }else if (name.match(/\.(?:mp4|avi|divx)$/i)) {
+			    return new VideoPlayer(name);
+			  }
+			}
+
+			// the instancies
+			const player1 = mediaPlayerMaker('time_lapse.mp3');
+			const player2 = mediaPlayerMaker('micahel_nyman_band_live.avi');
+
+			// the usage
+			player1.play();
+			player2.play();
+
+			// time_lapse.mp3 is playing on Audio Player!
+			// micahel_nyman_band_live.avi is playing on Video Player!
+		</code></pre>
+	</section>
+	<section><h3>The Factory as mechanism to enforce encapsulation</h3>
+		<dl class="fa">
+			<dt>As we saw, the only way to enforce encapsulation in JavaScript is by function scopes and closures </dt>
+			<dt>And Factory is just a function!</dt>
+		</dl>
+		<pre><code rel="JS" class="js">
+			var accountFactory = function(balance){
+				// private members
+				var balance = balance;
+
+				// public
+				var obj = {
+					getBalance: ()=>console.log(`Balnace = ${balance}`),
+					setBalance: (b)=>balance = b,
+				};
+
+				return obj;
+			}
+
+			var obj1 = accountFactory(999999999);
+
+			// let's try to change the balance directly:
+			obj1.balance = 0;
+			obj1.getBalance();
+			// Balnace = 999999999
+
+			// let's try to change the balance through the setter:
+			obj1.setBalance(0);
+			obj1.getBalance();
+			// Balnace = 0
+		</code></pre>
+	</section>
+	<!-- moved in OOP topic
+	<section><h3>The Factory Pattern - exercise (smartLogger)</h3>
+		<dl class="fa">
+			<dt>Implement a <code>logger</code> object, whose methods <code>log()</code> and <code>dir()</code> works on top of the standard <code>console</code> methods, but log a message only if the script is running under Dev environment and outputs nothing, if the script is started on Prod environment.
+			<dt>For simplicity, lets assume that our Dev environment will be distinguished from Prod by port in the URL. For instance, if the port is 8080 we assume that we are under Dev. env. Else - we can assume we are under Prod env.</dt>
+			<dt>Tips: you can simulate a development or production environment by using the simple  <a href="https://www.npmjs.com/package/live-server">live-server</a>. Start it with two instances on different ports and test your logger on them.</dt>
+		</dl>
+	</section> -->
+</section>
+
+<section data-min="5"><h1>The Singleton Pattern</h1></section>
+<section data-notes="2h"><h2>The Singleton Pattern</h2>
+	<section><h3>about</h3>
+		<dl class="fa">
+			<dt>Singleton provides protection against accidentally creating multiple copies of a complex object.</dt>
+			<dt>Allows deferral of object instantiation until the first use.</dt>
+			<dt>It's main usage is for managing the global application state and name-spacing.</dt>
+			<dt class="note">In short, the main idea of the Singleton is to have only one instance of a specific class.</dt>
+			<dt>Perhaps the most overused pattern, though it has fallen out of favour in recent years.</dt>
+		</dl>
+	</section>
+	<section><h3>usage</h3>
+		<dl class="fa">
+			<dt>for namespacing, i.e. to reduces the number of global variables</dt>
+			<dt>used to organize the code in a consistent manner,</dt>
+			<dt class="note">Note that from ES6 we can use modules (import/export).</dt>
+		</dl>
+	</section>
+	<section><h3>object literal</h3>
+		<dl class="fa">
+			<dt>An object literal can be regarded as the simplest form of  Singelton</dt>
+		</dl>
+		<pre><code rel="JS" class="js">
+			var mySingleton={
+				property1:"something",
+				property2:"something else",
+
+				method1:function(){
+					console.log('hello world');
+				}
+			};
+		</code></pre>
+	</section>
+	<section><h3>caching the singular instance</h3>
+		<pre><code rel="JS" class="js">
+			function Car(name, speed) {
+				// check for existing instance
+				if (typeof Car.instance === "object"){
+					return Car.instance;
+				}
+
+				// set instance properties
+				this.name = name || 'Car';
+				this.speed = speed || 180;
+
+				// cache the instance
+				Car.instance = this;
+			}
+
+			// lets try to create 2 instances
+			var car1 = new Car('car1', 200);
+			var car2 = new Car('car2', 300);
+
+			// test if we have ONLY ONE instance:
+			console.log(car1 === car2);
+		</code></pre>
+	</section>
+	<section><h3><span class="note">Exercise </span>: caching the singular instance in Factory</h3>
+		<dl class="fa">
+			<dt>Implement a Singleton <code>carMaker</code> object Factory, following the "caching the singular instance" approach.</dt>
+		</dl>
+	</section>
+	<section><h3>Instance in a Closure: rewrite the Constructor</h3>
+		<pre><code rel="JS" class="js">
+			function Car(name, speed) {
+				// cache the instance
+				var instance = this;
+
+				// set instance properties
+				this.name = name || 'Car';
+				this.speed = speed || 180;
+
+				// rewrite the constructor
+				Car = function(){
+					return instance;
+				};
+			}
+
+			// lets try to create 2 instances
+			var car1 = new Car('car1', 200);
+			var car2 = new Car('car2', 300);
+
+			// test if we have ONLY ONE instance:
+			console.log(car1 === car2);
+		</code></pre>
+	</section>
+	<section><h3><span class="note">Exercise </span>: rewrite the Factory</h3>
+		<dl class="fa">
+			<dt>Implement a Singleton <code>carMaker</code> object Factory, following the "rewrite the Constructor" approach.</dt>
+		</dl>
+	</section>
+</section>
+<section><h2>The Module Pattern</h2>
+	<section><h3>Modules in JavaScript</h3>
+		<dl class="fa">
+			<dt>Object literal notation</dt>
+			<dt>The Module pattern</dt>
+			<dt>AMD modules</dt>
+			<dt>CommonJS modules</dt>
+			<dt>ECMAScript6 modules</dt>
+		</dl>
+	</section>
+	<section><h3>Module as Object Literal</h3>
+		<pre><code rel="JS" class="js">
+			var myModule = {
+				config: {
+					encoding: 'UTF8',
+					maxLength: '2048'
+				},
+
+				log: function(value, msg){
+					msg?
+						console.log(`${msg}: ${value}\n\n`):
+						console.log(`${value}\n\n`);
+
+				}
+			}
+
+			var m = myModule;
+
+			for( conf in m.config){
+				m.log( m.config[conf], conf);
+			}
+		</code></pre>
+	</section>
+	<section><h3>Module Pattern</h3>
+		<dl class="fa">
+			<dt>The Module pattern encapsulates "privacy", state and organization using closures.</dt>
+			<dt>Provides a way of wrapping of public and private methods and variables</dt>
+			<dt>Only a public API is returned, keeping everything else within the closure private</dt>
+		</dl>
+	</section>
+	<section><h3>Example</h3>
+		<pre><code rel="JS" class="js">
+			var myModule = (function(){
+				// private
+				var config = {
+					encoding: 'UTF8',
+					maxLength: '2048'
+				};
+
+				var log = function(value, msg){
+					msg?
+						console.log(`${msg}: ${value}\n\n`):
+						console.log(`${value}\n\n`);
+
+				};
+
+				// API
+				var showConfig =  function(){
+					for( c in this.config ){
+						this.log(this.config[c], this.config)
+					}
+				}
+
+				return {
+					showConfig: showConfig
+				}
+			})();
+
+			myModule.showConfig();
+		</code></pre>
+	</section>
+	<section><h3>ES6 Modules - References</h3>
+		<dl class="fa">
+			<dt><a href="http://exploringjs.com/es6/ch_modules.html">Modules - chapter from Exploring ES6 by Axel Rauschmayer</a></dt>
+			<dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import">import @mdn</a></dt>
+			<dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export">export @mdn</a></dt>
+		</dl>
+	</section>
+	<section><h3>ES6 Modules - nodejs demo</h3>
+		<pre><code rel="moduleA.mjs" class="js">
+			function foo(){
+			  console.log(`foo from moduleA is called!`);
+			}
+
+			// exports a constant
+			export const PI = 3.14;
+
+			// named exports
+			export { foo };
+		</code></pre>
+		<pre><code rel="main.mjs" class="js">
+			import { foo, PI} from "./moduleA.mjs";
+
+			foo()
+			console.log(`PI=${PI}`);
+		</code></pre>
+		<pre><code rel="Terminal" class="js">
+			node --experimental-modules main.mjs
+		</code></pre>
+	</section>
+</section>
+<section data-notes="2h"><h2 class="advanced">The Builder Pattern</h2>
+	<section><h3>about</h3>
+		<dl class="fa">
+			<dt>Avoids this issue by centralizing the logic necessary to build the object</dt>
+			<dt>Different concrete builders can be plugged into the builder to construct different complicated objects</dt>
+			<dt>The goal is to separate the object creation (or initialization) logic from the representation.</dt>
+		</dl>
+	</section>
+	<section>
+		<a href="images/Builder_UML_class_diagram.svg.png"><img src="images/Builder_UML_class_diagram.svg.png"></a>
+		<dl class="fa" style="font-size: .7em">
+			<dt><span class="note">Director</span>: controls the algorithm that generates the final product object.</dt>
+			<dt><span class="note">Builder</span>: defines the abstract steps that must be taken in order to create a product.In JavaScript the Builder is not separated clearly and in some cases can be omitted</dt>
+			<dt><span class="note">Concrete Builders</span>: implements the real object creation. Concrete Builders can use Factories for building parts of the final object</dt>
+			<dt><span class="note">Product</span>: the complex object that is to be generated by the builder pattern.</dt>
+		</dl>
+	</section>
+</section>
+
+
+<section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
+	 <p>These slides are based on</p>
+	 <p>customised version of </p>
+	 <p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+	 <p>framework</p>
+</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+		</div>
+	</div>
+	<!-- Custom processing -->
+	<script src="../../../outfit/js/slides.js"></script>
+	<!-- external scripts -->
+	<script src="../../../lib/reveal.js/lib/js/head.min.js"></script>
+	<script src="../../../lib/reveal.js/js/reveal.js"></script>
+
+	<!-- init reveal -->
+	<script>
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		var highlightjsTabSize = '  ';
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			slideNumber: 'c/t',
+			keyboard: true,
+			history: true,
+
+			// display control
+			// center: true,
+			// width: '100%',
+			// height: '100%',
+			// // Factor of the display size that should remain empty around the content
+			// margin: 0.1,
+
+			// The "normal" size of the presentation, aspect ratio will be preserved
+			// when the presentation is scaled to fit different resolutions. Can be
+			// specified using percentage units.
+			width: 960,
+			height: 700,
+
+			// Factor of the display size that should remain empty around the content
+			margin: 0.1,
+
+			// Bounds for smallest/largest possible scale to apply to content
+			minScale: 0.2,
+			maxScale: 1.5,
+
+			// slide transition
+			transition: 'concave', // none/fade/slide/convex/concave/zoom
+			// shift+maous click to zoom in/out element
+			zoomKey: 'ctrl',
+			// theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+			// transition: Reveal.getQueryHash().transition || 'default'
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad(); } },
+				{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+				{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
+			]
+		});
+	</script>
+	<!-- linkedin badge -->
+	<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+</body>
+</html>

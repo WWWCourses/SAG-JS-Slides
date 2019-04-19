@@ -1,0 +1,23 @@
+// Constructor:
+apple:
+	color:
+	prices: []
+	calcMinPrice => return min price form prices
+
+// the objects
+apple1:
+	id: id1;
+	color: "red",
+	prices:[2.5, 2]
+
+...
+
+apple10:
+	id: id10;
+	color:"green",
+	prices:[1.8, 2.3, 2.0]
+
+// the main function
+cheepestApple( apples ){
+	return the cheepest apple id;
+}

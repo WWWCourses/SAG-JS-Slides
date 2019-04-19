@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>prototypes</title>
+</head>
+<body>
+
+<script type="text/javascript">
+	var student = {};
+	student.setName = function(name){
+		this.name = name;
+		return this;
+	};
+	student.setName("Iva");
+	console.log(student);
+
+	test();
+	function test(){
+		console.log("student.name=", student.name);
+	}
+
+	class person{
+		constructor(name, gender){
+			this.name = name;
+			this.gender = gender;
+		}
+		log(){
+			console.log(this)
+		}
+	}
+
+	var iva = new person("iva", 40);
+
+	iva.log();
+</script>
+</body>
+</html>

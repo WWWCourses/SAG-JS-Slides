@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>JS Patterns</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<!-- css & themes include -->
+	<link rel="stylesheet" href="../../../lib/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../../../outfit/css/themes/projector.css" id="theme">
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? '../../../lib/reveal.js/css/print/pdf.css' : '../../../lib/reveal.js/css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+	<!-- CUSTOM -->
+	<base target="_blank">
+</head>
+<body>
+	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+		<div class="top_links">
+			<a class="home_link" href="/ProgressBG-JS-Advanced_React/index.html#Course_Intro" target="_top"><i class="fa fa-home"></i></a>
+			<span class="help_link" href="#"><i class="fa fa-question"></i></span>
+			<div class="help_text">
+				<div><span>N/Спейс</span><span>следващ слайд</span></div>
+				<div><span>P</span><span>предишен слайд</span></div>
+				<div><span>O</span><span>всички слайдове</span></div>
+				<div><span>ctrl+left click</span><span>увеличава елемента</span></div>
+			</div>
+		</div>
+		<div class="footer theme_switch">
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/dark.css'); return false;">Dark</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/light.css'); return false;">Light</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/projector.css'); return false;">Projector</a>
+		</div>
+		<div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>JavaScript Patterns</h1></section>
+<section data-transition="zoom">
+	<div class="copyright">
+		<div class="note">
+			<p>Created for</p>
+		</div>
+		<div class="company">
+			<a href="http://progressbg.net/kurs-po-web-design/">
+				<img style="height:80%" src="../../../outfit/images/logos/ProgressBG_logo_529_127.png">
+			</a>
+		</div>
+		<div class="author">
+			<span>Iva E. Popova, 2018-2019,</span>
+			<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+		</div>
+	</div>
+</section>
+
+
+<section><h2>Public/Private fields in JavaScript</h2>
+	<section><h3>Public Members</h3>
+		<dl class="fa">
+			<dt>The members of an object are <span class="note">all public members</span>.</dt>
+		</dl>
+		<!-- TODO: indentation is not rendered when tabs are used... -->
+		<pre><code rel="JS">
+			  var event = {
+				  name: 'Mariinsky Theatre Orchestra with Gergiev',
+				  date: '22.05.2017',
+				  time: '19.30',
+				  place: 'Bulgaria Hall',
+			  }
+
+			  console.log(`Event name: ${event.name}`);
+			  // yep, event.name is public!
+		</code></pre>
+	</section>
+	<section><h3>Create Public members in Constructor</h3>
+		<pre><code rel="JS">
+			var Event = function(name, date, time) {
+				// all this.properties are public
+				this.name   = name;
+				this.date   = date;
+				this.time   = time;
+			}
+			var event1 = new Event(
+				'Mariinsky Theatre Orchestra with Gergiev',
+				'22.05.2017',
+				'19.30'
+			);
+			console.log(`Event name: ${event1.name}`);
+			// yep, event.name is public!
+		</code></pre>
+	</section>
+	<section><h3>Create Public members in Prototype</h3>
+		<dl class="fa">
+			<dt>Usually used for methods members:</dt>
+		</dl>
+		<pre><code rel="JS">
+			Event.prototype.setReminder = function(minutesBefore) {
+				alert('Reminder set for '+  minutesBefore +' minutes before start!');
+			};
+			</code></pre>
+	</section>
+	<section><h3>Private Members (Encapsulation)</h3>
+		<dl class="fa">
+			<dt>By private members we can implement the principle of<a href="https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)">data encapsulation</a> and  <a href="https://en.wikipedia.org/wiki/Information_hiding">information hiding</a></dt>
+			<dt>Private Members can be accessed only by the object itself</dt>
+			<dt>Ordinary vars and parameters of the constructor becomes the private members.</dt>
+			<dt>Some developers use the convention to name their private members by using <span class="note">underscore as prefix</span>. Like:</dt>
+			<pre><code rel="JS" class="js">
+				// private data
+				var _createdOn = new Date();
+			</code></pre>
+
+		</dl>
+	</section>
+	<section><h3>Private Members example</h3>
+		<pre><code rel="JS">
+			var Event = function(name) {
+				// private data
+				var name = name;
+
+				// private method
+				var sayName = function(){
+					console.log(`Event name: ${name}`);
+				}
+
+			}
+
+			var event1 = new Event('event1');
+			console.log(`event1.name: ${event1.name}`);
+			// event1.name: undefined
+			event1.sayName();
+			// Uncaught TypeError: event1.sayName is not a function
+		</code></pre>
+		<p>To make private members useful, we need to introduce a privileged method.</p>
+	</section>
+	<section><h3>Privileged methods</h3>
+		<dl class="fa">
+			<dt>Can access private members</dt>
+			<dt>Can be invoked as public methods</dt>
+			<dt>In JavaScript Privileged Method is just a name for Public Method which access private data.</dt>
+		</dl>
+	</section>
+	<section><h3>Privileged methods example</h3>
+		<pre><code rel="JS">
+			var Event = function(name) {
+				// private data
+				var name = name;
+
+				// public method
+				this.sayName = function(){
+					console.log(`Event name: ${name}`);
+				}
+
+			}
+			var event1 = new Event('event1');
+			console.log(`event1.name: ${event1.name}`);
+			// event1.name: undefined
+
+			event1.sayName();
+			// Event name: event1
+		</code></pre>
+	</section>
+	<section><h3>Privileged methods cons</h3>
+		<dl class="fa">
+			<dt>We can not define a privileged methods outside the constructor. I.e. we can not optimize the program to use shared methods between all objects</dt>
+		</dl>
+		<pre><code rel="JS" class="js">
+			var Event = function(name) {
+				// private data
+				var name = name;
+			}
+			// shared public method
+			Event.prototype.sayName = function(){
+				// no way to access Event.name outside the constructor!!!
+				console.log(`Event name: ${this.name}`);
+				console.log(`Event name: ${name}`);
+			}
+
+			var event1 = new Event('event1');
+			event1.sayName();
+		</code></pre>
+	</section>
+	<section><h3>More on Private Members</h3>
+	<a href="https://developer.mozilla.org/en-US/Add-ons/SDK/Guides/Contributor_s_Guide/Private_Properties">MDN: Private Properties</a>
+	</section>
+</section>
+
+
+<section><h2>Object creation patterns</h2>
+	<!-- <dl class="fa">
+		<dt>The 2 simple ways of creating objects: <span class="note"><code>Object</code> constructor</span> and <span class="note">object literal</span> has  drawback when creating a multiple objects with same interface</dt>
+		<dt>During the years, developers created solid techniques to overcome the drawbacks for various common situations.</dt>
+	</dl> -->
+</section>
+
+<section><h3>Object Literal Pattern</h3>
+	<p>Discussed in <a href="/pages/themes/OOPinJS/OOPinJS.html#/objectLiteral">Object Literal (object initializer)</a></p>
+	<pre><code rel="JS" class="js">
+		var car ={
+			doors: 4,
+			maxSpeed: 300,
+			drive: function(speed){
+				console.log(`Driving with ${speed} km/h!!!`);
+			}
+		};
+		car.drive(120);
+		// Driving with 120 km/h!!!
+	</code></pre>
+</section>
+
+<section><h3>the Constructor Pattern</h3>
+	<p>Discussed in <a href="/pages/themes/OOPinJS/OOPinJS.html#/constructor">Constructor Function</a></p>
+	<pre><code rel="JS" class="js">
+		var Car = function(doors, maxSpeed){
+			this.doors = doors // 4,
+			this.maxSpeed= maxSpeed // 300,
+		};
+		Car.prototype.drive = function(speed){
+			console.log(`Driving with ${speed} km/h!!!`);
+		}
+
+		var car = new Car();
+		car.drive(220);
+		// Driving with 220 km/h!!!
+	</code></pre>
+</section>
+
+<section><h3>The Factory Pattern</h3>
+	<dl class="fa">
+		<dt>In its nature, the "Factory" is a function which creates object instances! </dt>
+		<dt>It allows to abstract the object creation.</dt>
+		<dt>We can create objects inside the Factory function using various techniques: literal, constructor, <code>Object.create()</code>, etc. But the consumer of the object is not aware of that. That allows great flexibility and implementation independence.</dt>
+	</dl>
+</section>
+<section><h3>Factory Pattern - simple example</h3>
+	<pre><code rel="JS" class="js">
+		"use strict";
+		var objFactory = function(name){
+			var obj = {};
+			obj.name = name;
+			obj.sayName = () =>console.log(`I'm object: ${obj.name}`);
+
+			return obj;
+		}
+
+		var obj1 = objFactory('Object 1');
+		var obj2 = objFactory('Object 2');
+		obj1.sayName();
+		obj2.sayName();
+		// I'm object: Object 1
+		// I'm object: Object 2
+	</code></pre>
+</section>
+<section><h3>Factory Pattern - flexibility example</h3>
+	<pre><code rel="JS" class="js">
+		"use strict";
+		// aux constructors
+		function AudioPlayer(name){
+			this.name = name;
+			this.play = ()=>{
+				console.log(`${this.name} is playing as Audio!`);
+			}
+		}
+		function VideoPlayer(name){
+			this.name = name;
+			this.play = ()=>{
+				console.log(`${this.name} is playing as Video!`);
+			}
+		}
+
+		// the factory
+		function mediaPlayerMaker(name) {
+			if(name.match(/\.(?:mp3|ogg|flack)$/i) ){
+				return new AudioPlayer(name);
+			}
+			if (name.match(/\.(?:mp4|avi|divx)$/i)) {
+				return new VideoPlayer(name);
+			}
+		}
+
+		// the instancies
+		const player1 = mediaPlayerMaker('time_lapse.mp3');
+		const player2 = mediaPlayerMaker('micahel_nyman_band_live.avi');
+
+		// the usage
+		player1.play();
+		player2.play();
+
+		// time_lapse.mp3 is playing as Audio!
+		// micahel_nyman_band_live.avi is playing as Video!
+	</code></pre>
+</section>
+<section><h3>The Factory as mechanism to enforce encapsulation</h3>
+	<dl class="fa">
+		<dt>As we saw, the only way to enforce encapsulation in JavaScript is by function scopes and closures </dt>
+		<dt>And Factory is just a function!</dt>
+	</dl>
+	<pre><code rel="JS" class="js">
+		"use strict";
+		var objFactory = function(name){
+			// private members
+			var name = name;
+			// public
+			var obj = {
+				sayName: () =>console.log(`I'm object: ${name}`),
+			};
+
+			return obj;
+		}
+
+		var obj1 = objFactory('Object 1');
+		obj1.sayName();
+		console.log(`obj1.name: ${obj1.name}`);
+		// I'm object: Object 1
+		// obj1.name: undefined
+	</code></pre>
+</section>
+<section><h3>The Factory Pattern - exercise (smartLogger)</h3>
+	<dl class="fa">
+		<dt>TASK: implement a <code>logger</code> object, whose methods <code>log()</code> and <code>dir()</code> works on top of the standard <code>console</code> methods, but log a message if the script is running under developers/test environment, and outputs nothing, if the script is started on production environment.
+		<dt>Tips: you can simulate a development or production environment by using the simple  <a href="https://www.npmjs.com/package/live-server">live-server</a>. Start it with two instances on different posts and test your logger on them </dt>
+	</dl>
+</section>
+
+<section style="font-size: .8em"><h3>Object prototype</h3>
+	<dl class="fa">
+		<dt>In JavaScript every object is build on the top of a prototype object. I.e. every object has its prototype.</dt>
+	</dl>
+	<pre><code rel="JS" class="js">
+		var car = {};
+		console.log('The car object: ');
+		console.dir(car);
+	</code></pre>
+	<a href="images/TheGodOfAllObjects.png"><img src="images/TheGodOfAllObjects.png"></a>
+	<p>The Object object (i.e. the object created by Object constructor) does not have prototype. You can think of it as the God of all objects.</p>
+</section>
+<section><h3>Object prototype</h3>
+	<dl class="fa">
+		<dt>By ECMAScript standard, every object has the [[Prototype]] property, which points to its prototype.</dt>
+		<dt>Most JavaScript engines gives direct access to the [[Prototype]] property by the special property <code class="note">__proto__</code>.</dt>
+		<dt>From ES2015 the <code>__proto__</code> property is part of the standard!</dt>
+	</dl>
+	<pre><code rel="JS" class="js">
+		var car = {};
+
+		console.dir(car.__proto__);
+		// Object
+
+		console.dir(car.__proto__.__proto__);
+		// null
+	</code></pre>
+</section>
+<section><h3>Object creation - internals</h3>
+	<pre><code rel="JS" class="js">
+		var car = {};
+	</code></pre>
+	<img src="images/objectCreationInternals.png">
+</section>
+<section><h3>Object creation - internals (what Constructor do?)</h3>
+	<pre><code rel="JS" class="js">
+		var Car = function(){};
+		var ford = new Car();
+		var BMV = new Car();
+	</code></pre>
+	<a href="images/whatNewDo.png"><img src="images/whatNewDo.png"></a>
+</section>
+<section><h3>Object creation - internals (what Factoryp do?)</h3>
+	<pre><code rel="JS" class="js">
+		var carFactory = function(){ return {} }
+		var ford = carFactory();p
+		var BMV = carFactory();
+	</code></pre>
+	<a href="images/whatFactoryDo.png"><img src="images/whatFactoryDo.png"></a>
+</section>
+<section><h3>Object creation - internals (Factory vs Constructor)</h3>
+	<pre><code rel="JS" class="js">
+		function CarConstructor(){};
+		CarConstructor.prototype.sayHello=()=>
+			console.log(`Hello from CarConstructor.prototype`);
+		var constructedCar = new CarConstructor();
+
+		function CarFactory(){
+			return {}
+		};
+		CarFactory.prototype.sayHello=()=>
+			console.log(`Hello from CarFactory.prototype`);
+		var fabricatedCar = CarFactory();
+
+		constructedCar.sayHello();
+		//Hello from CarConstructor.prototype
+		fabricatedCar.sayHello();
+		//TypeError: fabricatedCar.sayHello is not a function
+	</code></pre>
+</section>
+<section><h3>The Object.create() method</h3>
+	<pre><code rel="Syntax" class="js">
+		Object.create( prototype_object [, propertiesObject] );
+	</code></pre>
+	<dl class="fa">
+		<dt><code>prototype_object</code> - the prototype for the new object. I.e. the object from which a new object will be created.</dt>
+		<dt><code>propertiesObject</code> - an object, describing the properties for the newly created object.  The syntax is like the <code>props</code> object in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties">Object.defineProperties() method</a></dt>
+		<dt><code>return</code> - new object with the specified prototype object and properties.</dt>
+	</dl>
+</section>
+<section><h3>The Object.create() method</h3>
+	<pre><code rel="JS" class="js">
+		var car = {
+			sayHello:()=>console.log(`Hello, I'm car literal`),
+		};
+		var ford = Object.create(car);
+		ford.sayHello();
+		// Hello, I'm car literal
+
+		console.log(ford.__proto__ === car);
+		// true
+	</code></pre>
+</section>
+<section><h3>The prototype relationship between objects</h3>
+	<dl class="fa">
+		<dt>Every object inherits all of it's prototype properties!</dt>
+		<dt>This is the key to <span class="note">prototypal inheritance</span> in JavaScript</dt>
+	</dl>
+	<pre><code rel="JS" class="js">
+		var car = {
+			maxSpeed: 300,
+			currentSpeed: 0,
+		};
+		var ford = {
+			currentSpeed: 280,
+			__proto__: car, // set the ford prototype to car.
+					// this is not a good practice, but a clear example
+		};
+
+		console.log(`ford max speed: ${ford.maxSpeed}`);
+		console.log(`ford current speed: ${ford.currentSpeed}`);
+		// ford max speed: 300
+		// ford current speed: 280
+	</code></pre>
+</section>
+<section><h3>The Prototype Chain</h3>
+	<img src="images/PrototypeChain.png">
+</section>
+<section><h3>Prototypal Inheritance</h3>
+	<p>Lets look at simple objec constructing:</p>
+	<pre><code rel="JS" class="js">
+		var ObjContrucotr = function(name){
+			console.log(`ObjContrucotr activated`);
+			this.name = name;
+		}
+
+		var obj1 = new ObjContrucotr('obj1');
+
+		console.dir(ObjContrucotr);
+		console.dir(obj1);
+	</code></pre>
+	<dl class="fa">
+		<dt>The ObjContrucotr is just a function!</dt>
+		<dt>Each function has the <code class="note">prototype</code> property, which is an empty object by default.</dt>
+	</dl>
+</section>
+<section><h3>Prototypal Inheritance - How it works?</h3>
+	<img src="images/Prototype Inheritance.png">
+</section>
+
+<section><h2>Module pattern</h2></section>
+
+<section><h2>Revealing module pattern</h2></section>
+<section><h2>Revealing prototype pattern</h2></section>
+<section><h2>Singleton pattern</h2></section>
+
+<!-- <section data-notes="20min"><h2>SectionTitle</h2>
+		<section>
+				<aside class="notes">
+						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+				</aside>
+		</section>
+	</section> -->
+
+	<section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
+		<p>These slides are based on</p>
+		<p>customised version of </p>
+		<p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+		<p>framework</p>
+	</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+</div>
+</div>
+<!-- Custom processing -->
+<script src="../../../outfit/js/slides.js"></script>
+<!-- external scripts -->
+<script src="../../../lib/reveal.js/lib/js/head.min.js"></script>
+<script src="../../../lib/reveal.js/js/reveal.js"></script>
+<!-- init reveal -->
+<script>
+	// Full list of configuration options available at:
+	// https://github.com/hakimel/reveal.js#configuration
+	var highlightjsTabSize = '  ';
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		slideNumber: 'c/t',
+		keyboard: true,
+		history: true,
+		center: true,
+		// width: 1024,
+		// width: '100%',
+		// height: 860,
+		height: '100%',
+		// Bounds for smallest/largest possible scale to apply to content
+		minScale: .5,
+		maxScale: 1,
+		// slide transition
+		transition: 'concave', // none/fade/slide/convex/concave/zoom
+		// Factor of the display size that should remain empty around the content
+		margin: 0.1,
+		// shift+maous click to zoom in/out element
+		zoomKey: 'ctrl',
+		// theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+		// transition: Reveal.getQueryHash().transition || 'default'
+		// Optional reveal.js plugins
+		dependencies: [
+		{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+		{ src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		{ src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad(); } },
+		{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+		{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
+		]
+	});
+</script>
+</body>
+</html>

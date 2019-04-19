@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ES6 class syntax demos</title>
+</head>
+<body>
+
+<script type="text/javascript">
+	var examples = {
+		'classDeclaration': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			class Person{
+			  // method definitions
+			}
+
+			let p1 = new Person('Pesho', 23);
+			console.dir(p1);
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'classExpression': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			let Person = class {
+			  // method definitions
+			}
+
+			let p1 = new Person('Pesho', 23);
+			console.dir(p1);
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'constructor': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			class Person{
+				constructor(name, age){
+					this.name = name;
+					this.age = age;
+				}
+			}
+
+			let p1 = new Person('Pesho', 23);
+			console.dir(p1);
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'methods': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			class Person{
+				constructor(name, age){
+					this.name = name;
+					this.age = age;
+				}
+
+				greet(){
+					console.log(`I'm ${this.name}, ${this.age} years old.`);
+				}
+			}
+
+			let p1 = new Person('Pesho', 23);
+			console.dir(p1);
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'static': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			class Person{
+				constructor(name, age){
+					this.name = name;
+					this.age = age;
+					Person.counter();
+				}
+
+				static counter(){
+					Person.count+=1;
+					console.log(`${Person.count} objects were created.`);
+				}
+
+				greet(){
+					console.log(`I'm ${this.name}, ${this.age} years old.`);
+				}
+			}
+			Person.count = 0;
+
+			let p1 = new Person('Pesho', 23);
+			let p2 = new Person('Maria', 28);
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'filedsDeclaration': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			class Person{
+				name="Anonymous";
+				age;
+
+				constructor(name, age){
+					this.name = name;
+					this.age = age;
+				}
+
+				greet(){
+					console.log(`I'm ${this.name}, ${this.age} years old.`);
+				}
+			}
+
+			let p1 = new Person('Pesho', 23);
+			let p2 = new Person();
+			p1.greet();
+			p2.greet();
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'subclassing': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			class Person{
+				constructor(name, age){
+					this.name = name;
+					this.age = age;
+				}
+
+				greet(){
+					console.log(`I'm ${this.name}, ${this.age} years old.`);
+				}
+			}
+
+			class Developer extends Person{
+				constructor(name, age, skills){
+					// call the parent constructor:
+					super(name, age)
+					this.skills = skills
+				}
+
+				// extending the greet method:
+				greet(){
+					super.greet();
+					console.log(`My skills are: ${this.skills.join()}`);
+				}
+			}
+
+			let dev1 = new Developer('Pesho', 23, ['JS','React','Vue'])
+			dev1.greet()
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+	}
+
+
+	examples.subclassing();
+</script>
+</body>
+</html>

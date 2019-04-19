@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Labs: Pub/Privite/Priviledged Members</title>
+</head>
+<body>
+
+<script type="text/javascript">
+	var examples = {
+		'example1': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var carFactory = function(){
+
+
+			};
+
+
+
+			carFactory.prototype.countDoors = function(){
+				console.log(`I have ${this.doors} doors`);
+			}
+
+			var ford = Object.create( carFactory.prototype, {
+				'doors':{value: 4,},
+				'model':{value: 'ford'}
+			});
+
+			// var BMW = carFactory("BMW", 5);
+			ford.countDoors();
+
+			// console.dir(ford);
+			// console.dir(BMW);
+
+
+
+
+
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+	}
+
+	examples.example1();
+</script>
+</body>
+</html>

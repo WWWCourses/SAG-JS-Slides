@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login Form</title>
+    <style>
+        #demo label{
+            display: block;
+            margin: 1em 0;
+        }
+    </style>
+</head>
+<body>
+    <form action="/user/login" id="demo">
+        <fieldset>
+            <legend>Login details</legend>
+            <label for="uname">name: <input type="text" name="uname"></label>
+            <label for="umail">email: <input type="email" name="umail"></label>
+            <button>Login</button>
+        </fieldset>
+    </form>
+
+    <script>
+        const DOMcache = {}
+        DOMcache.demoForm = document.querySelector('#demo');
+        DOMcache.unameLabel = DOMcache.demoForm.querySelector('label[for="uname"]');
+        DOMcache.unameInput = DOMcache.demoForm.querySelector('input[name="uname"]');
+        DOMcache.umailLabel = DOMcache.demoForm.querySelector('label[for="umail"]');
+        DOMcache.umailInput = DOMcache.demoForm.querySelector('input[name="umail"]');
+
+
+        const formValidator = {
+            'validateEmail' : function(email){
+                if(email.match(/[\w.-]@\w+\.\w{2,3}/)==null){
+
+                }
+            }
+        }
+
+        const DOMevents = {
+
+        }
+        DOMcache.demoForm.addEventListener('blur', function(e){
+            // targetName = e.target.getAttribute('name');
+            targetName = e.target.name || e.target.getAttribute('name') || "";
+            targetValue = e.target.value;
+            console.log(`e.target.name:${e.target.name}`);
+
+
+
+            if(targetName === 'umail'){
+                formValidator.validateEmail()
+            }else if(targetName === 'uname'){
+                formValidator.validateName()
+            }else{
+                console.log(`No validation for :${targetName}`);
+            }
+            // console.log(`targetName:${targetName}`);
+        }, true);
+        // DOMcache.demoForm.addEventListener("focus", function( event ) {
+        //   event.target.style.background = "pink";
+        // }, true);
+        // DOMcache.demoForm.addEventListener("blur", function( event ) {
+        //   event.target.style.background = "";
+        //   console.log(`event:${event}`);
+
+        // }, true);
+
+
+        // if(validEmail instanceof Error) {
+        //     console.error(`Error: ${validEmail.message}`);
+        // } else {
+        //     console.log(`Valid email: ${validEmail}`);
+        // }
+    </script>
+</body>
+</html>

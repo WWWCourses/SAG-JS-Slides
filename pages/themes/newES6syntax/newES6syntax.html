@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ES6 new featres</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <!-- css & themes include -->
+  <link rel="stylesheet" href="../../../lib/reveal.js/css/reveal.css">
+  <link rel="stylesheet" href="../../../outfit/css/themes/projector.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? '../../../lib/reveal.js/css/print/pdf.css' : '../../../lib/reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="lib/js/html5shiv.js"></script>
+  <![endif]-->
+  <!-- custom -->
+  <link rel="stylesheet" href="../../../outfit/css/reveal.js.css">
+  <base target="_blank">
+</head>
+<body>
+  <div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+    <div class="top_links">
+      <a class="home_link" href="/ProgressBG-JS-Advanced_React/index.html#Course_Intro" target="_top"><i class="fa fa-home"></i></a>
+      <span class="help_link" href="#"><i class="fa fa-question"></i></span>
+      <div class="help_text">
+        <div><span>N/Спейс</span><span>Next Slide</span></div>
+        <div><span>P</span><span>Previous Slide</span></div>
+        <div><span>O</span><span>Slides Overview</span></div>
+        <div><span>ctrl+left click</span><span>Zoom Element</span></div>
+      </div>
+    </div>
+    <div class="footer theme_switch">
+      <a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/dark.css'); return false;">Dark</a>
+      <a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/light.css'); return false;">Light</a>
+      <a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/projector.css'); return false;">Projector</a>
+    </div>
+    <div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>ES6 (ES2015) new features</h1></section>
+<section data-transition="zoom">
+  <section>
+    <div class="copyright">
+      <div class="note">
+        <p>Created for</p>
+      </div>
+      <div class="company">
+        <a href="http://progressbg.net/kurs-po-web-design/">
+        <img src="../../../outfit/images/logos/ProgressBG_logo_529_127.png">
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="copyright" data-transition="zoom" style="margin-top: -2em;">
+    <div class="note">
+      <p>Created by</p>
+    </div>
+    <div class="company">
+       <div class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="vertical" data-theme="dark" data-vanity="ivapopova"><a class="LI-simple-link" href='https://bg.linkedin.com/in/ivapopova?trk=profile-badge'>Iva E. Popova</a></div>
+    </div>
+    <!-- <div class="author">
+      <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+    </div> -->
+  </section>
+</section>
+
+<section data-min="5"><h1>The let keyword</h1></section>
+<section><h2>The let keyword</h2>
+  <section>
+    <dl class="fa">
+      <dt>The let statement declares a <span class="note">block scope local variable</span></dt>
+      <dt>Reference: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let">let @mdn</a></dt>
+    </dl>
+    <pre><code rel="JS" class="javascript">
+      var i = 999;
+
+      if (true){
+        let i = 111;
+        console.log(`if block i=${i}`);
+      }
+      console.log(`main i=${i}`);
+
+      for (let i = 0; i < 3; i++) {
+        console.log(`for block i=${i}`);
+      }
+      console.log(`main i=${i}`);
+    </code></pre>
+  </section>
+  <section>
+    <dl class="fa">
+      <dt>Redeclaring the same variable within the same scope raises a SyntaxError.</dt>
+    </dl>
+    <pre><code rel="JS" class="javascript">
+      let x;
+      let x = 2; // Uncaught SyntaxError: Identifier 'x' has already been declared
+
+      // next example will not through error, as second let declaration is in other scope
+      let x;
+      {
+        let x = 2;
+      }
+    </code></pre>
+  </section>
+</section>
+
+<section data-min="5"><h1>The const keyword</h1></section>
+<section><h2>The const keyword</h2>
+  <section>
+    <dl class="fa">
+      <dt>The const declaration creates a read-only reference to a value.</dt>
+      <dt>It does not prevent the value it holds to be changed, it just says that the variable identifier cannot be reassigned.</dt>
+    </dl>
+    <pre><code rel="JS" class="javascript">
+      const account = {
+        'balance' : 200
+      };
+
+      // TypeError: Assignment to constant variable.
+      account = {};
+
+      // no error - the object is mutable and const did not prevent that
+      account.balance = 300;
+
+      console.log(account.balance);
+      // 300
+
+    </code></pre>
+  </section>
+</section>
+
+<section data-min="30"><h1>The arrow function syntax</h1></section>
+<section><h2>The arrow function syntax</h2>
+  <section><h3>arrow functions???</h3>
+    <dl class="fa" style="font-size: .8em;">
+      <dt>ES6 introduces a <span class="note">new function declaration syntax</span> called <span class="note">arrow notation</span>.</dt>
+      <dt>Also known in JavaScript as <span class="note">Arrow functions</span> or <span class="note">Fat arrow functions</span></dt>
+      <dt>In other languages (Python, Java, C#,...) they are know as <span class="note">lambda functions</span></dt>
+      <dd>The term originated from Lisp language</dd>
+      <dt>It is essentially syntactic sugar that reduces the number of times you have to type the word function , as well as the number of braces you have to type</dt>
+    </dl>
+  </section>
+  <section><h3>Function expression vs arrow syntax:</h3>
+    <pre><code rel="JS" class="javascript">
+      const pi = 3.14;
+
+      // function expression syntax:
+      let circleAreaExp = function(r){
+        return r*r*pi;
+      }
+
+      // arrow function syntax:
+      let circleAreaArrow = r=>r*r*pi;
+    </code></pre>
+  </section>
+  <section><h3>Basic Syntax</h3>
+    <dl class="fa" style="font-size: .8em">
+      <dt>Arrow function syntax <span class="note">always creates an anonymous function</span>.</dt>
+      <dd>And this is usually it main use-case.</dd>
+      <dd>In order to simplify the examples, we'll assign the arrow function to a variable.</dd>
+    </dl>
+    <pre><code rel="Basic Syntax">
+      (param1, param2, …, paramN) => { statements }
+    </code></pre>
+    <pre><code rel="JS - example" class="javascript">
+      const pi = 3.14;
+
+      let circleArea = (r)=>{return r*r*pi};
+
+      console.log(`circleArea(2) = ${circleArea(2)}`);
+    </code></pre>
+  </section>
+  <section><h3>"single parameter" syntax</h3>
+    <dl class="fa">
+      <dt>If the function takes <span class="note">a single parameter</span>, you can omit the parameter's parentheses:</dt>
+      <dd>But note that braces are <span class="note">required</span> for multiple parameters.</dd>
+    </dl>
+    <pre><code rel="Basic Syntax">
+      singleParam => { statements }
+    </code></pre>
+    <pre><code rel="JS - examples" class="javascript">
+      const pi = 3.14;
+
+      let circleArea = r=>{return r*r*pi};
+
+      console.log(`circleArea(2) = ${circleArea(2)}`);
+    </code></pre>
+  </section>
+  <section><h3>"single expression" syntax</h3>
+    <dl class="fa">
+      <dt>If the function body is a <span class="note">single expression</span>, you can <span class="note">omit curly braces and the return statement</span></dt>
+    </dl>
+    <pre><code rel="Basic Syntax">
+      (param1, param2, …, paramN) => expression
+    </code></pre>
+    <pre><code rel="JS" class="javascript">
+      let circleArea = r=>r*r*pi;
+
+      console.log(`circleArea(2) = ${circleArea(2)}`);
+    </code></pre>
+  </section>
+  <section><h3>"single expression" syntax notes</h3>
+    <dl class="fa" style="font-size: .8em;">
+      <dt>Note again, that when the curly braces are <b>not omitted</b>, then the <code>return</code> <b>is not</b> implied.</dt>
+      <dt>In other words, next two syntaxes are <span class="note">not</span> equivallent:</dt>
+      <dd><code>(param1, param2, …, paramN) => expression</code></dd>
+      <dd><code>(param1, param2, …, paramN) => {expression}</code></dd>
+    </dl>
+    <pre><code rel="JS  - example" class="js">
+      const pi = 3.14;
+
+      // no return is implied, so the return value will be 'undefined':
+      let circleArea = r=>{r*r*pi};
+
+      console.log(`circleArea(2) = ${circleArea(2)}`);
+      // undefined
+    </code></pre>
+  </section>
+  <section><h3>lexical "this"</h3>
+    <dl class="fa">
+      <dt>"this" value in arrow functions is <span class="note">lexically scoped</span> in contrast to standard functions, whose "this" value is dynamically scoped.<br>I.e the value of "this" in arrow functions is this same as the value of "this" in the enclosing scope.</dt>
+      <dt>"this" in arrow functions can not be changed with <code>call/apply or bind</code> methods!</dt>
+    </dl>
+  </section>
+  <section><h3>lexical "this" - example</h3>
+    <pre><code rel="JS" class="javascript">
+      lexicalThis = this;
+
+      var obj = {
+        'exp': function(){
+          console.log(this === lexicalThis);
+        },
+        'arr': ()=>{console.log(this === lexicalThis)}
+      }
+
+
+      obj.exp(); // false
+      obj.arr(); // true
+    </code></pre>
+  </section>
+  <section><h3>lexical arguments</h3>
+    <dl class="fa">
+      <dt>the <code>arguments</code> object in arrow function is reference to the arguments object in the enclosing scope</dt>
+    </dl>
+    <pre><code rel="JS" class="javascript">
+      let logArgs = ()=>{
+        for (var i = 0; i < arguments.length; i++) {
+          console.log(arguments[i]);
+        }
+        console.dir(arguments);
+      }
+
+      logArgs(1,2,3);
+    </code></pre>
+  </section>
+  <section><h3>loose binding</h3>
+    <pre><code rel="JS" class="javascript">
+      const f = x => (x % 2) === 0 ? x : 0;
+      console.log(f(6));
+    </code></pre>
+    <pre><code rel="JS" class="javascript">
+      let cb;
+
+      cb = cb || function() {}; // ok
+
+      cb = cb || () => {};
+      // SyntaxError: invalid arrow-function arguments
+
+      cb = cb || (() => {});  // ok
+    </code></pre>
+  </section>
+  <section><h3>Notes</h3>
+    <dl class="fa">
+      <dt class="note">Arrow functions are always anonymous!</dt>
+      <dt>Arrow function syntax is best suited for non-method functions</dt>
+      <dt>Perfect for callbacks</dt>
+      <dt>Arrow functions cannot be used as constructors and will throw an error when used with new</dt>
+    </dl>
+  </section>
+  <section><h3>References</h3>
+    <dl class="fa">
+      <dt><a href="https://hacks.mozilla.org/2015/06/es6-in-depth-arrow-functions/">ES6 In Depth: Arrow functions</a> @hacks.mozilla.org</dt>
+    </dl>
+  </section>
+</section>
+
+<section data-min="5"><h1>Default parameter values</h1></section>
+<section><h2>Default parameter values</h2>
+  <section><h3>Before ES6</h3>
+    <pre><code rel="JS" class="javascript">
+      function f(x, y, z){
+        var x = x || 1;
+        var y = y || 2;
+        var z = z || 3;
+
+        console.log(x, y, z); //6,7,3
+      }
+      f(6, 7);
+    </code></pre>
+  </section>
+  <section><h3>After ES6</h3>
+    <pre><code rel="JS" class="javascript">
+      function f(x=1, y=2, z=3){
+        console.log(x, y, z); //6,7,3
+      }
+      f(6, 7);
+    </code></pre>
+  </section>
+</section>
+
+<section data-min="20"><h1>The spread operator</h1></section>
+<section><h2>The spread operator</h2>
+  <section><h3>in function call</h3>
+    <dl class="fa" style="font-size:.8em;">
+      <dt>Converts an iterable object (like array or strings) into a list of values</dt>
+      <dt>Useful to turn array into parameters, like the old ES5 trick with apply()</dt>
+    </dl>
+    <pre><code rel="Syntax: function call">
+      myFunction(...iterableObj);
+    </code></pre>
+    <pre><code rel="Example: function call" class="js">
+      function foo(a,b,c){
+        console.log(`a=${a}, b=${b}, c=${c}`)
+      }
+
+      let arr = [1,2,3];
+
+      // pass foo three arguments with spread operator (ES6 way):
+      foo(...arr); // a=1, b=2, c=3
+
+      // pass foo three arguments with the apply() method (ES5 way):
+      foo.apply(this, arr); //a=1, b=2, c=3
+    </code></pre>
+  </section>
+  <section><h3>in array literals</h3>
+    <dl class="fa">
+      <dt>With spread syntax in array literal we can create a new array using an existing array.</dt>
+      <dt>Or concatenate two or more arrays</dt>
+    </dl>
+    <pre><code rel="Syntax: array literals">
+      [...iterableObj, 4, 5, 6];
+    </code></pre>
+    <pre><code rel="Example: array literals" class="js">
+      let arr = [1,2,3];
+      let str = 'abc';
+
+      console.log( [...arr, 9] );       // [1, 2, 3, 9]
+      console.log( [9, ...arr] );       // [9, 1, 2, 3]
+      console.log( [...arr, ..str] );   // [1, 2, 3, "a", "b", "c"]
+    </code></pre>
+  </section>
+</section>
+
+<section data-min="10"><h1>The rest operator</h1></section>
+<section><h2>The rest operator</h2>
+  <section>
+    <dl class="fa">
+      <dt>The last parameter of a function prefixed with " ... " is called as <span class="note">a rest parameter</span>. It collects all remaining arguments and 'condenses' them into a single array element </dt>
+      <dt>Rest syntax looks exactly like spread syntax but is used for destructuring arrays and objects.</dt>
+      <dt>We can use it to replaces the <code>arguments</code> object. the difference is that the <code>...rest</code> parameter is an array type</dt>
+    </dl>
+  </section>
+  <section>
+    <dl class="fa">
+      <dt>The <span class="note">rest</span> parameter must be provided <span class="note">after</span> the positional parameters.</dt>
+    </dl>
+    <pre><code rel="JS" class="javascript">
+      function foo(a, b, ...args){
+        // a = 1, b = 2, args = [3,4,5]
+        console.log(args); //"3, 4, 5"
+      }
+      foo(1, 2, 3, 4, 5);
+
+      function bar(a,...args, b){
+        console.log(args);
+      }
+      // SyntaxError: Rest parameter must be last formal parameter
+    </code></pre>
+  </section>
+</section>
+
+
+<section data-min="10"><h1>De-structuring assignments</h1></section>
+<section><h2>De-structuring assignments</h2>
+  <section>
+    <dl class="fa">
+      <dt>The destructuring assignment syntax is a JavaScript expression that makes it possible to unpack values from arrays, or properties from objects, into distinct variables.</dt>
+      <dt>Reference: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">Destructuring_assignment @mdn</a></dt>
+    </dl>
+  </section>
+  <section><h3>Array destructuring - examples</h3>
+    <pre><code rel="JS" class="js">
+      // assign variables from array:
+      let [a, b] = [1,2];
+      console.log(`a = ${a}; b = ${b}`); // a = 1; b = 2
+
+      // same as above - no matter that we pass more elements:
+      let [a, b] = [1,2,3,4,5];
+      console.log(`a = ${a}; b = ${b}`); // a = 1; b = 2
+
+      // assign variables from array in conjunction with rest syntax:
+      let [a, ...rest] = [1,2,3];
+      console.log(a);     // 1
+      console.log(rest);  // [2, 3]
+    </code></pre>
+  </section>
+  <section><h3>use case: swapping variables values</h3>
+    <pre><code rel="JS" class="js">
+      let a = 1, b = 2;
+
+      // we do the swap without tmp variable, just with one line:
+      [a,b] = [b,a];
+
+      console.log(`a = ${a}; b = ${b}`); // a = 2; b = 1
+    </code></pre>
+  </section>
+  <section><h3>Object destructuring</h3>
+    <dl class="fa">
+      <dt>Destructuring on objects let us bind variables to different properties of an object.</dt>
+      <dt>There is a nice syntactical shortcut for when the property and variable names are the same</dt>
+    </dl>
+    <pre><code rel="JS" class="js">
+      let obj = {p1: 1, p2: 2};
+
+      // assign obj properties to variables with same name:
+      let {p1, p2} = obj;
+
+      console.log(p1);  // 1
+      console.log(p2);  // 2
+    </code></pre>
+  </section>
+</section>
+
+<section data-min="5"><h1>New object literal features</h1></section>
+<section><h2>New object literal features</h2>
+  <section><h3>Shorthand property names</h3>
+    <dl class="fa">
+      <dt>Declaring an object literal with keys that match variables is quite common use case. In such situations property values shorthands is quite useful: </dt>
+    </dl>
+    <pre><code rel="JS" class="js">
+      let userName = 'pesho';
+      let userAge = 23;
+
+      // ES6 way:
+      let p1 = {userName, userAge};
+
+      // ES5 way:
+      // let p1 = {userName:userName, userAge:userAge};
+
+      console.log(p1); // { userName: 'pesho', userAge: 23 }
+    </code></pre>
+  </section>
+  <section><h3>Method definitions</h3>
+    <dl class="fa">
+      <dt>ES6 introduces a shorter syntax for method definitions on objects initializers:</dt>
+    </dl>
+    <pre><code rel="JS" class="js">
+      let p1 = {
+        name: 'Pesho',
+        greet(){
+          console.log(`Hi, I'm ${this.name}`);
+        }
+      }
+
+      p1.greet(); // Hi, I'm Pesho
+    </code></pre>
+  </section>
+</section>
+
+<section data-min="10"><h1>object.assign() method</h1></section>
+<section><h2>object.assign() method</h2>
+  <section><h3>Overview</h3>
+    <dl class="fa">
+      <dt>The Object.assign() method is used to <span class="note">copy the values</span> of all enumerable own properties from one or more source objects to a target object.</dt>
+      <dt>It will return the target object.</dt>
+      <dt>Reference: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">Object.assign() @mdn</a></dt>
+    </dl>
+    <pre><code rel="JS" class="js">
+      let source = {a:1, b:2}
+      let target = {a:2, c:3}
+
+      let new_object = Object.assign(target, source);
+
+      console.log(target);      // { a: 1, c: 3, b: 2 }
+      console.log(new_object);  // { a: 1, c: 3, b: 2 }
+    </code></pre>
+  </section>
+  <section><h3>Shallow vs Deep copy</h3>
+    <dl class="fa">
+      <dt>Object.assign() copies property <span class="note">values</span>, and if they are reference to other objects, then the same reference will be copy.</dt>
+      <dt>Which means that with Object.assign() we make a <span class="note"><a href="https://en.wikipedia.org/wiki/Object_copying#Shallow_copy">shallow copy</a></span> of an object.</dt>
+    </dl>
+    <pre><code rel="JS" class="js">
+      let p1 = {
+        name: 'Pesho',
+        address: {
+          town: 'Sofia',
+          zip: 1504
+        }
+      }
+
+      // shallow copy the object:
+      let p2 = Object.assign({}, p1);
+      console.log(p2.address);     // { town: 'Sofia', zip: 1504 }
+
+      // now change p1
+      p1.address.town = 'Plovdiv';
+
+      // check if the change is reflected into p2
+      console.log(p2.address); // { town: 'Plovdiv', zip: 1504 } (yes, so we have a shallow copy)
+    </code></pre>
+  </section>
+  <section><h3>Deep copy</h3>
+    <dl class="fa">
+      <dt>The <a href="https://en.wikipedia.org/wiki/Object_copying#Deep_copy">Deep copy</a> on an object means that fields are dereferenced rather than references to objects being copied</dt>
+      <dt>For deep copy in JavaScript we can use the JSON methods:</dt>
+      <code>target = JSON.parse(JSON.stringify(source))</code>
+    </dl>
+    <pre><code rel="JS" class="js">
+      let p1 = {
+        name: 'Pesho',
+        address: {
+          town: 'Sofia',
+          zip: 1504
+        }
+      }
+
+      // create a deep copy
+      let p2 = JSON.parse(JSON.stringify(p1));
+      console.log(p2.address); // { town: 'Sofia', zip: 1504 }
+
+      // now change p1
+      p1.address.town = 'Plovdiv';
+
+      // check if the change is reflected into p2
+      console.log(p2.address); // { town: 'Sofia', zip: 1504 } (no, so we have a deep copy)
+    </code></pre>
+  </section>
+</section>
+
+<section data-min="5"><h1>The Class Syntax</h1></section>
+<section><h2>The Class Syntax</h2>
+  <section><h3>Class definitions:</h3>
+    <dl class="fa">
+      <dt>Classes in JS are "special functions" and we can define them using the expression or declaration syntax</dt>
+      <dt>All code inside the class construct is automatically interpreted in strict mode.</dt>
+    </dl>
+    <pre><code rel="JS" class="js">
+      // class declaration
+      class Person{
+        // method definitions
+      }
+    </code></pre>
+    <pre><code rel="JS" class="js">
+      // class expression
+      let Person = class {
+        // method definitions
+      }
+    </code></pre>
+  </section>
+  <section><h3>Constructor</h3>
+    <dl class="fa">
+      <dt>The constructor method is a special method for creating and initializing an object created with a class</dt>
+      <dt>It's called automatically whenever a new object is created</dt>
+      <dt>There can only be one special method with the name "constructor" in a class</dt>
+    </dl>
+    <pre><code rel="JS" class="js">
+      class Person{
+        constructor(name, age){
+          this.name = name;
+          this.age = age;
+        }
+      }
+
+      let p1 = new Person('Pesho', 23);
+      console.dir(p1);
+    </code></pre>
+  </section>
+  <section><h3>Methods</h3>
+    <dl class="fa">
+      <dt>We can define methods in class declaration using the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions">shorter ES6 method definition syntax</a>.</dt>
+      <dt>Note, that methods are created in the class prototype.</dt>
+    </dl>
+    <pre><code rel="JS" class="js">
+      class Person{
+        constructor(name, age){
+          this.name = name;
+          this.age = age;
+        }
+
+        greet(){
+          console.log(`I'm ${this.name}, ${this.age} years old.`);
+        }
+      }
+
+      let p1 = new Person('Pesho', 23);
+      console.dir(p1);
+    </code></pre>
+  </section>
+  <section><h3>Static methods and properties</h3>
+    <dl class="fa">
+      <dt>We can define a static method for a class, using the keyword <span class="note">static</span> inside the class body</dt>
+      <dt>Static (class) properties must be defined outside of the Class declaration</dt>
+    </dl>
+    <pre><code rel="JS" class="js">
+      class Person{
+        constructor(name, age){
+          this.name = name;
+          this.age = age;
+          Person.counter();
+        }
+        // static method
+        static counter(){
+          Person.count+=1;
+          console.log(`${Person.count} objects were created.`);
+        }
+
+        greet(){
+          console.log(`I'm ${this.name}, ${this.age} years old.`);
+        }
+      }
+      // static (class) property
+      Person.count = 0;
+
+      let p1 = new Person('Pesho', 23);
+      let p2 = new Person('Maria', 28);
+    </code></pre>
+  </section>
+  <!-- <section><h3>Field declarations</h3>
+    <dl class="fa">
+      <dt>The new field declaration syntax allows us to declare fields up-front, outside the constructor, setting some default value if we need.</dt>
+      <dt>Using the fields declaration class definitions become more self-documenting, and the fields are always present.</dt>
+    </dl>
+  </section> -->
+  <section><h3>Sub classing with extendsSection</h3>
+    <dl class="fa">
+      <dt>To create a class as a child of another class we can use the <span class="note">extends</span> keyword in class definition</dt>
+      <dt>The <span class="note">super</span> keyword allows to call the parent  constructor or any method of the super class</dt>
+    </dl>
+    <pre><code rel="JS" class="js">
+      class Person{
+        constructor(name, age){
+          this.name = name;
+          this.age = age;
+        }
+
+        greet(){
+          console.log(`I'm ${this.name}, ${this.age} years old.`);
+        }
+      }
+
+      class Developer extends Person{
+        constructor(name, age, skills){
+          // call the parent constructor:
+          super(name, age)
+          this.skills = skills
+        }
+
+        greet(){
+          // call the parent greet() method
+          super.greet();
+          console.log(`My skills are: ${this.skills.join()}`);
+        }
+      }
+
+      let dev1 = new Developer('Pesho', 23, ['JS','React','Vue'])
+      dev1.greet()
+    </code></pre>
+  </section>
+</section>
+
+<section data-min="5"><h1>Exercises</h1></section>
+<section><h2>Exercises</h2>
+  <section id="DeveloperManagerPersonClassSyntaxTaskDescription"><h3>Developer_Manager_Person with Class Syntax- task description</h3>
+    <dl class="fa">
+      <dt>Refactor the solution of <a href="https://wwwcourses.github.io/ProgressBG-JS-Advanced_React/pages/themes/prototypalInheritance/prototypalInheritance.html#/DeveloperManagerPersonTaskDescription">Developer_Manager_Person Task</a> using this time the Class Syntax</dt>
+      <dt>Your new code must produce the same results for same input data, as in the old solution.</dt>
+    </dl>
+  </section>    
+</section>
+
+
+<section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
+   <p>These slides are based on</p>
+   <p>customised version of </p>
+   <p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+   <p>framework</p>
+</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+    </div>
+  </div>
+  <!-- Custom processing -->
+  <script src="../../../outfit/js/slides.js"></script>
+  <!-- external scripts -->
+  <script src="../../../lib/reveal.js/lib/js/head.min.js"></script>
+  <script src="../../../lib/reveal.js/js/reveal.js"></script>
+  <!-- init reveal -->
+  <script>
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    var highlightjsTabSize = '  ';
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      slideNumber: 'c/t',
+      keyboard: true,
+      history: true,
+      center: true,
+      width: '100%',
+      // height: '100%',
+      // slide transition
+      transition: 'concave', // none/fade/slide/convex/concave/zoom
+      // Factor of the display size that should remain empty around the content
+      margin: 0.1,
+      // shift+maous click to zoom in/out element
+      zoomKey: 'ctrl',
+      // theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+      // transition: Reveal.getQueryHash().transition || 'default'
+      // Optional reveal.js plugins
+      dependencies: [
+        { src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+        { src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        { src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        { src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad(); } },
+        { src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+        { src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
+      ]
+    });
+  </script>
+  <!-- linkedin badge -->
+  <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+</body>
+</html>

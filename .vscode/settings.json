@@ -1,0 +1,13 @@
+{
+    "spellright.language": [
+        "English (American)",
+        "English (British)"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext",
+        "python"
+    ],
+    "editor.fontSize": 16,
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SingeltonPattern</title>
+</head>
+<body>
+<script type="text/javascript">
+	// да се напише singleObjectMaker2, която отново да създава един едиснтвен обект, аналогично на singleObjectMaker,  но като използвате подхода с "пренаписване на конструктора"
+
+	// Singelton: вариант 1
+	var singleObjectMaker = function(name){
+		if( singleObjectMaker.instance ){
+			return singleObjectMaker.instance;
+		}
+
+		var obj = {};
+		obj.name = name;
+
+		singleObjectMaker.instance = obj;
+		return obj;
+	}
+
+	var obj1 = singleObjectMaker2('obj1');
+	var obj2 = singleObjectMaker2('obj2');
+
+	// test:
+	console.log( obj2 == obj1); // should be TRUE !!!
+</script>
+</body>
+</html>

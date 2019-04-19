@@ -1,0 +1,37 @@
+html, body{
+	height: 100%
+}
+html, body, h1,h2,h3,h4,h5,h6,p{
+	margin: 0;
+	padding: 0;
+}
+header{
+	height: 10vh;
+	background: #CCC;
+	color: #333l
+}
+footer{
+	height: 10vh;
+	background: #333;
+	color: #CCC;
+}
+.pagesWrapper{
+	position: relative;
+	height: 80vh;
+}
+.pagesWrapper>div{
+	display: block;
+	position: absolute;
+	top: 0; bottom: 0; left: 0; right: 0;
+	box-sizing: border-box;
+}
+.pagesWrapper>#page1{
+	display: block;
+	background: red;
+}
+.pagesWrapper>#page2{
+	background: green;
+}
+.pagesWrapper>#page3{
+	background: blue;
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>The Home Page</title>
+	<script type="text/javascript" src="smartLogger.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+	// var logger = smartLogger(document.URL);
+	var logger = smartLogger('https://mysite.com:8080');
+
+	logger.log(`The logger.log is logging!`);
+	// If script is running by server, i.e. the document.url starts with 'http://' or 'https://', then no output to console.
+	 // If script is running locally, i.e. the document.URL starts with 'file://', then in console:
+	 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	 // I'm the logger.log!
+	 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+</script>
+</body>
+</html>

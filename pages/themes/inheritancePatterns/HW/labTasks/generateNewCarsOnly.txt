@@ -1,0 +1,24 @@
+Car:
+	color: black,
+	year: 2000,
+
+	// shared members
+	getYear();
+	setYear(year){
+
+	}
+
+	# ? if (2017- year > 20) => can not create object!
+###########################################################
+
+ford = new Car(); // red, 2015
+bmw = new Car();  // green, 2010
+opel = new Car(); // blue, 1995
+
+electricFord ISA ford with batery: '34Am/h';
+
+
+
+console.log(opel);  // undefined
+ford.setYear(2010);
+electricFord.getYear(); // 2015

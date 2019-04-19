@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Labs: Pub/Privite/Priviledged Members</title>
+</head>
+<body>
+
+<script type="text/javascript">
+	var examples = {
+		'objLiteral': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var event = {
+				name: 'Mariinsky Theatre Orchestra with Gergiev',
+				date: '22.05.2017',
+				time: '19.30',
+				place: 'Bulgaria Hall',
+			}
+
+			console.log(`Event name: ${event.name}`);
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'publicMembers': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var Event = function(name, date, time) {
+				this.name 	= name;
+				this.date 	= date;
+				this.time 	= time;
+			}
+			var event1 = new Event(
+				'Mariinsky Theatre Orchestra with Gergiev',
+				'22.05.2017',
+				'19.30'
+			) ;
+			Event.prototype.setReminder = function(minutesBefore) {
+				alert('Reminder set for '+  minutesBefore +' minutes before start!');
+			};
+
+			event1.setReminder(60);
+			 // yep, event.setReminder() is public!
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'shared': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var Event = function(id) {
+				// public
+				this.id = this.count();
+				console.log(`Object ${this.counter} was created!`);
+			}
+
+			// shared
+			Event.prototype.counter = 0;
+			Event.prototype.count = ()=> ++Event.prototype.counter;
+
+			var event1 = new Event(1) ;
+			var event2 = new Event(1) ;
+			var event3 = new Event(1) ;
+			console.log(event3.id);
+
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'private': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var Event = function(id) {
+				// private data
+				var createdOn = new Date();
+				//private method
+				var dateToString = function(date, sep){
+					var mm = date.getMonth() + 1;
+					var dd = date.getDate();
+
+					return [
+					        (dd>9 ? '' : '0') + dd,
+					        (mm>9 ? '' : '0') + mm,
+					        date.getFullYear(),
+					].join(sep);
+				}
+				var timeToString = function(date, sep){
+					 var seconds = date.getSeconds();
+					 seconds = seconds>9? seconds : '0'+seconds;
+					return date.getHours()+sep+date.getMinutes()+sep+seconds;
+				}
+				console.log(`Onject created on date: ${dateToString(createdOn, '.')}`);
+				console.log(`Onject created on time: ${timeToString(createdOn, ':')}`);
+			}
+			var event1 = new Event();
+			console.dir(event1);
+			// ups, no properties at all
+
+			console.log(`event1.createdOn: ${event1.createdOn}`);
+			// event1.createdOn: undefined
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'privileged': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var Event = function(id) {
+				// private data
+				var createdOn = new Date();
+				//private method
+				var dateToString = function(date, sep){
+					var mm = date.getMonth() + 1;
+					var dd = date.getDate();
+
+					return [
+					        (dd>9 ? '' : '0') + dd,
+					        (mm>9 ? '' : '0') + mm,
+					        date.getFullYear(),
+					].join(sep);
+				}
+				var timeToString = function(date, sep){
+					 var seconds = date.getSeconds();
+					 seconds = seconds>9? seconds : '0'+seconds;
+					return date.getHours()+sep+date.getMinutes()+sep+seconds;
+				}
+
+				// privileged members
+				this.createdDate = function(){
+					return dateToString(createdOn, '.');
+				};
+				this.createdTime = function(){
+					return timeToString(createdOn, ':');
+				};
+			}
+
+			var event1 = new Event;
+			console.log(event1.createdDate());
+			console.log(event1.createdTime());
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'shredPrivileged': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var Event = function(id) {
+				// private data
+				var createdOn = new Date();
+				//private method
+				var dateToString = function(date, sep){
+					var mm = date.getMonth() + 1;
+					var dd = date.getDate();
+
+					return [
+					        (dd>9 ? '' : '0') + dd,
+					        (mm>9 ? '' : '0') + mm,
+					        date.getFullYear(),
+					].join(sep);
+				}
+				var timeToString = function(date, sep){
+					 var seconds = date.getSeconds();
+					 seconds = seconds>9? seconds : '0'+seconds;
+					return date.getHours()+sep+date.getMinutes()+sep+seconds;
+				}
+
+				// privileged members
+				this.createdDate = function(){
+					return dateToString(createdOn, '.');
+				};
+				this.createdTime = function(){
+					return timeToString(createdOn, ':');
+				};
+			}
+
+			var event1 = new Event;
+			console.log(event1.createdDate());
+			console.log(event1.createdTime());
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'example1': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var ObjContrucotr = function(name){
+				return {
+					name:name
+				};
+			}
+			ObjContrucotr.prototype.sayName = function(){
+				console.log(`I'm ${this.name}`);
+			}
+
+			var obj1 =  ObjContrucotr('obj1');
+			console.dir(obj1);
+			console.dir(ObjContrucotr);
+			console.log(obj1.toString());
+			obj1.sayName();
+
+
+
+
+
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+	}
+
+	examples.example1();
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>object_inherits_object</title>
+</head>
+<body>
+
+<script type="text/javascript">
+	'use strict';
+
+	if (typeof Object.create !== 'function') {
+	    Object.create = function (o) {
+	        function F() {}
+	        F.prototype = o;
+	        return new F();
+	    };
+	}
+
+	var person = {
+		fullName: function(){
+			return fName + ' ' + surname;
+		}
+	}
+	console.log("iva obj: ", iva);
+
+	var iva = Object.create(person);
+	console.log("iva obj: ", iva);
+
+</script>
+</body>
+</html>

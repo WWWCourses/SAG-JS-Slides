@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>AJAX</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<!-- css & themes include -->
+	<link rel="stylesheet" href="../../../lib/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../../../outfit/css/themes/projector.css" id="theme">
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? '../../../lib/reveal.js/css/print/pdf.css' : '../../../lib/reveal.js/css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+	<!-- CUSTOM -->
+	<base target="_blank">
+</head>
+<body>
+	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+		<div class="top_links">
+			<a class="home_link" href="/ProgressBG-JS-Advanced_React/index.html#Course_Intro" target="_top"><i class="fa fa-home"></i></a>
+			<span class="help_link" href="#"><i class="fa fa-question"></i></span>
+			<div class="help_text">
+				<div><span>N/Space</span><span>Next Slide</span></div>
+				<div><span>P</span><span>Previous Slide</span></div>
+				<div><span>O</span><span>Slides Overview</span></div>
+				<div><span>ctrl+left click</span><span>Zoom Element</span></div>
+			</div>
+		</div>
+		<div class="footer theme_switch">
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/dark.css'); return false;">Dark</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/light.css'); return false;">Light</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/projector.css'); return false;">Projector</a>
+		</div>
+		<div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>AJAX: consuming Remote Data with JavaScript</h1></section>
+<section data-transition="zoom">
+	<div class="copyright">
+		<div class="note">
+			<p>Created for</p>
+		</div>
+		<div class="company">
+			<a href="http://progressbg.net/kurs-po-web-design/">
+			<img style="height:80%" src="../../../outfit/images/logos/ProgressBG_logo_529_127.png">
+			</a>
+		</div>
+		<div class="author">
+			<span>Iva E. Popova, 2018-2019,</span>
+			<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+		</div>
+	</div>
+</section>
+
+<section><h2>What is AJAX?</h2>
+	<section>
+		<p class="note">AJAX</p>
+		<p><hr></p>
+		<div style="text-align: center">
+			<p><span class="note">A</span>synchronous</p>
+			<p><span class="note">J</span>avaScript</p>
+			<p><span class="note">A</span>nd</p>
+			<p><span class="note">X</span>ML</p>
+		</div>
+		<p><em>In reality, these days, the use of JSON prevails over XML, but for backward compatibility we do not say AJAJ</em></p>
+	</section>
+	<section>
+		<p>With AJAX, Web applications can send and retrieve data from a Web server <span class="note">asynchronously</span> (in the background)  without refreshing the existent page </p>
+	</section>
+	<section>
+		<p>With AJAX we can:</p>
+		<dl class="fa">
+			<dt>Update a web page without reloading the page</dt>
+			<dt>Request data from a server - after the page has loaded</dt>
+			<dt>Receive data from a server - after the page has loaded</dt>
+			<dt>Send data to a server - in the background</dt>
+		</dl>
+	</section>
+	<section>
+		<a href="images/Ajax_vs_Conventinal_Model.png"><img src="images/Ajax_vs_Conventinal_Model.png"></a>
+	</section>
+	<section><h3>So, what is AJAX and what's behind it?</h3>
+		<dl class="fa">
+			<dt>AJAX is just the name for combination of technologies:</dt>
+			<dd>the use of the built-in <span class="note">XMLHttpRequest</span> object to request data from a web server</dd>
+			<dd>the use of JavaScript and HTML DOM (to display or use the data)</dd>
+		</dl>
+	</section>
+</section>
+
+<section><h2>the XMLHttpRequest object</h2>
+	<section>
+		<a href="https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest">XMLHttpRequest at MDN</a>
+	</section>
+	<section><h3>Simple example</h3>
+		<pre><code rel="HTML" class="html">
+			<button class="getDataBtn">Get data</button>
+			<div class="output"></div>
+		</code></pre>
+		<p>An empty DIV in which the data will be load, after the button click.</p>
+		<p>Note, that only the DIV content will be updated!</p>
+	</section>
+	<section><h3>Simple example</h3>
+		<pre><code rel="JS" class="js">
+			var nodes={
+				output:  document.getElementsByClassName('output')[0],
+				getDataBtn: document.getElementsByClassName('getDataBtn')[0],
+			};
+
+			var dataURL = 'loremIpsum.txt';
+
+			var AJAXcall = function(){
+				// create a XMLHttpRequest object
+				var xhr = window.XMLHttpRequest ? new XMLHttpRequest() :
+								new ActiveXObject("Microsoft.XMLHTTP");
+
+				// initializes the request:
+				xhr.open("GET", dataURL, true);
+
+				// EventHandler, that will be fired each time when the xhr state changes
+				xhr.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						// finally do something with content:
+						nodes.output.innerHTML = this.responseText;
+					};
+				};
+
+				// sends the request:
+				xhr.send();
+			};
+
+			nodes.getDataBtn.addEventListener('click', function(){
+				AJAXcall();
+			});
+		</code></pre>
+	</section>
+</section>
+
+<section><h2>the Fetch API</h2>
+	<section>
+		<dl class="fa">
+			<dt>The Fetch API provides an interface for fetching resources, similar to the XMLHttpRequest, but the new API provides a more powerful and flexible feature set.</dt>
+			<dt>Fetch APIs use the concept of <a href="https://www.sitepoint.com/overview-javascript-promises/">promises</a> in JavaScript</dt>
+			<dt>As Fetch APIs are "A modern replacement for XMLHttpRequest", do think about the browser compatibility: <a href="http://caniuse.com/#feat=fetch">caniuse.com: fetch</a></dt>
+		</dl>
+	</section>
+	<section>
+		<a href="https://developer.mozilla.org/en/docs/Web/API/Fetch_API">Fetch API at MDN</a>
+	</section>
+	<section><h3>fetch by <code>fetch</code></h3>
+		<pre><code rel="JS" class="js">
+			fetch(url)
+				.then(function (response){
+					return response.text();
+				})
+				.then(function (responseText){
+					// do something with responseText
+					nodes.output.innerHTML = responseText;
+				})
+		</code></pre>
+		<p class="note">Async by promises!</p>
+	</section>
+	<section><h3>with error checks</h3>
+		<pre><code rel="JS" class="js">
+			fetch(url)
+				.then(function (response) {
+					if( response.text){
+						return response.text();
+					}else{
+						throw new Error("No response.text")
+					}
+				})
+				.then(function (responseText) {
+					// renderHTML(responseText);
+					nodes.output.innerHTML = responseText;
+				})
+				.catch( function(error){
+					console.error('Upss, an error occurred');
+					console.error(error.message);
+				});
+		</code></pre>
+	</section>
+	<section><h3>More on <code>response</code> interface</h3>
+	<a href="https://developer.mozilla.org/en-US/docs/Web/API/Response">Response interface at MDN</a>
+	</section>
+</section>
+
+<section><h2>Create HTTP request with jQuery</h2>
+	<section>
+		<a href="https://www.w3schools.com/jquery/jquery_ajax_get_post.asp">jQuery - AJAX get() and post() Methods at w3schools</a>
+		<a href="https://www.w3schools.com/jquery/jquery_ref_ajax.asp">jQuery AJAX Methods Reference at w3schools</a>
+	</section>
+	<section><h3>simple get() example</h3>
+		<pre><code rel="HTML" class="html">
+			&lt;head&gt;
+					&lt;script type=&quot;text/javascript&quot; src=&quot;//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js&quot;&gt;&lt;/script&gt;
+			&lt;/head&gt;
+			&lt;body&gt;
+				&lt;button class=&quot;getDataBtn&quot;&gt;Get data&lt;/button&gt;
+				&lt;div class=&quot;output&quot;&gt;&lt;/div&gt;
+			&lt;/body&gt;
+		</code></pre>
+		<pre><code rel="JS" class="js">
+			$(".getDataBtn").click(function(){
+				$.get(dataURL, function(data, status){
+					// do something with data:
+					$(".output").html(data);
+				});
+			});
+		</code></pre>
+	</section>
+	<section><h3>simple load() example</h3>
+		<pre><code rel="HTML" class="html">
+			&lt;head&gt;
+					&lt;script type=&quot;text/javascript&quot; src=&quot;//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js&quot;&gt;&lt;/script&gt;
+			&lt;/head&gt;
+			&lt;body&gt;
+				&lt;button class=&quot;getDataBtn&quot;&gt;Get data&lt;/button&gt;
+				&lt;div class=&quot;output&quot;&gt;&lt;/div&gt;
+			&lt;/body&gt;
+		</code></pre>
+		<pre><code rel="JS" class="js">
+			$(".getDataBtn").click(function(){
+				$(".output").load(dataURL);
+			});
+		</code></pre>
+	</section>
+</section>
+<section><h2>Examples</h2>
+	<section><h3>example: songs lyrics</h3>
+		<a href="examples/songLyricsAjaxLoad/songLyricsAjaxLoad.html">Load Song Lyrics By AJAX</a>
+	</section>
+	<section><h3>Task: songs lyrics</h3>
+		<dl class="fa">
+			<dt>Create a similar page, with your favorite artists and songs</dt>
+			<dt>For getting the lyrics data, use the three approaches for making AJAX requests:</dt>
+			<dd>by XMLHttpRequest object</dd>
+			<dd>by Fetch APIs</dd>
+			<dd>by jQuery get() or load() methods</dd>
+		</dl>
+	</section>
+	<section><h3>example: simple Shopping Cart</h3>
+		<a href="examples/ShoppingCart/index.html">Shopping Cart</a>
+		<p>* created by Martin Harsovski *</p>
+	</section>
+	<section><h3>task: simple Shopping Cart</h3>
+		<dl class="fa">
+			<dt>Create the simple Shopping Cart page by yourself, with the similar functionality, but <span class="note">fix the bug</span> of products disappearing from list after being added to shopping cart. Instead, fade them a little by css.</dt>
+			<dt>The products are generated dynamically, using the information in <code><a href="https://raw.githubusercontent.com/ProgressBG-WWW-Courses/JavaScript-Advanced/gh-pages/downloads/products.json">https://raw.githubusercontent.com/ProgressBG-WWW-Courses/JavaScript-Advanced/gh-pages/downloads/products.json</a> file</code></dt>
+			<dt>You can use the Martin's html and css (<a href="https://github.com/ProgressBG-WWW-Courses/JavaScript-Advanced/raw/gh-pages/downloads/ShoppingCartMartinBase.zip">ShoppingCartMartinBase.zip</a>), or create your own style.</dt>
+		</dl>
+	</section>
+</section>
+<section><h2>Appendix</h2>
+	<dl class="fa">
+		<dt>List of public APIs</dt>
+		<dd><a href="https://github.com/toddmotto/public-apis">Public APIs list on GitHub</a></dd>
+	</dl>
+</section>
+
+
+<!-- <section><h2>JSON WebServices</h2>
+
+	<section><h3>fetch by <code>fetch</code></h3>
+		<pre><code rel="JS" class="js">
+			fetch(url).then(function (response) {
+				response.text().then(function (responseText) {
+					renderHTML(responseText);
+				});
+			});
+		</code></pre>
+		<p class="note">Async by promises!</p>
+	</section>
+	<section><h23>JSON to JS object</h3>
+		<pre><code rel="JS" class="js">
+			var obj = JSON.parse(response);
+		</code></pre>
+	</section>
+	<section><h3>JS obj to JSON</h3>
+		<pre><code rel="JS" class="js">
+			var json = JSON.stringify(obj);
+		</code></pre>
+	</section>
+</section>
+<section><h2>Exercises && Tasks</h2>
+	<section><h3>GitHub: top 10 last updated</h3>
+		<p>Generate an HTML list with the top 10 repositories from a given user, sorted by <b>last-updated</b> order</p>
+		<p>Note: use the <a href="https://developer.github.com/v3/repos/#list-user-repositories">GitHub REST API v3 (List user repositories)</a></p>
+	</section>
+</section> -->
+
+<section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
+	<p>These slides are based on</p>
+	<p>customised version of </p>
+	<p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+	 <p>framework</p>
+</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+		</div>
+	</div>
+	<!-- Custom processing -->
+	<script src="../../../outfit/js/slides.js"></script>
+	<!-- external scripts -->
+	<script src="../../../lib/reveal.js/lib/js/head.min.js"></script>
+	<script src="../../../lib/reveal.js/js/reveal.js"></script>
+
+	<!-- init reveal -->
+	<script>
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		var highlightjsTabSize = '  ';
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			slideNumber: 'c/t',
+			keyboard: true,
+			history: true,
+
+			// display control
+			// center: true,
+			// width: '100%',
+			// height: '100%',
+			// // Factor of the display size that should remain empty around the content
+			// margin: 0.1,
+
+			// The "normal" size of the presentation, aspect ratio will be preserved
+			// when the presentation is scaled to fit different resolutions. Can be
+			// specified using percentage units.
+			width: 960,
+			height: 700,
+
+			// Factor of the display size that should remain empty around the content
+			margin: 0.1,
+
+			// Bounds for smallest/largest possible scale to apply to content
+			minScale: 0.2,
+			maxScale: 1.5,
+
+			// slide transition
+			transition: 'concave', // none/fade/slide/convex/concave/zoom
+			// shift+maous click to zoom in/out element
+			zoomKey: 'ctrl',
+			// theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+			// transition: Reveal.getQueryHash().transition || 'default'
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad(); } },
+				{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+				{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
+			]
+		});
+	</script>
+	<!-- linkedin badge -->
+	<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+</body>
+</html>

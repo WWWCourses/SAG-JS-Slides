@@ -1,0 +1,14 @@
+<h1>TODO List</h1>
+<input type="text" id="myInput" placeholder="New item..." tabindex="1"
+	(input)="onInput($event)" [value]="inputEcho"
+>
+
+<!-- <input [(ngModel)]="username"> -->
+<!-- button will be enabled: -->
+<button (click)="onAddNewItems">Add 1</button>
+<!-- button will be enabled: -->
+<button bind-disabled="false">Add 2</button>
+<!-- button will be enabled: -->
+<button disabled="{{false}}">Add 3</button>
+
+<p class="inputEcho">{{inputEcho}}</p>

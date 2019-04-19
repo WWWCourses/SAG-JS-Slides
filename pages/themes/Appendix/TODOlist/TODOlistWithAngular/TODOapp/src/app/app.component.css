@@ -1,0 +1,24 @@
+body{
+	margin: 0;
+	padding: 0;
+}
+header{
+	/*margin-top: -1em;*/
+	display: block;
+	height: 20vh;
+	background: #990000;
+}
+[items]{
+	display: block;
+	height: 70vh;
+	background: #009900;
+}
+[stats]{
+	display: block;
+	height: 10vh;
+	background: #000099;
+	color: #CCC;
+}
+h1{
+	color: purple;
+}

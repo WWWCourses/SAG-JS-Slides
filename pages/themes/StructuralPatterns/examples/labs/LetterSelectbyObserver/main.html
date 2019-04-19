@@ -1,0 +1,39 @@
+<html>
+<head>
+    <title>Select</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        ul {
+            list-style: none;
+        }
+
+        #main {
+            width: 300px;
+            margin: 200px auto;
+            border: 1px solid lightgray;
+            font-size: 20px;
+        }
+
+        #title {
+            text-align: center;
+            line-height: 40px;
+            border-bottom: 1px solid lightgray;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div id="title">
+            <label for="letter"><b>Select letter:</b></label>
+            <select id="dropdown">
+                <option value="-1"> </option>
+            </select>
+        </div>
+        <div>
+            <ul id="words"></ul>
+        </div>
+    </div>
+    <script src="mainAsPubSub.js"></script>
+</body>
+</html>

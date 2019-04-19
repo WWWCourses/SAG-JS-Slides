@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>loremIpsum</title>
+    <style type="text/css">
+    	.output{
+    		background: #666;
+    		color: #CCC;
+    	}
+    </style>
+</head>
+<body>
+	<button class="getDataBtn">Get data</button>
+	<div class="output">PUTPUT</div>
+</body>
+<script type="text/javascript">
+	(function(){
+		var ObjDriver = function(){
+			var atachEvents= function(){
+				for(nodeName in this.nodes){
+					var node = this.nodes[nodeName];
+					for(eventName in node.events){
+						var handler = node.events[eventName].cb;
+						if( node.events[eventName].bind){
+							node.el.addEventListener(eventName, handler.bind(this));
+						}else{
+							node.el.addEventListener(eventName, handler);
+						}
+
+					}
+				}
+			};
+
+			return{
+				atachEvents: atachEvents
+			}
+		};
+
+
+		var objDrivenApp = ObjDriver();
+		objDrivenApp.nodes = {
+			output:  {
+				el: document.getElementsByClassName('output')[0],
+				setContent: function(content){
+					this.el.innerHTML = content;
+				}
+			},
+			getDataBtn:  {
+				el: document.getElementsByClassName('getDataBtn')[0],
+				events:{
+					'click': {
+						cb: function(){
+							this.nodes.output.setContent("CONTENT SET SUCCESSFULLY!");
+						},
+						bind: true,
+					}
+				},
+			},
+		},
+		objDrivenApp.atachEvents();
+	})();
+</script>
+</html>

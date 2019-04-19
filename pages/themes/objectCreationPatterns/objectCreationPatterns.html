@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>objectCreationPatterns</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<!-- css & themes include -->
+	<link rel="stylesheet" href="../../../lib/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../../../outfit/css/themes/projector.css" id="theme">
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? '../../../lib/reveal.js/css/print/pdf.css' : '../../../lib/reveal.js/css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+	<!-- CUSTOM -->
+	<base target="_blank">
+</head>
+<body>
+	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+		<div class="top_links">
+			<a class="home_link" href="/ProgressBG-JS-Advanced_React/index.html#Course_Intro" target="_top"><i class="fa fa-home"></i></a>
+			<span class="help_link"><i class="fa fa-question"></i></span>
+			<div class="help_text">
+				<div><span>N/Спейс</span><span>следващ слайд</span></div>
+				<div><span>P</span><span>предишен слайд</span></div>
+				<div><span>O</span><span>всички слайдове</span></div>
+				<div><span>ctrl+left click</span><span>увеличава елемента</span></div>
+			</div>
+		</div>
+		<div class="footer theme_switch">
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/dark.css'); return false;">Dark</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/light.css'); return false;">Light</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/projector.css'); return false;">Projector</a>
+		</div>
+		<div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>Creational Design Patterns</h1></section>
+<section data-transition="zoom">
+	<div class="copyright">
+		<div class="note">
+			<p>Created for</p>
+		</div>
+		<div class="company">
+			<a href="http://progressbg.net/kurs-po-web-design/">
+				<img style="height:80%" src="../../../outfit/images/logos/ProgressBG_logo_529_127.png">
+			</a>
+		</div>
+		<div class="author">
+			<span>Iva E. Popova, 2018-2019,</span>
+			<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+		</div>
+	</div>
+</section>
+
+<section id="creationalDesignPatterns"><h2>about</h2>
+	<dl class="fa">
+		<dt>Creational design patterns focus on object creation mechanisms</dt>
+		<dt>Summaries best practices for object creation suitable for different, common, situations</dt>
+		<dt>Removes the potential complexity in a project</dt>
+		<dt>Some of the patterns that fall under this category are: Factory, Abstract, Prototype, Singleton and Builder</dt>
+	</dl>
+</section>
+<section data-notes="2h"><h2>The Singleton Pattern</h2>
+	<section><h3>about</h3>
+		<dl class="fa">
+			<dt>Perhaps the most overused pattern, though it has fallen out of favor in recent years.</dt>
+			<dt>Singleton provides protection against accidentally creating multiple copies of a complex object</dt>
+			<dt>Allows deferral of object instantiation until the first use</dt>
+			<dt class="note">In short, the main idea of the Singleton is to have only one instance of a specific class</dt>
+		</dl>
+	</section>
+	<section><h3>usage</h3>
+		<dl class="fa">
+			<dt>for namespacing, i.e. to reduces the number of global variables</dt>
+			<dt>used to organize the code in a consistent manner,</dt>
+		</dl>
+	</section>
+	<section><h3>caching the singular instance</h3>
+		<pre><code rel="JS" class="js">
+			function Car(name, speed) {
+				// check for existing instance
+				if (typeof Car.instance === "object"){
+					return Car.instance;
+				}
+
+				// set instance properties
+				this.name = name || 'Car';
+				this.speed = speed || 180;
+
+				// cache the instance
+				Car.instance = this;
+			}
+
+			// lets try to create 2 instances
+			var car1 = new Car('car1', 200);
+			var car2 = new Car('car2', 300);
+
+			// test if we have ONLY ONE instance:
+			console.log(car1 === car2);
+		</code></pre>
+	</section>
+	<section><h3>Instance in a Closure: rewrite the Constructor</h3>
+		<pre><code rel="JS" class="js">
+			function Car(name, speed) {
+				// cache the instance
+				var instance = this;
+
+				// set instance properties
+				this.name = name || 'Car';
+				this.speed = speed || 180;
+
+				// rewrite the constructor
+				Car = function(){
+					return instance;
+				};
+			}
+
+			// lets try to create 2 instances
+			var car1 = new Car('car1', 200);
+			var car2 = new Car('car2', 300);
+
+			// test if we have ONLY ONE instance:
+			console.log(car1 === car2);
+		</code></pre>
+	</section>
+</section>
+<section data-notes="2h"><h2>The Builder Pattern</h2>
+	<section><h3>about</h3>
+		<dl class="fa">
+			<dt>Avoids this issue by centralizing the logic necessary to build the object</dt>
+			<dt>Different concrete builders can be plugged into the builder to construct different complicated objects</dt>
+			<dt>The goal is to separate the object creation (or initialization) logic from the representation.</dt>
+		</dl>
+	</section>
+	<section>
+		<a href="images/Builder_UML_class_diagram.svg.png"><img src="images/Builder_UML_class_diagram.svg.png"></a>
+		<dl class="fa" style="font-size: .7em">
+			<dt><span class="note">Director</span>: controls the algorithm that generates the final product object.</dt>
+			<dt><span class="note">Builder</span>: defines the abstract steps that must be taken in order to create a product.In JavaScript the Builder is not separated clearly and in some cases can be omitted</dt>
+			<dt><span class="note">Concrete Builders</span>: implements the real object creation. Concrete Builders can use Factories for building parts of the final object</dt>
+			<dt><span class="note">Product</span>: the complex object that is to be generated by the builder pattern.</dt>
+		</dl>
+	</section>
+</section>
+
+<section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
+	<p>These slides are based on</p>
+	<p>customised version of </p>
+	<p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+	<p>framework</p>
+</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+</div>
+</div>
+<!-- Custom processing -->
+<script src="../../../outfit/js/slides.js"></script>
+<!-- external scripts -->
+<script src="../../../lib/reveal.js/lib/js/head.min.js"></script>
+<script src="../../../lib/reveal.js/js/reveal.js"></script>
+<!-- init reveal -->
+<script>
+	// Full list of configuration options available at:
+	// https://github.com/hakimel/reveal.js#configuration
+	var highlightjsTabSize = '  ';
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		slideNumber: 'c/t',
+		keyboard: true,
+		history: true,
+		center: true,
+		// width: 1024,
+		// width: '100%',
+		// height: 860,
+		height: '100%',
+		// Bounds for smallest/largest possible scale to apply to content
+		minScale: .5,
+		maxScale: 1,
+		// slide transition
+		transition: 'concave', // none/fade/slide/convex/concave/zoom
+		// Factor of the display size that should remain empty around the content
+		margin: 0.1,
+		// shift+maous click to zoom in/out element
+		zoomKey: 'ctrl',
+		// theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+		// transition: Reveal.getQueryHash().transition || 'default'
+		// Optional reveal.js plugins
+		dependencies: [
+		{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+		{ src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		{ src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad(); } },
+		{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+		{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
+		]
+	});
+</script>
+</body>
+</html>

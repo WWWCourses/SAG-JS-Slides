@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tmp</title>
+</head>
+<body>
+  <script type="text/javascript">
+    const mixinA = {
+      spice_A1(){
+        console.log(`Spice_A1 is added to ${this.dishName}!`);
+      },
+      spice_A2(){
+        console.log(`Spice_A2 is added to ${this.dishName}!`);
+      }
+    }
+
+    const mixinB = {
+      spice_B1(){
+        console.log(`Spice_B1 is added to ${this.dishName}!`);
+      }
+    }
+
+    class Dish{
+      constructor(dishName){
+        this.dishName = dishName;
+      }
+    }
+    const dish1 = new Dish("Dish 1");
+
+    // add mixinA to Dish class
+    Object.assign(Dish.prototype, mixinA);
+
+    // !Object.hasOwnProperty.call(receiver.prototype, methodName)
+    console.log(Object.hasOwnProperty.call(Dish.prototype, "spice_A"));
+    console.log(Dish.prototype.hasOwnProperty("spice_A"));
+
+    // add mixinB to Dish
+    Object.assign(Dish.prototype, mixinB);
+
+    // // use the spices from mixins:
+    // dish1.spice_A1();
+    // dish1.spice_A2();
+    // dish1.spice_B1();
+
+
+
+
+
+  </script>
+</body>
+</html>

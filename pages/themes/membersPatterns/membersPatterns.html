@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Members Patterns</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<!-- css & themes include -->
+	<link rel="stylesheet" href="../../../lib/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../../../outfit/css/themes/projector.css" id="theme">
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? '../../../lib/reveal.js/css/print/pdf.css' : '../../../lib/reveal.js/css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+	<!-- CUSTOM -->
+	<base target="_blank">
+</head>
+<body>
+	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+		<div class="top_links">
+			<a class="home_link" href="/ProgressBG-JS-Advanced_React/index.html#Course_Intro" target="_top"><i class="fa fa-home"></i></a>
+			<span class="help_link"><i class="fa fa-question"></i></span>
+			<div class="help_text">
+				<div><span>N/Спейс</span><span>следващ слайд</span></div>
+				<div><span>P</span><span>предишен слайд</span></div>
+				<div><span>O</span><span>всички слайдове</span></div>
+				<div><span>ctrl+left click</span><span>увеличава елемента</span></div>
+			</div>
+		</div>
+		<div class="footer theme_switch">
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/dark.css'); return false;">Dark</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/light.css'); return false;">Light</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/projector.css'); return false;">Projector</a>
+		</div>
+		<div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>JavaScript MemberPatterns</h1></section>
+<section data-transition="zoom">
+	<div class="copyright">
+		<div class="note">
+			<p>Created for</p>
+		</div>
+		<div class="company">
+			<a href="http://progressbg.net/kurs-po-web-design/">
+				<img style="height:80%" src="../../../outfit/images/logos/ProgressBG_logo_529_127.png">
+			</a>
+		</div>
+		<div class="author">
+			<span>Iva E. Popova, 2018-2019,</span>
+			<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+		</div>
+	</div>
+</section>
+
+<section><h2>Concept clarifications</h2>
+	<section style="font-size: .8em">
+		<dl class="fa">
+			<dt>Public/Private/Privileged Members are concepts coming from class-based languages (Java, C++, ...)</dt>
+			<dt>A <span class="note">public</span> object member is a member (i.e. object field) who is accessible outside the object itself.</dt>
+			<dt><span class="note">Private</span> members are those which are accessible only in the object itself and not from the outside.</dt>
+			<dt>By private members we can implement the principle of<a href="https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)">data encapsulation</a> and  <a href="https://en.wikipedia.org/wiki/Information_hiding">information hiding</a></dt>
+			<dt>A <span class="note">privileged</span> method is able to access the private variables and methods, and is itself accessible to the public methods and the outside.</dt>
+			<dd>In JavaScript Privileged Method is just a name for Public Method which access private data</dd>
+		</dl>
+	</section>
+	<section><h3>fake private data</h3>
+		<dl class="fa">
+			<dt>Often in JavaScript apps we use "private" data just to hide some module internals in order to give the users a clear interface.</dt>
+			<dt>In such case, the "privacy" can be accomplished by naming and docs convention. Common pattern is to not documenting the "private" members and to name private members by using <span class="note">underscore as prefix</span>. Like:</dt>
+		</dl>
+		<pre><code rel="JS" class="js">
+			// private data?
+			var _createdOn = new Date();
+		</code></pre>
+	</section>
+	<section><h3>The JavaScript way</h3>
+		<p class="note">JavaScript does not provide syntax for specifying the visibility of object members. I.e. no <code>private</code> like keywords.</p>
+		<p>But JavaScript has IIFE and closures => we can simulate private and privileged members!</p>
+	</section>
+</section>
+<section><h2>Object Literal</h2>
+	<section><h3>Public Members</h3>
+		<dl class="fa">
+			<dt>The members of an object are <span class="note">all public members</span>.</dt>
+		</dl>
+		<pre><code rel="JS">
+			var event = {
+				name: 'Mariinsky Theatre Orchestra with Gergiev',
+				date: '22.05.2017',
+				time: '19.30',
+				place: 'Bulgaria Hall',
+			}
+
+			console.log(`Event name: ${event.name}`);
+			// yep, event.name is public!
+		</code></pre>
+	</section>
+	<section style="font-size:.8em;"><h3>Private Members</h3>
+		<dl class="fa">
+			<dt>The only way to hide a variable from the outside is to wrap it in a function!</dt>
+		</dl>
+		<pre><code rel="JS">
+			var event = {
+				// public
+				name: 'Mariinsky Theatre Orchestra with Gergiev',
+				date: '22.05.2017',
+				time: '19.30',
+				place: 'Bulgaria Hall',
+				timestamp: (function(){
+					//private
+					var ts = Date();
+					return  ts;
+				})()
+			}
+
+			setTimeout( ()=>{
+				console.log(
+					'event.timestamp: ' + event.timestamp + '\n' +
+					'reported on' +Date()
+				);
+			}, 3000)
+
+			//event.timestamp: Thu Jun 01 2017 13:16:50 GMT+0300 (EEST)
+			//reported onThu Jun 01 2017 13:16:54 GMT+0300 (EEST)
+		</code></pre>
+	</section>
+</section>
+<section><h2>Constructor Function</h2>
+	<section><h3>Public Members</h3>
+		<p>All <code class="note">this</code> properties are public!</p>
+		<pre><code rel="JS" class="js">
+			var Event = function() {
+				// public
+				this.name = 'Mariinsky Theatre Orchestra with Gergiev';
+				this.date = '22.05.2017';
+				this.time = '19.30';
+				this.place = 'Bulgaria Hall';
+			}
+
+			var event = new Event;
+		</code></pre>
+	</section>
+	<section style="font-size:.8em;"><h3>Private Members</h3>
+		<dl class="fa">
+			<dt>All local variables and parameters are private members for the constructor function.</dt>
+		</dl>
+
+		<pre><code rel="JS">
+			var Event = function() {
+				//private data
+				var timestamp = Date();
+
+				// privileged method
+				this.timestamp = (function(){
+					return timestamp;
+				})();
+
+				// public
+				this.name = 'Mariinsky Theatre Orchestra with Gergiev';
+				this.date = '22.05.2017';
+				this.time = '19.30';
+				this.place = 'Bulgaria Hall';
+			}
+
+			var event = new Event;
+			setTimeout( ()=>{
+				console.log(
+					'event.timestamp: ' + event.timestamp + '\n' +
+					'reported on' +Date()
+				);
+			}, 3000);
+
+			//event.timestamp: Thu Jun 01 2017 13:18:10 GMT+0300 (EEST)
+			//reported onThu Jun 01 2017 13:18:14 GMT+0300 (EEST)
+		</code></pre>
+	</section>
+</section>
+<section><h2>Prototype</h2>
+	<section><h3>Public Members</h3>
+		<dl class="fa">
+			<dt>The members in prototype object are shared among all objects build from that prototype. They are all public members.</dt>
+			<dt>Usually, we put in the prototype only the shared functionality.</dt>
+		</dl>
+		<pre><code rel="JS">
+			Event.prototype.setReminder = function(minutesBefore) {
+				alert('Reminder set for '+  minutesBefore +' minutes before start!');
+			};
+
+			</code></pre>
+	</section>
+	<section><h3>Private Members in Prototype</h3>
+		<pre><code rel="JS" class="js" style="font-size:.8em;">
+			var Event = function() {
+				// public
+				this.name = 'Mariinsky Theatre Orchestra with Gergiev';
+			}
+			Event.prototype = (function(){
+				// private
+				var date = Date();
+
+				// this is the actual prototype
+				return {
+					//privileged
+					timestamp: date,
+				}
+			})();
+			var event = new Event;
+
+			setTimeout( ()=>{
+				console.log(
+					'event.timestamp: ' + event.timestamp + '\n' +
+					'reported on' +Date()
+				);
+			}, 3000);
+			console.dir(event);
+		</code></pre>
+	</section>
+	<section><h3>Private Members in Prototype: count instances example</h3>
+		<pre><code rel="JS" class="js" style="font-size:.8em;">
+			var Event = function(name) {
+				// public
+				this.name = name // '';
+				this.id = Object.getPrototypeOf(this).countObj();
+			}
+			Event.prototype = (function(){
+				// private
+				var count = 1;
+
+				// this is the actual prototype
+				return {
+					//privileged
+					countObj: ()=>count++,
+
+				}
+			})();
+
+			var events = [];
+			for (var i = 0; i < 10; i++) {
+				events.push(new Event(`Event ${i}`));
+			}
+
+			console.log(`events[0].id:  ${events[0].id}`);
+			console.log(`events[4].id:  ${events[4].id}`);
+			console.log(`events[9].id:  ${events[9].id}`);
+		</code></pre>
+	</section>
+	<section style="font-size:.8em;"><h3>Private Members in Prototype - do we need them?</h3>
+		<dl class="fa">
+			<dt>Remember, that private members is a class-based OOP paradigm, not a JavaScript!</dt>
+			<dt>Whenever possible try to not using them</dt>
+		</dl>
+		<pre><code rel="JS" class="js">
+			var Event = function(name) {
+				// public
+				this.name = name // '';
+				this.id = Event.count++;
+
+			}
+			Event.count = 1;
+
+			var events = [];
+			for (var i = 0; i < 10; i++) {
+				events.push(new Event(`Event ${i}`));
+			}
+
+			console.log(`events[0].id:  ${events[0].id}`);
+			console.log(`events[4].id:  ${events[4].id}`);
+			console.log(`events[9].id:  ${events[9].id}`);
+		</code></pre>
+	</section>
+</section>
+
+
+<section><h3>Public/Private fields in modern JS World</h3>
+	<dl class="fa">
+		<dt>Upcoming into ES.next ()</dt>
+		<dd><a href="https://tc39.github.io/proposal-class-fields/">Public and private instance fields proposal</a></dd>
+		<dd><a href="https://tc39.github.io/proposal-private-methods/">Private Methods and Accessors Proposal</a></dd>
+		<dt>TypeScript</dt>
+		<dd><a href="https://yakovfain.com/2015/06/30/the-private-in-typescript-is-kinda-private/">The private in TypeScript is kinda private by Yakov Fain</a></dd>
+	</dl>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <section data-notes="20min"><h2>SectionTitle</h2>
+		<section>
+				<aside class="notes">
+						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+				</aside>
+		</section>
+	</section> -->
+
+	<section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
+		<p>These slides are based on</p>
+		<p>customised version of </p>
+		<p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+		<p>framework</p>
+	</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+</div>
+</div>
+<!-- Custom processing -->
+<script src="../../../outfit/js/slides.js"></script>
+<!-- external scripts -->
+<script src="../../../lib/reveal.js/lib/js/head.min.js"></script>
+<script src="../../../lib/reveal.js/js/reveal.js"></script>
+<!-- init reveal -->
+<script>
+	// Full list of configuration options available at:
+	// https://github.com/hakimel/reveal.js#configuration
+	var highlightjsTabSize = '  ';
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		slideNumber: 'c/t',
+		keyboard: true,
+		history: true,
+		center: true,
+		// width: 1024,
+		// width: '100%',
+		// height: 860,
+		height: '100%',
+		// Bounds for smallest/largest possible scale to apply to content
+		minScale: .5,
+		maxScale: 1,
+		// slide transition
+		transition: 'concave', // none/fade/slide/convex/concave/zoom
+		// Factor of the display size that should remain empty around the content
+		margin: 0.1,
+		// shift+maous click to zoom in/out element
+		zoomKey: 'ctrl',
+		// theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+		// transition: Reveal.getQueryHash().transition || 'default'
+		// Optional reveal.js plugins
+		dependencies: [
+		{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+		{ src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		{ src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() {
+			hljs.configure({tabReplace: highlightjsTabSize});
+			hljs.initHighlightingOnLoad();
+			 } },
+		{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+		{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
+		]
+	});
+</script>
+</body>
+</html>

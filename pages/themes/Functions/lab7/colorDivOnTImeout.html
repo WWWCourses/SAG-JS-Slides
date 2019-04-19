@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>colorDivOnTImeout</title>
+    <link rel="stylesheet" type="text/css" href="colorDivOnTImeout.css">
+</head>
+<body>
+	<section>
+		<h1>Task:</h1>
+		<p>Implement the changeColor() function, so that the given call <code>setTimeout(changeColor(colors[i]), 2000);</code> would work as expected: after clicking the button 'Color the BOX' the box div background should shange its colors on 2 second interval.</p>
+	</section>
+	<section>
+		<h1>Test area</h1>
+		<div id="box">I'm the box</div>
+		<hr>
+		<button>Color the BOX</button>
+	</section>
+</body>
+<script type="text/javascript">
+	var colors = ["red", "green", "blue"];
+
+	for (var i = 0; i < colors.length; i++) {
+		// implement, so that this call to work:
+		setTimeout(changeColor(colors[i]), 2000);
+	}
+</script>
+</html>

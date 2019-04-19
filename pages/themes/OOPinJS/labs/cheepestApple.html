@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>cheepestApple</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+	var AppleMaker = function(id, color, prices){
+		this.id = id;
+		this.color = color;
+		this.prices = prices;
+		var secret = "abrakadabra";
+
+		this.calcMinPrice = function(){
+			return Math.min( ...prices);
+		}
+
+		this.tellMeTheSecret = function(){
+			return secret;
+		}
+	}
+
+	var objCount = 0;
+	AppleMaker.prototype.countMe = function(){
+		console.log("I'm ", objCount++);
+	}
+
+	var apple45 = new AppleMaker(45, "red", 	[1,1.5, 0.9]);
+	var apple2 = new AppleMaker(2, "red", 	[1.2,1.3]);
+	var apple2 = new AppleMaker(2, "red", 	[1.2,1.3]);
+	apple2.secret = "123";
+
+	console.log(apple45.countMe); // 1
+	console.log(apple2.countMe);  // 2
+	console.log(apple2.secret);  // 2
+
+
+
+
+
+</script>
+</html>
