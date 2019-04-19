@@ -221,7 +221,7 @@ body{
 	content: ' h.]';
 }
 .stats>#total_hours{
-	float: left;
+	float: right;
 	height: 1em;
 	color: #7B3B3B;
 }

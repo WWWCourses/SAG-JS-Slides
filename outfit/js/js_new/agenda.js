@@ -1,6 +1,6 @@
 "use strict";
 
-var hours_per_day = 8;
+var hours_per_day = 3;
 
 window.onload = function(){
     init();

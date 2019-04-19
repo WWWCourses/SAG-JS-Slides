@@ -7,7 +7,7 @@ var subThemes = document.querySelectorAll('.themes>article>section>ol');
 var toggleButtonsDiv = document.querySelector('.toggleButtons');
 let toggleButtonsTopOffset = toggleButtonsDiv.offsetTop;
 
-var hours_per_day = 4;
+var hours_per_day = 3;
 themes.shown = true;
 subThemes.shown = false;
 
@@ -36,7 +36,6 @@ function attachEvents(){
         let titleNode = titleNodes[i];
 
         // do not add click on empty lists and remove the arrow class on that title:
-        console.log(`titleNode: ${titleNode.innerHTML}`);
         if(titleNode.nextElementSibling && titleNode.nextElementSibling.tagName === "OL" && titleNode.nextElementSibling.children.length === 0){
             titleNode.className = "";
             continue;
@@ -99,7 +98,7 @@ function setThemeURL(){
         // create link node:
         let aNode = document.createElement('a');
         aNode.setAttribute("title", "slides");
-        aNode.href = `/ProgressBG-JS-Advanced_React/pages/themes/${themeTitle}/${themeTitle}.html`;
+        aNode.href = `/SAG-JS-Slides/pages/themes/${themeTitle}/${themeTitle}.html`;
         aNode.innerHTML = h3_content;
 
         // append it into h3 node
@@ -168,21 +167,20 @@ function calcTotalDays(){
         current_hours += theme_hours;
 
         // calculate current days and show it as tooltip
-        var current_days;
+        // var current_days;
+       
+        // current_days = current_hours / hours_per_day;
+        // current_days = Math.round(current_days * 10)/10         
 
-
-        current_days = current_hours / hours_per_day;
-        current_days = Math.round(current_days * 10)/10
-
-        // output
+        // // output
         hours_nodes[i].title = "hours:" + current_hours;
-        hours_nodes[i].title += "\n"+"day:" + current_days;
+        // hours_nodes[i].title += "\n"+"day:" + current_days;
 
-        total_days = current_days;
+        // total_days = current_days;
     };
 
     // calculate total days
-    out_node.innerHTML = total_days;
+    // out_node.innerHTML = total_days;
 }
 
 function showHideAll( clicked_node, effected_nodes ){
