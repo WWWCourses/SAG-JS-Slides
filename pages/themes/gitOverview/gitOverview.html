@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>__cliche_title__</title>
+	<title>gitOverview</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -47,7 +47,7 @@
 ##################### SLIDES START #####################
 ########################################################
 -->
-<section><h1>__cliche_title__</h1></section>
+<section><h1>gitOverview</h1></section>
 <section data-transition="zoom">
 	<section>
 		<div class="copyright">
@@ -75,13 +75,142 @@
 </section>
 
 
-<section data-min="5"><h1>Git and Github Basics</h1></section>
-<section><h2>___MainSectionTitle___</h2>
-  <section><h3>___SubSectionTitle___</h3>
-
+<section data-min="5"><h1>Installing and configuring git.</h1></section>
+<section><h2>Installing and configuring git.</h2>
+  <section>
+  	<dl class="fa">
+  		<dt><a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">Installing Git</a></dt>
+  		<dt><span class="note">Note for Windows Users</span> - install from <a href="https://gitforwindows.org/">gitforwindows.org</a> which also brings a nice features like <code>git bash</code>, <code>shell integration</code> and more </dt>
+  	</dl>
   </section>
 </section>
 
+<section data-min="5"><h1>Distributed VCS - Basic Concepts</h1></section>
+<section><h2>Distributed VCS - Basic Concepts</h2>
+	<section><h3>Distributed VCS Concepts Overview</h3>
+		<a href="images/distributed_concepts_overview.png"><img src="images/distributed_concepts_overview.png" style="height: 60vh"></a>
+	</section>
+	<section><h3 class="note">Initialize a Git repository</h3>
+		<pre><code rel="Terminal" class="bash" data-noescape>
+				$ git init
+			</code></pre>
+		<dl class="fa">
+			<dt>git will start to track the Current Working Directory (CWD).</dt>
+			<dt>A hidden <code>.git</code> folder is created.</dt>
+		</dl>
+	</section>
+	<section><h3 class="note">Stage files/changes</h3>
+		<p>Also known as <span class="note">adding files content to the index</span></p>
+		<pre><code rel="Terminal" class="bash" data-noescape>
+				# to stage only certain file/path:
+				$ git add <i>path</i>
+
+				# to stage all files in CWD:
+				git add -A
+			</code></pre>
+		<dl class="fa">
+			<dt>The staging are contains all the changes that will be added to the local repository after the <code>commit</code></dt>
+			<dt>You can remove (unstage) files from the index, with:
+				<pre><code rel="Terminal" class="bash" data-noescape>
+					git rm <i>file</i>
+				</code></pre>
+			</dt>
+		</dl>
+	</section>
+	<section><h3 class="note">Commit files to local repository</h3>
+		<pre><code rel="Terminal" class="bash" data-noescape>
+				# commit files - the default editor for git will be opened to write your Commit Message
+				$ git commit
+
+				# commit and write the Commit Message
+				$ git commit -m'Your Commit Message'
+			</code></pre>
+		<dl class="fa">
+			<dt>You can set a default editor by your choice:</dt>
+			<dd><a href="https://stackoverflow.com/questions/8951275/how-can-i-make-sublime-text-the-default-editor-for-git/23934471">How can I make Sublime Text the default editor for Git?</a></dd>
+		</dl>
+	</section>
+  <section><h3>The Three States</h3>
+  	<a href="images/git_areas.png"><img src="images/git_areas.png"></a>
+  </section>
+</section>
+
+<section data-min="5"><h1>Adding files to repository and committing changes</h1></section>
+<section><h2>Adding files to repository and committing changes</h2>
+  <section>
+  	<p>Open a Terminal/Command Prompt</p>
+  	<pre><code rel="Terminal" class="bash" data-noescape style="font-size: .7em">
+  			# Create your project directory
+  			$ mkdir my_project
+
+  			# go into it
+  			$ cd my_project
+
+  			# initialize the new repository
+  			$ git init
+
+  			# do some work and save your files
+  			$ echo "I'm working hard..." > file1.txt
+
+  			# stage all your work
+  			$ git add -A
+
+  			# commit your work
+  			$ git commit -am'Work 1 Done'
+  	</code></pre>
+  </section>
+</section>
+<!-- 
+<section data-min="5"><h1>Working with branches.</h1></section>
+<section><h2>Working with branches.</h2>
+  <section>
+  	<a href="https://www.atlassian.com/git/tutorials/using-branches">Git Branch</a>
+  </section>
+</section>
+
+<section data-min="5"><h1>Merging and reverting changes</h1></section>
+<section><h2>Merging and reverting changes</h2>
+  <section>
+
+  </section>
+</section> -->
+
+<section data-min="5"><h1>Overview of GitHub/GitLab and setting-up an account</h1></section>
+<section><h2>Overview of GitHub/GitLab and setting-up an account</h2>
+  <section>
+  	<dl class="fa">
+  		<dt><a href="https://guides.github.com/activities/hello-world/">The Hello World project @github</a></dt>
+  	</dl>
+  </section>
+</section>
+
+<section data-min="5"><h1>Connect your local git repository to your GitHub/GitLab repository</h1></section>
+<section><h2>Connect your local git repository to your GitHub/GitLab repository</h2>
+  <section>
+  	<dl class="fa">
+  		<dt><a href="https://help.github.com/en/articles/adding-an-existing-project-to-github-using-the-command-line">Adding an existing project to GitHub using the command line</a></dt>
+  	</dl>
+  </section>
+</section>
+<!-- 
+<section data-min="5"><h1>Using GitHub/GitLab pages as free hosting for your project</h1></section>
+<section><h2>Using GitHub/GitLab pages as free hosting for your project</h2>
+  <section>
+
+  </section>
+</section> -->
+
+<section data-min="5"><h1>Resources</h1></section>
+<section><h2>Video (overview)</h2>
+  <section>
+  	<p>Git Tutorial for Beginners: Command-Line Fundamentals</p>
+  	<iframe width="736" height="414" src="https://www.youtube.com/embed/HVsySz-h9r4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </section>
+  <section><h3>Video (for dummies :) )</h3>
+  	<p>Github Tutorial For Beginners - Github Basics for Mac or Windows & Source Control Basics</p>
+  	<iframe width="736" height="414" src="https://www.youtube.com/embed/0fKg7e37bQE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </section>
+</section>
 
 
 <!--

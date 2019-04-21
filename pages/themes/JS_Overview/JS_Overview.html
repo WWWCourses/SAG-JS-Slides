@@ -161,6 +161,12 @@
                 </ul>
             </aside>
         </section>
+        <section><h3></h3>
+            <dl class="fa">
+                <dt><a href="https://www.youtube.com/watch?v=UTEqr0IlFKY">Crockford on JavaScript - Level 7: ECMAScript 5: The New Parts</a></dt>
+            </dl>
+            <iframe width="1150" height="647" src="https://www.youtube.com/embed/UTEqr0IlFKY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </section>
         <section><h3><a href="http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262%206th%20edition%20June%202015.pdf">ECMAScript 6 (ES6)/ ECMAScript 2015 (ES2015)</a> year</h3>
                 <dl class="fa">
                     <dt>New Features:</dt>
@@ -241,123 +247,6 @@
     </section>
 </section>
 
-
-<section data-min="20"><h1>The object oriented nature of JavaScript: "everything is an object"?</h1></section>
-<section><h2>The object oriented nature of JavaScript: "everything is an object"?</h2>
-    <section data-notes="2min"><h3>Data types and structures</h3>
-        <dl class="fa">
-            <dt>Primitive types:</dt>
-            <dd>Boolean</dd>
-            <dd>Null</dd>
-            <dd>Undefined</dd>
-            <dd>Number</dd>
-            <dd>String</dd>
-            <dd>Symbol (new in ECMAScript 6)</dd>
-            <dt>Objects (Reference Data types):</dt>
-            <dd>Objects</dd>
-            <dd>Function</dd>
-            <dd>Indexed collections: Arrays and typed Arrays</dd>
-            <dd>Keyed collections: Maps, Sets, WeakMaps, WeakSets</dd>
-        </dl>
-    </section>
-    <section data-notes="1min" id="prim_types"><h3>Primitive types</h3>
-        <p>Primitive types <span class="note">are not</span> objects!</p>
-        <pre><code rel="JS">
-            console.log(typeof null); // "object" - A BUG, see bellow!
-            console.log(typeof true); // "boolean"
-            console.log(typeof undefined); // "undefined"
-            console.log(typeof 42); // "number"
-            console.log(typeof 'howdy'); // "string"
-            console.log(typeof Symbol()); // "symbol"
-        </code></pre>
-        <p id="a1">the 'typeof null' return "object" due to a bug in the first release in JavaScript <a href="#/refs" class="sup">3</a></p>
-    </section>
-    <section data-notes="2min"><h3>Primitives Boxing</h3>
-        <p>The primitive types <code>boolean</code>, <code>number</code>, <code>string</code> and <code>symbol</code> have corresponding object types (wrappers): <code>Boolean</code>, <code>Number</code>, <code>String</code> and <code>Symbol</code></p>
-        <p>Primitives do not have methods, but can borrow from their corresponding wrapper, when needed.</p>
-    </section>
-    <section data-notes="2min"><h3>Primitives Boxing: Example</h3>
-    <pre><code rel="JS">
-        console.log( 3.141592653589793.toFixed(4) );
-        //3.1416
-
-        console.log( 'ada byron'.length );
-        //9
-
-        console.log( true.toString() );
-        //"true"
-    </code></pre>
-    </section>
-    <section data-notes="1min"><h3>Primitives Immutability</h3>
-        <dl class="fa">
-            <dt><span class="note">Immutability</span>: objects whose state is <span class="note">not allowed to change</span> over time</dt>
-            <dt>Immutability is a core principle in functional programming</dt>
-            <dt class="note">All primitive types in JavaScript are immutable!</dt>
-        </dl>
-        <pre><code rel="JS">
-            var ada = 'Ada';
-            console.log(ada); // 'Ada'
-
-            ada.surname = 'Byron';
-            console.log(ada.surname); // undefined
-        </code></pre>
-    </section>
-    <section data-notes="2min"><h3>Objects</h3>
-        <dl class="fa">
-            <dt>A collection of properties</dt>
-            <dt>Property values can be values of any type, including other objects</dt>
-            <dt>Properties are identified using key values</dt>
-            <dt>A key value is either a String or a Symbol value.</dt>
-        </dl>
-    </section>
-    <section data-notes="2min"><h3>Objects</h3>
-        <p>Objects are mutable!</p>
-        <pre><code rel="JS">
-            var ada = {};
-            console.log(ada); //Object {}
-
-            ada.surname = 'Byron';
-            console.log(ada.surname); //Byron
-        </code></pre>
-    </section>
-    <section data-notes="5min"><h3>Functions</h3>
-        <dl class="fa">
-            <dt><span class="note">Functions are objects</span> that have an internal [[Call]] property</dt>
-            <dt>So, functions are mutable too!</dt>
-        </dl>
-        <pre><code rel="JS" class="js">
-            function foo(){}
-
-            foo.id = 1
-            console.log(foo.id); // 1
-        </code></pre>
-    </section>
-    <section data-notes="2min"><h3>Indexed collections: Arrays and typed Arrays</h3>
-        <dl class="fa">
-            <dt>Reference: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array Object @mdn</a></dt>
-            <dt>Reference: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray">TypedArray Object @mdn</a></dt>
-        </dl>
-    </section>
-    <section data-notes="2min"><h3>Keyed collections: Maps, Sets, WeakMaps, WeakSets</h3>
-        <dl class="fa">
-            <dt>Reference: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map Object @mdn</a></dt>
-            <dt>Reference: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">Set Object @mdn</a></dt>
-            <dt>Reference: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap">WeakMap Object @mdn</a></dt>
-            <dt>Reference: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet">WeaSetp Object @mdn</a></dt>
-        </dl>
-    </section>
-</section>
-
-
-<section data-min="10"><h1>DOM - overview, elements, events</h1></section>
-<section><h2>DOM - overview, elements, events</h2>
-  <section>
-    <dl class="fa">
-        <dt>Reference: <a href="http://wwwcourses.github.io/ProgressBG-Front-End-Dev/pages/themes/beginners/JS_DOM_BOM/JS_DOM_BOM.html#/">DOM Intro @JavaScript-Beginners course</a></dt>
-        <dt>Reference: <a href="http://wwwcourses.github.io/ProgressBG-Front-End-Dev/pages/themes/beginners/JS_Events/JS_Events.html#/">DOM Events @JavaScript-Beginners course</a></dt>
-    </dl>
-  </section>
-</section>
 <!--
 <section id="refs" data-notes="0min"><h2>Resources</h2>
     <ol class="fa">

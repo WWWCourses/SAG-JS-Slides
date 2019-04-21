@@ -84,8 +84,8 @@ function setThemeURL(){
         // <h3><a title="slides" href="/ProgressBG-JS-Advanced_React/pages/themes/__themeTitle__/__themeTitle__.html">__themeTitle__</a></h3>
 
     for (let i = 0, len = themes.length; i < len ; i++){
-        // do not set link for elements in WIP mode:
-        if( themes[i].hasAttribute("data-wip") ){
+        // do not set link for elements in WIP mode or non-id elements:
+        if( themes[i].hasAttribute("data-wip") || !themes[i].id ){
             continue;
         }
 
