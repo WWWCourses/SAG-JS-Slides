@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>HTML_CSS_DOM_Overview</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<!-- css & themes include -->
+	<link rel="stylesheet" href="../../../lib/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../../../outfit/css/themes/projector.css" id="theme">
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? '../../../lib/reveal.js/css/print/pdf.css' : '../../../lib/reveal.js/css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+	<!-- custom -->
+	<link rel="stylesheet" href="../../../outfit/css/reveal.js.css">
+	<base target="_blank">
+</head>
+<body>
+	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+		<div class="top_links">
+			<a class="home_link" href="/SAG-JS-Slides/index.html#Course_Intro" target="_top"><i class="fa fa-home"></i></a>
+			<span class="help_link" href="#"><i class="fa fa-question"></i></span>
+			<div class="help_text">
+				<div><span>N/Space</span><span>Next Slide</span></div>
+				<div><span>P</span><span>Previous Slide</span></div>
+				<div><span>O</span><span>Slides Overview</span></div>
+				<div><span>ctrl+left click</span><span>Zoom Element</span></div>
+			</div>
+		</div>
+		<div class="footer theme_switch">
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/dark.css'); return false;">Dark</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/light.css'); return false;">Light</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/projector.css'); return false;">Projector</a>
+		</div>
+		<div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>HTML, CSS, DOM Overview</h1></section>
+<section data-transition="zoom">
+	<section>
+		<div class="copyright">
+			<div class="note">
+				<p>Created for</p>
+			</div>
+			<div class="company">
+        <a href="https://www.softwareag.com/bg/default.html">
+        <div style="font-size:3em">Software AG</div>
+        </a>
+      </div>
+		</div>
+	</section>
+	<section class="copyright" data-transition="zoom" style="margin-top: -2em;">
+		<div class="note">
+			<p>Created by</p>
+		</div>
+		<div class="company">
+		   <div class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="vertical" data-theme="dark" data-vanity="ivapopova"><a class="LI-simple-link" href='https://bg.linkedin.com/in/ivapopova?trk=profile-badge'>Iva E. Popova</a></div>
+		</div>
+		<!-- <div class="author">
+			<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+		</div> -->
+	</section>
+</section>
+
+
+<!-- HTML syntax -->
+<section><h1>HTML versions and standards</h1></section>
+<section><h2>HTML versions and standards</h2>
+	<section>
+		<dl class="fa">
+			<dt>The first HTML version:</dt>
+			<dd><a href="http://info.cern.ch/hypertext/WWW/MarkUp/Tags.html">HTML Tags by T.B.Lee</a></dd>
+			<dt>The latest standardised version:</dt>
+			<dd><a href="https://www.w3.org/TR/html/">Latest Version of HTML</a></dd>
+			<dt>Next version</dt>
+			<dd><a href="https://w3c.github.io/html/">HTML 5.2 - Editor’s Draft, 25 October 2016</a></dd>
+		</dl>
+	</section>
+	<section><h3>W3C?</h3>
+		<dl class="fa">
+			<dt><abbr>W3C</abbr><dfn id="CSS"><span>World</span><span>Wide</span><span>Web</span><span>Consortium</span></dfn></dt>
+			<dd>the main international standards organization for the World Wide Web</dd>
+			<dt><abbr>WHATWG</abbr><dfn id="CSS"><span>Web</span><span>Hypertext</span><span>Application</span><span>Technology</span><span>Working</span><span>Group</span></dfn></dt>
+			<dd>a W3C alternative, formed in response to the slow development of W3C Web standards</dd>
+		</dl>
+	</section>
+</section>
+
+<section><h1>HTML syntax</h1></section>
+<section><h2>HTML syntax</h2>
+	<section>
+		<img src="images/HTML_elements_syntax.png">
+	</section>
+	<section>
+		<dl class="fa">
+			<dt>An HTML document consists of HTML elements!</dt>
+			<dt>Each element has:</dt>
+			<dd><pre class="inline"><code>&lt;opening tag&gt; content &lt;/closing tag&gt;</code></pre>
+			</dd>
+			<dt>The content can be text, or another HTML element</dt>
+			<dt>Some HTML elements are empty - they have no content, and according to HTML5 - no closing tag. For example:</dt>
+			<dd><pre class="inline"><code>&lt;img src=&quot;images/cats.png&quot;&gt;</code></pre></dd>
+		</dl>
+	</section>
+	<section>
+		<pre><code rel="HTML">
+			&lt;h1&gt;Hello World&lt;/h1&gt;
+			&lt;h1&gt;Hello &lt;i&gt;World&lt;/i&gt;&lt;/h1&gt;
+			&lt;h1 class="primary"&gt;Hello World&lt;/h1&gt;
+		</code></pre>
+	</section>
+	<section>
+		<dl class="fa">
+			<dt>HTML5 defines the tag names as case-insensitive, but the convention is lower-case to be used.</dt>
+		</dl>
+	</section>
+</section>
+
+<section><h1>HTML document structure</h1></section>
+<section><h2>HTML document structure</h2>
+	<section>
+		<pre><code rel="HTML">
+			<!-- Specifies the language and the version -->
+			&lt;!DOCTYPE html&gt;
+			&lt;html&gt;
+				<!-- Meta information -->
+				&lt;head&gt;
+				...
+				&lt;/head&gt;
+				<!-- Page content -->
+				&lt;body&gt;
+				...
+				&lt;/body&gt;
+			&lt;/html&gt;
+	   </code></pre>
+	</section>
+	<section><h4>DOCTYPE examples</h4>
+		<pre><code data-trim rel="HTML5">
+			&lt;!DOCTYPE html&gt;
+		</code></pre>
+		<pre><code data-trim rel="HTML 4.01 Strict">
+			&lt;!DOCTYPE HTML PUBLIC "­//W3C//DTD HTML 4.01//EN"
+			"http://www.w3.org/TR/html4/strict.dtd "&gt;
+		</code></pre>
+		<pre><code data-trim rel="HTML 4.01 Transitional">
+			&lt;!DOCTYPE HTML PUBLIC "­//W3C//DTD HTML 4.01 Transitional//EN"
+			"http://www.w3.org/TR/html4/loose.dtd"&gt;
+		</code></pre>
+	</section>
+</section>
+
+<section><h1>Elements in HEAD section</h1></section>
+<section><h2>Elements in HEAD section</h2>
+	<section>
+		<ul>
+			<li>title</li>
+			<li>style</li>
+			<li>link</li>
+			<li>script</li>
+			<li>meta</li>
+			<li>base</li>
+		</ul>
+	</section>
+	<section><h3>title</h3>
+		<pre><code rel=HTML>
+			&lt;title&gt;JavaScript Course&lt;/title&gt;
+		</code></pre>
+		<dl class="fa">
+			<dt>Defines the page title</dt>
+			<dt>Its content is displayed in the browser window/tab heading</dt>
+		</dl>
+	</section>
+	<section><h3>style</h3>
+		<p>To define page style - its content is CSS</p>
+		<pre><code rel="HTML">
+		&lt;style&gt;
+			body {background­-color:lightgray}
+			h1 {color:red;}
+			p {color:green;}
+		&lt;/style&gt;
+		</code></pre>
+	</section>
+	<section><h3>script</h3>
+		<pre><code rel="HTML">
+			<!-- includes external script file: -->
+			&lt;script src=&quot;scripts/JS/MyFunctions.js&quot;&gt;&lt;/script&gt;
+
+			<!-- defines internal page script -->
+			&lt;script&gt;
+				alert(&quot;JavaScript welcomes you!&quot;);
+			&lt;/script&gt;
+		</code></pre>
+		<p>Script element can be placed in the BODY section, as well</p>
+		<p class="note">When script is used with <code>src</code> attribute, its content is ignored!</p>
+	</section>
+	<section><h3>link</h3>
+		<p>links an external resource to the page </p>
+		<pre><code rel="HTML">
+			&lt;link rel="stylesheet" type="text/css" href="default.css"&gt;
+
+			&lt;link rel="icon" href="/favicon.ico" type="image/x-icon"&gt;
+		</code></pre>
+	</section>
+	<section><h3>meta</h3>
+		<p>Defines meta information about the document</p>
+		<pre><code rel="HTML">
+			&lt;meta charset="UTF­8"&gt;
+			&lt;meta name="robots" content="selection"&gt;
+			&lt;meta name="keywords" content="Course, JavaScript, EcmaScript, ESNext"&gt;
+			&lt;meta name="description" content="A detailed course   about JavaScript latest technologies"&gt;
+			&lt;meta name="author" content="Iva E.Popova"&gt;
+		</code></pre>
+		<p><a href="http://www.metatags.org/all_metatags">All metatags</a></p>
+	</section>
+	<section><h3>base</h3>
+		<p>Defines base the URL for <span class="note">all hyperlinks</span>, as well as default value for <code>_target</code> attribute</p>
+		<pre><code rel="HTML - HEAD section">
+			<!-- href content will be the prefix for all relative hyperlinks -->
+			&lt;base href="https://www.w3schools.com/tags"&gt;
+
+			<!-- всички линкове ще се отварят в нов таб/прозорец -->
+			&lt;base target="_blank"&gt;
+		</code></pre>
+		<pre><code rel="HTML - BODY section">
+			<!-- opens "https://www.w3schools.com/tags/tag_ul.asp" in new tab -->
+			<a href="tag_ul.asp">UL in W3Schools</a>
+		</code></pre>
+		</section>
+</section>
+
+<section><h1>HTML Comments</h1></section>
+<section><h2>HTML Comments</h2>
+	<section><h3>Self-learning section!</h3>
+		<p><a href="http://www.w3schools.com/tags/tag_comment.asp">W3Schools HTML comments</a></p>
+	</section>
+</section>
+
+<section><h1>HTML validator</h1></section>
+<section><h2>HTML validator</h2>
+	<section>
+		<p>To check your HTML code online:</p>
+		<a href="https://validator.w3.org/">W3C Markup Validation Service</a>
+		<p>Or install respective plugin/extension to your code editor</p>
+	</section>
+</section>
+
+<!-- HTML forms -->
+<section><h1>HTML form element</h1></section>
+<section id="form_element"><h2>HTML form element</h2>
+	<section>
+		<p>A container for form components</p>
+		<pre><code rel="HTML">
+			<form action="registration.py" method="POST">
+				<div>Name: <input type="text" name="uname"></div>
+				<div>Password: <input type="password" name="pass"></div>
+				<button type="submit">Submit</button>
+			</form>
+		</code></pre>
+	</section>
+	<section style="font-size: .8em"><h3>Main attributes</h3>
+		<dl class="fa">
+			<dt><span class="code">action</span></dt>
+			<dd>URL to the server-sede program which will handles the user input</dd>
+			<dt><span class="code">method</span></dt>
+			<dd>Specifies the HTTP request method:
+			<ul>
+				<li><span class="keyword">get</span> - defines a GET request. Form data will be attached in the URL</li>
+				<li><span class="keyword">post</span> - defines a POST request. Form data will be attached in the request body</li>
+			</ul>
+			</dd>
+		</dl>
+		<br><br>
+		<p class="note">Never use GET method when the form will contain sensitive information, like password fields.</code></p>
+	</section>
+	<section><h3>HTML elements in  <code><b>form</b></code></h3>
+		<pre>
+
+			<a href="http://www.w3schools.com/tags/tag_input.asp">input</a> <a href="http://www.w3schools.com/tags/tag_textarea.asp">textarea</a>	 <a href="http://www.w3schools.com/tags/tag_button.asp">button</a>
+
+			<a href="http://www.w3schools.com/tags/tag_option.asp">option</a>   <a href="http://www.w3schools.com/tags/tag_optgroup.asp">optgroup</a>   <a href="http://www.w3schools.com/tags/tag_select.asp">select</a>
+
+			<a href="http://www.w3schools.com/tags/tag_label.asp">label</a> <a href="http://www.w3schools.com/tags/tag_fieldset.asp">fieldset</a>
+		</pre>
+	</section>
+	<section><h3>HTML5 input types</h3>
+		<a href="http://www.w3schools.com/tags/tag_input.asp">http://www.w3schools.com/tags/tag_input.asp</a>
+	</section>
+	<section><h3>the name attribute</h3>
+		<dl class="fa">
+			<dt>Specifies a name for an input element.</dt>
+			<dt>The input data will be associated with that name</dt>
+			<dt>If the <code>name</code> attribute has no value, then no data will be sent to the server</dt>
+		</dl>
+	</section>
+	<section><h3>Element <code class="html">label</code></h3>
+		<a href="http://www.w3schools.com/tags/tag_label.asp">http://www.w3schools.com/tags/tag_label.asp</a>
+	</section>
+	<section><h3>Element <code>textarea</code></h3>
+		<a href="http://www.w3schools.com/tags/tag_textarea.asp">http://www.w3schools.com/tags/tag_textarea.asp</a>
+	</section>
+	<section><h3>Element <code>select</code></h3>
+		<a href="http://www.w3schools.com/tags/tag_select.asp">http://www.w3schools.com/tags/tag_select.asp</a>
+	</section>
+	<section><h3>Elements <code>option и optgroup</code></h3>
+		<a href="http://www.w3schools.com/tags/tag_option.asp">http://www.w3schools.com/tags/tag_option.asp</a>
+		<a href="http://www.w3schools.com/tags/tag_optgroup.asp">http://www.w3schools.com/tags/tag_optgroup.asp</a>
+		<p>
+			<select name="town" class="fontsize1">
+				<option value="">Населено място</option>
+				<option value="София">София</option>
+				<optgroup label="А">
+					<option value="Айдемир">Айдемир</option>
+					<option value="Айрово">Айрово</option>
+					<option value="...">...</option>
+				</optgroup>
+				<optgroup label="Б">
+					<option value="Багренци">Багренци</option>
+					<option value="Балабанско">Балабанско</option>
+					<option value="...">...</option>
+				</optgroup>
+				<option value="towncustom_option">Друго</option>
+			</select>
+		</p>
+	</section>
+	<section><h3>Elements <code>fieldset & legend</code></h3>
+		<a href="http://www.w3schools.com/tags/tag_fieldset.asp">http://www.w3schools.com/tags/tag_fieldset.asp</a>
+		<a href="http://www.w3schools.com/tags/tag_legend.asp">http://www.w3schools.com/tags/tag_legend.asp</a>
+	</section>
+	<section><h3>Element <code>button</code></h3>
+		<a href="http://www.w3schools.com/tags/tag_button.asp">http://www.w3schools.com/tags/tag_button.asp</a>
+	</section>
+</section>
+
+
+<!-- HTML lists -->
+<section><h1>HTML lists</h1></section>
+<section><h2>HTML lists</h2>
+	<section><h3>Unordered lists (<code><strong>UL</strong></code>)</h3>
+		<pre><code rel="HTML">
+			<ul>
+				<li>2 бр. яйца</li>
+				<li>1 ч.ч. прясно мляко или вода</li>
+				<li>1 ч.ч. брашно тип 500</li>
+				<li>1 с.л. краве масло</li>
+				<li>Щипка сол, щипка захар</li>
+			</ul>
+		</code></pre><br>
+		<ul class="fa">
+			<li class="note">An <code><strong>UL</strong></code> element could contain <b>only</b> <code><strong>LI</strong></code> elements!</li>
+			<li class="note">A <code><strong>LI</strong></code> element could contains any HTML elements</li>
+		</ul>
+	</section>
+	<section><h3>Ordered lists (<code><strong>OL</strong></code>)</h3>
+		<h4>Element: <code><strong>OL</strong></code></h4>
+		<pre style="font-size: .5em"><code rel="HTML" class="html">
+			<ol>
+				<li>Яйцата се разбиват, докато се получи еднородна смес.</li>
+				<li>Добавя се млякото, щипка сол и щипка захар.</li>
+				<li>На малки порции се добавя пресятото брашно.</li>
+				<li>Разбъркваме до получаването на гъста смес,
+					с консистенция подобна на боза.</li>
+				<li>Намазваме с масло предварително нагрятия тиган
+					и поставяме черпак от сместа.</li>
+				<li>След няколко минути обръщаме палачинката.</li>
+			</ol>
+
+		</code></pre><br>
+		<ul class="fa">
+			<li class="note">An <code><strong>OL</strong></code> element could contain <b>only</b> <code><strong>LI</strong></code> elements!</li>
+			<li class="note">A <code><strong>LI</strong></code> element could contains any HTML elements</li>
+		</ul>
+	</section>
+	<section><h3>Nested Lists</h3>
+		<pre><code rel="HTML">
+			<p>Products</p>
+			<ol>
+				<li>Fruits
+					<ul type="square">
+						<li>Apple</li>
+						<li>Orange</li>
+						<li>Strawberry</li>
+					</ul>
+				</li>
+			</ol>
+		</code></pre>
+	</section>
+</section>
+
+<!-- DOM -->
+<section><h1>DOM bases</h1></section>
+<section><h2>Overview</h2>
+	<section>
+	   <dl class="fa">
+			<dt><abbr>DOM</abbr><dfn><span>Document</span><span>Object</span><span>Model</span></dfn></dt>
+			<dt><span class="note">A platform-independent</span> and <span class="note">language agnostic</span> convention for representing and manipulating the objects in <span class="code">HTML</span>, <span class="code">XHTML</span> и <span class="code">XML</span> documents.</dt>
+			<dt>Web Browsers represent internally the HTML/CSS code in a structure, very close to DOM, called <abbr><a href="https://en.wikipedia.org/wiki/Browser_Object_Model">BOM</a></abbr><dfn><span>Browser</span><span>Object</span><span>Model</span></dfn>.</dt>
+		</dl>
+	</section>
+	<section><h3>DOM/BOM/JS objects(API)</h3>
+		<a href="images/windowObjects.png"><img src="images/windowObjects.png"></a>
+	</section>
+	<section>
+		<a href="images/DOM-model.svg.png"><img src="images/DOM-model.svg.png" style="height: 70vh;"></a>
+	</section>
+	<section>
+		<dl class="fa">
+			<dt>DOM is an hierarchical structure.</dt>
+			<dt>DOM defines next object types, called nodes</dt>
+			<dd><span class="note code">document node</span>.</dd>
+			<dd><span class="note code">elements nodes</span></dd>
+			<dd><span class="note code">attribute nodes</span></dd>
+			<dd><span class="note code">text node</span></dd>
+			<dd><span class="note code">comment node</span></dd>
+		</dl>
+	</section>
+</section>
+<section><h2>The Document Object</h2>
+	<section>
+		<dl class="fa">
+			<dt>The html element is represented by the <span class="note code">document object</span>.</dt>
+			<dd><a href="http://www.w3schools.com/jsref/dom_obj_document.asp">w3schools: The HTML DOM Document Object</a></dd>
+		</dl>
+	</section>
+	<section><h3>Example:</h3>
+		<pre><code rel="HTML">
+			&lt;body&gt;
+				<p id="p1">Paragraph <b>1</b>!</p>
+
+				<script type="text/javascript">
+					console.log("The Document node object:");
+					console.dir(document);
+				</script>
+			&lt;/body&gt;
+		</code></pre>
+	</section>
+</section>
+<section><h2>The Element Object</h2>
+	<section>
+		<dl class="fa">
+			<dt>Every HTML element is represented by an object of type <span class="code note">element object</span></dt>
+			<dt>Each <span class="code note">element node</span> could be a parent node for: element nodes, text nodes or comment nodes</dt>
+			<dt><a href="http://www.w3schools.com/jsref/dom_obj_all.asp">The HTML DOM Element Object</a></dt>
+		</dl>
+	</section>
+	<section><h3>Example:</h3>
+		<pre><code rel="HTML">
+			&lt;body&gt;
+				<p id="p1">Paragraph <b>1</b>!</p>
+
+				<script type="text/javascript">
+					console.log("The p Element node object:");
+					var elementNode = document.getElementById("p1");
+					console.dir(elementNode);
+				</script>
+			&lt;/body&gt;
+		</code></pre>
+	</section>
+</section>
+<section><h2>The Attribute Object</h2>
+	<section>
+		<dl class="fa">
+			<dt>Every HTMl attribute is represented as object of type: <span class="note code">attribute object</span></dt>
+			<dt>an attribute object is always a part of an element object.</dt>
+			<dt><a href="http://www.w3schools.com/jsref/dom_obj_attributes.asp">The HTML DOM Attribute Object</a></dt>
+		</dl>
+	</section>
+	<section><h3>Example:</h3>
+		<pre><code rel="HTML">
+			&lt;body&gt;
+				<p id="p1">Paragraph <b>1</b>!</p>
+
+				<script type="text/javascript">
+					console.log("The id Attribute node object:");
+					var atributeNode = document.body.childNodes[1].getAttributeNode('id');
+					console.dir( atributeNode );
+				</script>
+			&lt;/body&gt;
+		</code></pre>
+	</section>
+</section>
+
+<section><h2>The Text Object</h2>
+	<section>
+		<dl class="fa">
+			<dt class="note">The text content of an HTML element or HTML attribute is represented as object of type <span class="note">text object</span></dt>
+			<dt><a href="https://www.w3schools.com/xml/dom_text.asp">XML DOM - The Text Object</a></dt>
+		</dl>
+	</section>
+	<section><h3>Example:</h3>
+		<pre><code rel="HTML">
+			&lt;body&gt;
+				<p id="p1">Paragraph <b>1</b>!</p>
+
+				<script type="text/javascript">
+					console.log("The 'Paragraph' text node object:");
+					var textNode = document.body.childNodes[1].childNodes[0];
+					console.dir( textNode );
+				</script>
+			&lt;/body&gt;
+		</code></pre>
+	</section>
+</section>
+
+<section><h2>The Comment Object</h2>
+	<section>
+		<dl class="fa">
+			<dt class="note">HTML comments are represented as objects of type <span class="note">Comment Object</span></dt>
+			<dt><a href="https://www.w3schools.com/xml/dom_comment.asp">XML DOM - The Comment Object</a></dt>
+		</dl>
+	</section>
+	<section><h3>Example:</h3>
+		<pre><code rel="HTML">
+			&lt;body&gt;
+				<p id="p1">Paragraph <b>1</b>!</p>
+				<!-- some comment -->
+
+				<script type="text/javascript">
+					console.log("The Comment node object:");
+					var commentNode = document.body.childNodes[3];
+					console.dir( commentNode );
+				</script>
+			&lt;/body&gt;
+		</code></pre>
+	</section>
+</section>
+
+<section><h2>Numerical Node Types</h2>
+	<section>
+		<dl class="fa">
+			<dt>Each DOM object type has an associated number. Thus, it could be dynamically determined what's the type of an object.</dt>
+			<dt>Browsers use the <code>nodeType</code> object property to represent the object numerical type</dt>
+			<dt><a href="https://www.w3schools.com/xml/dom_nodetype.asp">XML DOM Node Types</a></dt>
+		</dl>
+	</section>
+</section>
+
+<section><h2>Methods for accessing Element Nodes</h2>
+	<section><h3><a href="https://www.w3schools.com/jsref/met_document_getelementbyid.asp">getElementById()</a></h3>
+		<dl class="fa">
+			<dt>returns the object, representing the HTML element with the given</dt>
+		</dl>
+		<pre><code rel="JS">
+			var node = document.getElementById('test');
+		</code></pre>
+	</section>
+	<section><h3><a href="https://www.w3schools.com/jsref/met_document_getelementsbyclassname.asp">getElementsByClassName()</a></h3>
+		<dl class="fa">
+			<dt>Returns NodeList - a collection of all objects, representing the HTML elements with the given class</dt>
+			<dt>NodeList is a structure similar, but not exactly, to JavaScript arrays</dt>
+			<dt>To get a given HTML element from the collection we have to use the <span class="note">[]</span> notation.</dt>
+		</dl>
+		<pre><code rel="JS">
+			var allRedNodes = document.getElementsByClassName('red');
+			var firstRedNode = allRedNodes[0];
+		</code></pre>
+	</section>
+	<section><h3><a href="https://www.w3schools.com/jsref/met_document_getelementsbytagname.asp">getElementsByTagName()</a></h3>
+		<dl class="fa">
+			<dt>Returns NodeList - a collection of all objects, representing the HTML elements with the given tag Name</dt>
+		</dl>
+		<pre><code rel="JS">
+			var allParagraphNodes = document.getElementsByTagName('p');
+			var firstParagraph = allParagraphNodes[0];
+		</code></pre>
+	</section>
+	<section><h3><a href="https://www.w3schools.com/jsref/met_document_queryselector.asp">querySelector()</a></h3>
+		<dl class="fa">
+			<dt>Return an object representing the first HTML element, which could be selected by the given selector.</dt>
+		</dl>
+		<pre><code rel="JS">
+			var firstLI = document.querySelector("ul>li:nth-of-type(1)");
+		</code></pre>
+	</section>
+	<section><h3><a href="https://www.w3schools.com/jsref/met_document_queryselectorall.asp">querySelectorAll()</a></h3>
+		<dl class="fa">
+			<dt>Return NodeList of all objects, representing the HTML elements, which could be selected by the given selector.</dt>
+		</dl>
+		<pre><code rel="JS">
+			var allFooterLI = document.querySelectorAll('footer ul>li');
+		</code></pre>
+	</section>
+</section>
+
+
+
+<!--
+<section style="font-size: .8em"><h2>Exercises</h2>
+	<section><h3>Task: __task_ttile__</h3>
+		<dl class="fa">
+			<dt></dt>
+		</dl>
+	</section>
+</section> -->
+
+
+<section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
+	 <p>These slides are based on</p>
+	 <p>customised version of </p>
+	 <p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+	 <p>framework</p>
+</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+		</div>
+	</div>
+	<!-- Custom processing -->
+	<script src="../../../outfit/js/slides.js"></script>
+	<!-- external scripts -->
+	<script src="../../../lib/reveal.js/lib/js/head.min.js"></script>
+	<script src="../../../lib/reveal.js/js/reveal.js"></script>
+	<!-- init reveal -->
+	<script>
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		var highlightjsTabSize = '  ';
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			slideNumber: 'c/t',
+			keyboard: true,
+			history: true,
+			center: true,
+			width: '100%',
+			height: '100%',
+			// slide transition
+			transition: 'concave', // none/fade/slide/convex/concave/zoom
+			// Factor of the display size that should remain empty around the content
+			margin: 0.1,
+			// shift+maous click to zoom in/out element
+			zoomKey: 'ctrl',
+			// theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+			// transition: Reveal.getQueryHash().transition || 'default'
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad(); } },
+				{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+				{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
+			]
+		});
+	</script>
+	<!-- linkedin badge -->
+	<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+</body>
+</html>

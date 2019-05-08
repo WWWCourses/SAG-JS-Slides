@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>variablesAndDataTypes</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<!-- css & themes include -->
+	<link rel="stylesheet" href="../../../lib/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../../../outfit/css/themes/projector.css" id="theme">
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? '../../../lib/reveal.js/css/print/pdf.css' : '../../../lib/reveal.js/css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+	<!-- custom -->
+	<link rel="stylesheet" href="../../../outfit/css/reveal.js.css">
+	<base target="_blank">
+</head>
+<body>
+	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+		<div class="top_links">
+			<a class="home_link" href="/SAG-JS-Slides/index.html#Course_Intro" target="_top"><i class="fa fa-home"></i></a>
+			<span class="help_link" href="#"><i class="fa fa-question"></i></span>
+			<div class="help_text">
+				<div><span>N/Space</span><span>Next Slide</span></div>
+				<div><span>P</span><span>Previous Slide</span></div>
+				<div><span>O</span><span>Slides Overview</span></div>
+				<div><span>ctrl+left click</span><span>Zoom Element</span></div>
+			</div>
+		</div>
+		<div class="footer theme_switch">
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/dark.css'); return false;">Dark</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/light.css'); return false;">Light</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/projector.css'); return false;">Projector</a>
+		</div>
+		<div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>variablesAndDataTypes</h1></section>
+<section data-transition="zoom">
+	<section>
+		<div class="copyright">
+			<div class="note">
+				<p>Created for</p>
+			</div>
+			<div class="company">
+        <a href="https://www.softwareag.com/bg/default.html">
+        <div style="font-size:3em">Software AG</div>
+        </a>
+      </div>
+		</div>
+	</section>
+	<section class="copyright" data-transition="zoom" style="margin-top: -2em;">
+		<div class="note">
+			<p>Created by</p>
+		</div>
+		<div class="company">
+		   <div class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="vertical" data-theme="dark" data-vanity="ivapopova"><a class="LI-simple-link" href='https://bg.linkedin.com/in/ivapopova?trk=profile-badge'>Iva E. Popova</a></div>
+		</div>
+		<!-- <div class="author">
+			<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+		</div> -->
+	</section>
+</section>
+
+
+<section id="Variables"><h1>Променливи в JS</h1></section>
+<section id="Variables"><h2>Променливи в JS</h2>
+  <section><h3>Какво е променлива в JavaScript?</h3>
+    <dl class="fa">
+      <dt>Променлива в JS е "име" на част от паметта (RAM), в която съхраняваме данни, необходими за програмата.</dt>
+    </dl>
+  </section>
+  <section><h3>Къде и как се създават променливите</h3>
+    <pre><code rel="JS">
+      var x = 1;
+      var y = 2;
+      var z;
+    </code></pre>
+    <a href="images/variables_in_RAM.png" title="click for bigger image"><img src="images/variables_in_RAM.png" style="height: 80vh"></a>
+  </section>
+  <section style="font-size: .9em"><h3>Деклариране/Дефиниране</h3>
+    <dl class="fa">
+      <dt>Създаването на една променлива се нарича <span class="note">деклариране</span> на променлива.
+      В JavaScript това става чрез запазената за езика дума <code class="note">var</code>.
+      </dt>
+      <dd class="advanced"></i>В ECMAScript 6, се въвеждат и нови думи за деклариране на променливи: <code class="note">let</code> и <code class="note">const</code>, които ще разгледаме след като изясним понятията "scope" и "hoisting".</dd>
+      <dt>Ако желаем, може при създаването на променливата, да запишем в нея конкретна стойност - т.е. да <span class="note">дефинираме</span>(<span>инициализираме</span>) променливата.</dt>
+      <dt style="font-size: .8em;">В JavaScript, една променлива винаги е дефинирана, тъй като ако не зададем екслплицитно стойност при декларацията, то в променливата се записва стойността <span class="note">undefined</span></dt>
+    </dl>
+    <pre><code rel="JS">
+      var x;      // деклариране на променливата x
+      x = 10;     // записваме в x стойност 10
+      var y;      // деклариране на променливата y
+      var a,b;    // деклариране на променливите a и b
+      var x = 10; // деклариране и инициализиране на x със стойността 10
+    </code></pre>
+  </section>
+  <section><h3>Глобални променливи</h3>
+    <p>В JavaScript, променлива може да се създаде и без указване на <code class="note">var</code>/<span class="note">let</span> или <span class="note">const</span>. Например:</p>
+    <pre><code rel="JS" class="js">
+      x = 10;
+      console.log(x); // 10 (Error in strict mode)
+    </code></pre>
+    <p class="note">Това се счита за изключително лоша практика, тъй като се създава "<strong>глобална променлива</strong>" (в темата за <a href="/ProgressBG-Front-End-Dev/pages/themes/beginners/JS_Functions/JS_Functions.html#Scope">scope</a>, ще разгледаме защо), и в новите версии на езика (от ЕС5.1) при използването на strict mode, това би <strong>довело до грешка</strong>!</p>
+  </section>
+  <section><h3>Правила за имена на променливи</h3>
+    <dl class="fa">
+      <dt>Името (идентификатор) на променливата трябва да <span class="note">започва</span> с <span class="note">буква <sup><small>1</small></sup></span> или '<span class="code note">$</span>' или '<span class="code note">_</span>'</dt>
+      <dt>След това в името могат да се включат и <span class="note">цифри</span>, освен горепосочените символи.</dt>
+      <dt>Нищо друго, дори спейс или тире, не е допустимо да участва в името на променливата.</dt>
+      <dt>Не е препоръчително да започват с '$' или '_' (използват се за специфични случаи, например в JQuery и пр.)</dt>
+      <dt>Прави се разлика между малки/големи букви тъй като JavaScript е <span class="note">case–sensitive</span> език.</dt>
+    </dl>
+    <hr>
+    <small id="note1">1. Позволяват се латински букви и определени unicode символи: <span class="advanced"></span><a href="https://mathiasbynens.be/notes/javascript-identifiers-es6">Valid JavaScript variable names in ECMAScript 6</a></small>
+  </section>
+  <section><h3>Правила за имена на променливи</h3>
+    <dl class="fa">
+      <dt>Не може да използвате за имена на променливи някоя от запазените думи в JavaScript, като:</dt>
+      <pre><code class="html">
+        break     delete   for         let        super   void
+        case      do       function    new        switch  while
+        catch     else     if          package    this    with
+        class     enum     implements  private    throw   yield
+        const     export   import      protected  true
+        continue  extends  in          public     try
+        debugger  false    instanceof  return     typeof
+        default   finally  interface   static     var
+      </code></pre>
+      <dt>Пълен списък: <a href="http://www.w3schools.com/js/js_reserved.asp">http://www.w3schools.com/js/js_reserved.asp</a></dt>
+    </dl>
+  </section>
+  <section><h3>Конвенции за именуване на променливи</h3>
+    <dl class="fa">
+      <dt>Ако е необходимо името да се състои от две или повече думи, то в JavaScript се препоръчва да се използва <span class="note">lowerCamelCase</span> - първата дума започва с малка буква, а следващите думи се залепват непосредствено като започват с голяма буква.</dt>
+    </dl>
+    <pre><code rel="JS" class="js">
+      var camelCasedName = 'something';
+    </code></pre>
+  </section>
+  <section><h3>Примери:</h3>
+    <pre><code rel="JS">
+      var x;  // ок
+      var $x; // позволено, но не се препоръчва
+      var userName; // ок
+      var user name; // SyntaxError!
+      var username; //  ok, но е по-трудно четима и не е според конвенцията (lowerCamelCase)
+      var user-first-name; //SyntaxError
+      var user_first_name; //ok, но не е според конвенцията (lowerCamelCase)
+      var userFirstName; //ok
+      var x234AB$$53; // синтактично е ок, но какво ли означава?
+    </code></pre>
+  </section>
+</section>
+
+<section id="PrimitiveTypes"><h1>Прости типове данни (Primitive types)</h1></section>
+<section><h2>Прости типове данни (Primitive types)</h2>
+  <section><h3>Число (number)</h3>
+    <pre><code rel="JS">
+      // цяло число, положително
+      var x = 10;
+
+      // цяло число, отрицателно
+      var y = ­-5;
+
+      // реално число
+      var pi = 3.14;
+
+      // реално число, експонентен запис
+      var million = 10e6;
+    </code></pre>
+  </section>
+  <section><h3>Низ (string):</h3>
+    <dl class="fa">
+      <dt>Последователност от символи, заградена в единични или двойни кавички</dt>
+      <dt>В JavaScript, за разлика от други езици, <span class="note">няма значение, дали ще използваме единични или двойни кавички</span>, но трябва да внимаваме ако такива символи ще присъстват в самия низ</dt>
+    </dl>
+    <pre><code rel="JS">
+      var userName = 'Ada Byron'; // ок
+      var nickName = "LadyLovelace"; //ок
+      var quot = 'И той отсече - "Ще вали!"'; //ок
+      var quot = "И той отсече - "Ще вали!""; //SyntaxError
+      var foo = "What's the time?" //ок
+    </code></pre>
+  </section>
+  <section><h3><code>\</code> escape character in string:</h3>
+    <p>Ако в низ използваме символа '<code>\</code>' (backslash), то той не се тълкува буквално, а заедно със непосредствено следващия го символ образуват т.нар. ескейп последователност, която има специално значение.</p>
+  </section>
+  <section><h3>Някои основни ескейп последователности:</h3>
+    <table style="font-size: .8em">
+      <tr><td><span class="note">\n</span>:</td><td>line feed</td><td>нов ред</td></tr>
+      <tr><td><span class="note">\t</span>:</td><td>horizontal tab</td><td>таб</td></tr>
+      <tr><td><span class="note">\"</span>:</td><td>Double quotation mark</td><td>двойни кавички, които не се тълкуват като специален символ</td></tr>
+      <tr><td><span class="note">\'</span>:</td><td>Single quotation mark</td><td>кавичкa, която не се тълкува като специален символ</td></tr>
+      <tr><td><span class="note">\\</span>:</td><td>backslash</td><td>не се тълкува като специален символ</td></tr>
+    </table>
+  </section>
+  <section><h3>Някои основни ескейп последователности - пример:</h3>
+    <pre><code rel="JS" class="js">
+      console.log('1. Ето какво прави "\\n": --->\n<---');
+      console.log('2. Ето какво прави "\\t": --->\t<---');
+      console.log('3. Ето какво прави "\\"": --->\"<---');
+      console.log('4. Ето какво прави "\\\'": --->\'<---');
+    </code></pre>
+    <pre><code rel="Result" class="result">
+      1. Ето какво прави "\n": --->
+      <---
+      2. Ето какво прави "\t": ---> <---
+      3. Ето какво прави "\"": --->"<---
+      4. Ето какво прави "\'": --->'<---
+    </code></pre>
+  </section>
+  <section><h3>Низ (string):</h3>
+    <dl class="fa" style="font-size: .8em;">
+      <dt>Забележете, че в низовете не може да използваме буквално символ за нов ред (клавиша enter):</dt>
+      <pre style="font-size: .6em; width: 110%;"><code rel="JS" class="js">
+      var lyrics = "В късна нощ — преди години — сам над книгите старинни,
+            безотраден, вниквах, жаден, в знания незнайни тук; —
+            скръбен, търсех без сполука мир във тайната наука —
+            но оборен в сънна скука, чух внезапно бавен звук."
+      // Uncaught SyntaxError: Invalid or unexpected toke
+      </code></pre>
+      <dt>но можем да го заместим с "\n":</dt>
+      <pre style="font-size: .6em; width: 110%;"><code rel="JS" class="js">
+        var lyrics = "В късна нощ — преди години — сам над книгите старинни,\nбезотраден, вниквах, жаден, в знания незнайни тук; —\nскръбен, търсех без сполука мир във тайната наука —\nно оборен в сънна скука, чух внезапно бавен звук."
+      </code></pre>
+      <dt>или:</dt>
+      <pre style="font-size: .6em; width: 110%;"><code rel="JS" class="js">
+        var lyrics = "В късна нощ — преди години — сам над книгите старинни," +
+               "безотраден, вниквах, жаден, в знания незнайни тук; —" +
+               "скръбен, търсех без сполука мир във тайната наука —" +
+               "но оборен в сънна скука, чух внезапно бавен звук.";
+      </code></pre>
+    </dl>
+  </section>
+  <section><h3 class="advanced">Низ (string):</h3>
+    <dl class="fa" style="font-size: .8em;">
+      <dt>В ES6 се въвежда и така наречения "<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">template string</a>", където низа се огражда в <b class="note">`</b> и <span class="note">`</span> (backticks).</dt>
+      <dt>Те добавят възможност в низ, да въвеждаме нов (enter) ред</dt>
+      <pre style="font-size: .6em; width: 110%;"><code rel="JS" class="js">
+        var lyrics = `В късна нощ — преди години — сам над книгите старинни,
+                безотраден, вниквах, жаден, в знания незнайни тук; —
+                скръбен, търсех без сполука мир във тайната наука —
+                но оборен в сънна скука, чух внезапно бавен звук.`
+      </code></pre>
+      <dt>както и да се изчисляват изрази и интерполират променливи:</dt>
+      <pre><code rel="JS" class="js">
+        console.log( `2 + 4 = ${2+4}` )
+        // 2 + 4 = 6
+
+        var firstName = "Ada";
+        console.log(`Hello, ${firstName}, how are you today?`)
+        // Hello, Ada, how are you today?
+      </code></pre>
+    </dl>
+  </section>
+  <section><h3>Булев тип (boolean)</h3>
+    <p>Данните от този тип могат да приемат само 2 стойности: <span class="note">true</span> или <span class="note">false</span></p>
+    <p>Използват се предимно в условните оператори, които са разгледани по-нататък.</p>
+    <pre><code rel="JS" class="javascript">
+      var start = true;
+      var stop  = false;
+    </code></pre>
+  </section>
+  <section><h3>null</h3>
+    <p>Използва се при работа с обекти, които са разгледани по-нататък.</p>
+    <p class="advanced">null е примитивен тип, а не обект! Факта, че оператора <code>typeof null;</code> връща "object" се дължи на всеизвестен <span class="note">бъг в JavaScript</span> ( <i class="advanced"></i><a href="http://2ality.com/2013/10/typeof-null.html">The history of “typeof null” by Dr. Axel Rauschmayer</a>)</p>
+  </section>
+  <section><h3>undefined</h3>
+    <dl class="fa">
+      <dt>Обозначава, че променливата съществува (декларирана е), но в нея няма зададена стойност (не е дефинирана).</dt>
+      <dt>Това е стойността, която се записва по подразбиране, когато не зададем стойност при декларацията на променлива.</dt>
+      <dt>Разликата между <code>null</code> и <code>undefined</code> ще разгледаме след като се запознаем с обектите в JS.</dt>
+    </dl>
+  </section>
+  <section><h3>typeof оператор</h3>
+    <dl class="fa">
+      <dt>За да разберем какъв е типът данни на дадена стойност, може да използваме оператора <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof">typeof</a></code></dt>
+    </dl>
+    <pre><code rel="JS" class="js">
+      console.log( typeof 5 );
+      // number
+
+      console.log( typeof "Ada" );
+      // string
+
+      console.log( typeof true );
+      // boolean
+
+      console.log( typeof undefined );
+      // undefined
+
+      console.log( typeof null );
+      // object
+      // но това е споменатия вече бъг в JS
+
+    </code></pre>
+  </section>
+</section>
+
+<section id="Comments"><h1>Коментари</h1></section>
+<section><h2>Коментари</h2>
+  <dl class="fa">
+    <dt>Self learning section</dt>
+    <dd><a href="https://www.w3schools.com/js/js_comments.asp">JavaScript Comments</a></dd>
+  </dl>
+</section>
+
+<section data-notes="20min"><h1>Variables hoisting: declarations vs assignments</h1></section>
+<section><h2>Variables hoisting: declarations vs assignments</h2>
+	<section>
+		<p>Two phases (stages) on processing a JS program:</p>
+		<dl class="fa">
+			<dt class="note">Declaration</dt>
+			<dd>Happens on <em>parsing stage</em></dd>
+			<dt class="note">Assignment</dt>
+			<dd>Happens on <em>execution stage</em></dd>
+		</dl>
+	    <aside class="notes"></aside>
+	</section>
+	<section>
+		<pre><code rel="JS" class="js">
+			var a;  // declaration -> parsing stage
+			a = 10; // initialization -> execution stage
+
+			var b = 5; // shortcut for 2 statements: declaration and initialization
+		</code></pre>
+	</section>
+	<section>
+		<dl class="fa">
+			<dt>Variable declarations (and declarations in general) are processed before any code is executed.</dt>
+			<dt>It looks (note - just looks) like the variable declarations are moved to the top of your program.</dt>
+			<dt>This behaviour is what we call <span class="note">hoisting</span> in JavaScript.</dt>
+			<dt>"Hoisting" is not specified in ECMAScript standard, but is commonly accepted name.</dt>
+			<dt class="note">NB. Variables declared with <code>let</code> or <code>const</code> are not hoisted!</dt>
+		</dl>
+	</section>
+	<section>
+		<pre><code rel="JS" class="js">
+			var a;
+			a = 10;
+			console.log(`a = ${a}`);	// a = 10
+
+			console.log(`b = ${b}`);	// b = undefined
+			var b = 5;
+
+			console.log(`c = ${c}`); 	// ReferenceError: c is not defined
+		</code></pre>
+	</section>
+	<section>
+		<pre><code rel="JS" class="js">
+			// the equivalent of the next code:
+			// ▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾
+			// console.log(`b = ${b}`);
+			// var b = 5;
+			// ▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴
+			// is:
+
+			var b;
+			console.log(`b = ${b}`);
+			b = 5
+		</code></pre>
+	</section>
+	<section><h3>Best Practices</h3>
+		<dl class="fa">
+			<dt>Hoisting can led to some misunderstandings and problems</dt>
+			<dt>Better to use the "single var pattern": <span class="note">declare all function variables in the top of the function with a single <code>var</code> statement.</span></dt>
+		</dl>
+	</section>
+	<section><h3>Best Practices</h3>
+		<pre><code rel="JS" class="js">
+			function foo(){
+				var a,b
+					x = 20,
+					userName = 'Ada';
+
+				// do something with data
+			}
+		</code></pre>
+	</section>
+	<section><h3>Best Practices</h3>
+		<dl class="fa">
+			<dt>The adoption of the single var pattern will also has the next benefits:</dt>
+			<dd>provides a single place to look for all the local variables needed by the function</dd>
+			<dd>helps you remember to declare variables and therefore minimize globals</dd>
+		</dl>
+	</section>
+</section>
+
+<section data-min="20"><h1>The object oriented nature of JavaScript: "everything is an object"?</h1></section>
+<section><h2>The object oriented nature of JavaScript: "everything is an object"?</h2>
+	<section data-notes="2min"><h3>Data types and structures</h3>
+		<dl class="fa">
+			<dt>Primitive types:</dt>
+			<dd>Boolean</dd>
+			<dd>Null</dd>
+			<dd>Undefined</dd>
+			<dd>Number</dd>
+			<dd>String</dd>
+			<dd>Symbol (new in ECMAScript 6)</dd>
+			<dt>Objects (Reference Data types):</dt>
+			<dd>Objects</dd>
+			<dd>Function</dd>
+			<dd>Indexed collections: Arrays and typed Arrays</dd>
+			<dd>Keyed collections: Maps, Sets, WeakMaps, WeakSets</dd>
+		</dl>
+	</section>
+	<section data-notes="1min" id="prim_types"><h3>Primitive types</h3>
+		<p>Primitive types <span class="note">are not</span> objects!</p>
+		<pre><code rel="JS">
+			console.log(typeof null); // "object" - A BUG, see bellow!
+			console.log(typeof true); // "boolean"
+			console.log(typeof undefined); // "undefined"
+			console.log(typeof 42); // "number"
+			console.log(typeof 'howdy'); // "string"
+			console.log(typeof Symbol()); // "symbol"
+		</code></pre>
+		<p id="a1">the 'typeof null' return "object" due to a bug in the first release in JavaScript <a href="#/refs" class="sup">3</a></p>
+	</section>
+	<section data-notes="2min"><h3>Primitives Boxing</h3>
+		<p>The primitive types <code>boolean</code>, <code>number</code>, <code>string</code> and <code>symbol</code> have corresponding object types (wrappers): <code>Boolean</code>, <code>Number</code>, <code>String</code> and <code>Symbol</code></p>
+		<p>Primitives do not have methods, but can borrow from their corresponding wrapper, when needed.</p>
+	</section>
+	<section data-notes="2min"><h3>Primitives Boxing: Example</h3>
+	<pre><code rel="JS">
+		console.log( 3.141592653589793.toFixed(4) );
+		//3.1416
+
+		console.log( 'ada byron'.length );
+		//9
+
+		console.log( true.toString() );
+		//"true"
+	</code></pre>
+	</section>
+	<section data-notes="1min"><h3>Primitives Immutability</h3>
+		<dl class="fa">
+			<dt><span class="note">Immutability</span>: objects whose state is <span class="note">not allowed to change</span> over time</dt>
+			<dt>Immutability is a core principle in functional programming</dt>
+			<dt class="note">All primitive types in JavaScript are immutable!</dt>
+		</dl>
+		<pre><code rel="JS">
+			var ada = 'Ada';
+			console.log(ada); // 'Ada'
+
+			ada.surname = 'Byron';
+			console.log(ada.surname); // undefined
+		</code></pre>
+	</section>
+	<section data-notes="2min"><h3>Objects</h3>
+		<dl class="fa">
+			<dt>A collection of properties</dt>
+			<dt>Property values can be values of any type, including other objects</dt>
+			<dt>Properties are identified using key values</dt>
+			<dt>A key value is either a String or a Symbol value.</dt>
+		</dl>
+	</section>
+	<section data-notes="2min"><h3>Objects</h3>
+		<p>Objects are mutable!</p>
+		<pre><code rel="JS">
+			var ada = {};
+			console.log(ada); //Object {}
+
+			ada.surname = 'Byron';
+			console.log(ada.surname); //Byron
+		</code></pre>
+	</section>
+	<section data-notes="5min"><h3>Functions</h3>
+		<dl class="fa">
+			<dt><span class="note">Functions are objects</span> that have an internal [[Call]] property</dt>
+			<dt>So, functions are mutable too!</dt>
+		</dl>
+		<pre><code rel="JS" class="js">
+			function foo(){}
+
+			foo.id = 1
+			console.log(foo.id); // 1
+		</code></pre>
+	</section>
+	<section data-notes="2min"><h3>Indexed collections: Arrays and typed Arrays</h3>
+		<dl class="fa">
+			<dt>Reference: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array Object @mdn</a></dt>
+			<dt>Reference: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray">TypedArray Object @mdn</a></dt>
+		</dl>
+	</section>
+	<section data-notes="2min"><h3>Keyed collections: Maps, Sets, WeakMaps, WeakSets</h3>
+		<dl class="fa">
+			<dt>Reference: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map Object @mdn</a></dt>
+			<dt>Reference: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">Set Object @mdn</a></dt>
+			<dt>Reference: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap">WeakMap Object @mdn</a></dt>
+			<dt>Reference: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet">WeaSetp Object @mdn</a></dt>
+		</dl>
+	</section>
+</section>
+
+
+
+<!--
+<section style="font-size: .8em"><h2>Exercises</h2>
+	<section><h3>Task: __task_ttile__</h3>
+		<dl class="fa">
+			<dt></dt>
+		</dl>
+	</section>
+</section> -->
+
+
+<section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
+	 <p>These slides are based on</p>
+	 <p>customised version of </p>
+	 <p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+	 <p>framework</p>
+</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+		</div>
+	</div>
+	<!-- Custom processing -->
+	<script src="../../../outfit/js/slides.js"></script>
+	<!-- external scripts -->
+	<script src="../../../lib/reveal.js/lib/js/head.min.js"></script>
+	<script src="../../../lib/reveal.js/js/reveal.js"></script>
+	<!-- init reveal -->
+	<script>
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		var highlightjsTabSize = '  ';
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			slideNumber: 'c/t',
+			keyboard: true,
+			history: true,
+			center: true,
+			width: '100%',
+			// height: '100%',
+			// slide transition
+			transition: 'concave', // none/fade/slide/convex/concave/zoom
+			// Factor of the display size that should remain empty around the content
+			margin: 0.1,
+			// shift+maous click to zoom in/out element
+			zoomKey: 'ctrl',
+			// theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+			// transition: Reveal.getQueryHash().transition || 'default'
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad(); } },
+				{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+				{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
+			]
+		});
+	</script>
+	<!-- linkedin badge -->
+	<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+</body>
+</html>

@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Statements</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<!-- css & themes include -->
+	<link rel="stylesheet" href="../../../lib/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../../../outfit/css/themes/projector.css" id="theme">
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? '../../../lib/reveal.js/css/print/pdf.css' : '../../../lib/reveal.js/css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+	<!-- custom -->
+	<link rel="stylesheet" href="../../../outfit/css/reveal.js.css">
+	<base target="_blank">
+</head>
+<body>
+	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+		<div class="top_links">
+			<a class="home_link" href="/SAG-JS-Slides/index.html#Course_Intro" target="_top"><i class="fa fa-home"></i></a>
+			<span class="help_link" href="#"><i class="fa fa-question"></i></span>
+			<div class="help_text">
+				<div><span>N/Space</span><span>Next Slide</span></div>
+				<div><span>P</span><span>Previous Slide</span></div>
+				<div><span>O</span><span>Slides Overview</span></div>
+				<div><span>ctrl+left click</span><span>Zoom Element</span></div>
+			</div>
+		</div>
+		<div class="footer theme_switch">
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/dark.css'); return false;">Dark</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/light.css'); return false;">Light</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/projector.css'); return false;">Projector</a>
+		</div>
+		<div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>Statements</h1></section>
+<section data-transition="zoom">
+	<section>
+		<div class="copyright">
+			<div class="note">
+				<p>Created for</p>
+			</div>
+			<div class="company">
+        <a href="https://www.softwareag.com/bg/default.html">
+        <div style="font-size:3em">Software AG</div>
+        </a>
+      </div>
+		</div>
+	</section>
+	<section class="copyright" data-transition="zoom" style="margin-top: -2em;">
+		<div class="note">
+			<p>Created by</p>
+		</div>
+		<div class="company">
+		   <div class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="vertical" data-theme="dark" data-vanity="ivapopova"><a class="LI-simple-link" href='https://bg.linkedin.com/in/ivapopova?trk=profile-badge'>Iva E. Popova</a></div>
+		</div>
+		<!-- <div class="author">
+			<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+		</div> -->
+	</section>
+</section>
+
+
+
+<section id="ConditionalStatements"><h2>Условни изрази (Conditional statements)</h2>
+  <section><h3><code>if</code> statement</h3>
+    <pre style=" font-size: .5em;"><code rel="Syntax">
+      if(условие){
+        изрази, които ще се изпълнят, ако условието е истина
+      }
+    </code></pre>
+    <pre><code rel="JS">
+      if( age > 18 ){
+        status = "adult";
+      }
+    </code></pre>
+  </section>
+  <section><h3><code>if-else</code> statement</h3>
+    <pre style=" font-size: .5em;"><code rel="Syntax">
+      if( условие ){
+        изрази, които ще се изпълнят, ако условието е истина
+      }else {
+        изрази, които ще се изпълнят, ако условието е лъжа
+      }
+    </code></pre>
+    <pre><code rel="JS">
+      if( age > 18 ){
+        status = "adult";
+      }else {
+        status = "child";
+      }
+    </code></pre>
+  </section>
+  <section><h3>Examples</h3>
+    <pre><code rel="JS" class="js">
+      let x = 5;
+
+      if(x%2){
+        console.log(`Odd`);
+      }else{
+        console.log(`Even`);
+      }
+    </code></pre>
+  </section>
+  <section><h3><code>if-else-if</code> statement</h3>
+    <pre style=" font-size: .5em;"><code rel="Syntax" class="javascript">
+      if( условие1){
+        изрази, които ще се изпълнят, ако условие1 е истина
+      }else if (условие2) {
+        изрази, които ще се изпълнят, ако условие1 e лъжа,
+        а условие2 е истина
+      }else {
+        изрази, които ще се изпълнят, ако нито едно от
+        горните условия не е истина
+      }
+    </code></pre>
+    <dl class="fa note" style="font-size: .8em">
+      <dt>Задължително започваме с <code>if{}</code> блок</dt>
+      <dt>След него може да има 0 или повече <code>else if{}</code> блока</dt>
+      <dt><code>else{}</code> блока е винаги в края, като не е задължителен, но се препоръчва да присъства.</dt>
+    </dl>
+  </section>
+  <section><h3><code>if-else-if</code> statement - пример</h3>
+    <pre><code rel="JS" class="javascript">
+      if( age > 18 ){
+        status = "adult";
+      }else if( age < 18 && age > 12){
+        status = "teen";
+      }else{
+        status = "child"
+      }
+    </code></pre>
+
+  </section>
+  <section><h3 class="advanced">Условен оператор (Conditional (ternary) Operator)</h3>
+    <pre><code rel="Syntax" class="javascript">
+      Условие ? Израз1 : Израз2
+    </code></pre>
+    <dl class="fa">
+      <dt>ако Условие е <span class="note">истина</span> (израз, който се изчислява до true) оператора връща стойността на <span class="note">Израз1</span></dt>
+      <dt>ако Условие е <span class="note">лъжа</span> (израз, който се изчислява до false) оператора връща стойността на <span class="note">Израз2</span></dt>
+    </dl>
+    <pre><code rel="JS" class="js">
+      var x = 42;
+      var numType = x%2==0 ? "even" : "odd";
+      console.log(numType); // "even"
+    </code></pre>
+  </section>
+</section>
+
+<section id="CycleOperators"><h2>Цикли (Loops/Iteration Statements)</h2>
+  <section><h3><code>for</code> Statement: алгоритъм</h3>
+    <pre><code rel="Syntax">
+      for (init; condition; increment) {
+        block
+      }
+    </code></pre>
+    <img src="images/for_algorithm.png">
+  </section>
+  <section><h3><code>for</code> Statement: пример и program flow diagram</h3>
+    <a href="images/JS_Loops.png"><img src="images/JS_Loops.png"></a>
+  </section>
+  <section><h3><code>for</code> Statement: синтаксис</h3>
+    <pre style="width: 70vw;"><code rel="Syntax" class="text">
+      for (init; condition; increment) {
+        блок, който се изпълнява, докато condition
+        е истина
+      }
+    </code></pre>
+    <p>Стъпките, в един цикъл са:</p>
+    <dl class="fa">
+      <dt>1. init: изпълнява се първа и само веднъж</dt>
+      <dt>2. condition:</dt>
+        <dd>ако е истина => изпълнява се блока</dd>
+        <dd>ако е лъжа => излиза се от цикъла</dd>
+      <dt>3. increment: изпълнява се след блока. Обикновено тук се променят променливите, които контролират цикъла.</dt>
+    </dl>
+  </section>
+  <section><h3><code>for</code> Statement: пример 1</h3>
+    <pre><code rel="JS">
+      for (var i = 0; i < 5; i++) {
+        console.log("i=" + i);
+      }
+    </code></pre>
+    <p>// резултата, видим в конзолата, е:</p>
+    <pre><code rel="Console">
+      i=0
+      i=1
+      i=2
+      i=3
+      i=4
+    </code></pre>
+  </section>
+  <section><h3><code>for</code> Statement: пример 2</h3>
+    <pre><code rel="JS">
+      // i е четно число, в интервала [0-10]
+      for (var i = 2; i <= 10; i = i+2){
+        console.log("i=", i);
+      }
+    </code></pre>
+    <p>// резултата, видим в конзолата, е:</p>
+    <pre><code rel="Console">
+      i=2
+      i=4
+      i=6
+      i=8
+      i=10
+    </code></pre>
+  </section>
+  <section><h3><code>for</code> Statement: пример 3</h3>
+    <pre><code rel="JS">
+      // create the list element
+      var listNode = document.createElement(listType);
+
+      //create list items
+      for (var i = 1; i <= listItemsCount; i++){
+        var listItem = document.createElement('li');
+        listItem.innerHTML = 'Item '+ i;
+        listNode.appendChild(listItem);
+      }
+
+      // attach to output node:
+      outputNode.appendChild( listNode );
+    </code></pre>
+    <p><a href="examples/slides/auto_list_generator.html">test it</a> or <a href="http://codepen.io/webdesigncourse/pen/RoXNPb?editors=0010">play with it on codepen</a></p>
+  </section>
+  <section><h3><code>for</code> Statement: пример 4</h3>
+    <pre><code rel="JS">
+      // half tree print
+      var treeDeep = 5;
+      for (var i = 1; i <= treeDeep; i++) {
+        console.log("*".repeat(i));
+      }
+    </code></pre>
+    <p>// резултата, видим в конзолата, е:</p>
+    <pre><code rel="Console">
+      *
+      **
+      ***
+      ****
+      *****
+    </code></pre>
+    <p><a href="https://codepen.io/webdesigncourse/pen/boJwNQ">play with it on codepen</a></p>
+  </section>
+  <section><h3><code>for</code> Statement: пример 5</h3>
+    <p><a href="https://codepen.io/webdesigncourse/pen/veMXKd">play with it on codepen</a></p>
+    <pre><code rel="JS">
+      // full tree print
+      var crownHeight = 6;
+      var boleHeight = 2;
+      var boleWidth = 3;
+      var spaceCount;
+
+      // print the crown:
+      for (var i = 1; i <= crownHeight; i++) {
+        spaceCount = Math.floor(crownHeight) - i;
+        console.log(" ".repeat(spaceCount) + "*".repeat(i * 2 - 1));
+      }
+
+      // print the bole:
+      spaceCount = Math.floor((crownHeight * 2 - 1 - boleWidth) / 2);
+      for (var i = 1; i <= boleHeight; i++) {
+        console.log(" ".repeat(spaceCount) + "*".repeat(boleWidth));
+      }
+    </code></pre>
+    <p>резултата, видим в конзолата, е:</p>
+    <pre><code rel="Console" class="bash">
+           *
+          ***
+         *****
+        *******
+       *********
+      ***********
+          ***
+          ***
+    </code></pre>
+  </section>
+  <section><h3>forEach</h3>
+  	<dl class="fa">
+  		<dt>Will be discussed (and used) after Function and Objects topics.</dt>
+  		<dt>Reference: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">forEach @mdn</a></dt>
+  	</dl>
+  </section>
+  <section><h3><code>while</code> statement: синтаксис</h3>
+    <pre style="width: 75vw;"><code rel="Syntax">
+      while ( condition) {
+        блок, който се изпълнява, докато condition е истина
+      }
+    </code></pre>
+    <p>Стъпките, в един <code>while</code> цикъл са:</p>
+    <dl class="fa">
+      <dt>condition:</dt>
+        <dd>ако е истина => изпълнява се блока,</dd>
+        <dd>ако е лъжа => излиза се от цикъла</dd>
+    </dl>
+    <p class="note">За да се избегне безкраен цикъл, променливата в <code>condition</code> трябва да променя стойността си в тялото на цикъла!</p>
+  </section>
+  <section><h3><code>while</code> statement: алгоритъм</h3>
+    <img src="images/while_algorithm.png">
+  </section>
+  <section><h3><code>while</code> statement: пример 1</h3>
+    <pre><code rel="JS" class="js">
+      var userTries = 5;
+
+      while( userTries>0){
+        console.log(`Try: ${userTries}`);
+        userTries--; // ако този ред липсва, цикълът става безкраен!
+      }
+    </code></pre>
+    <p class="note">Забележете, че този пример, би било по-добре да бъде имплементиран чрез <code>for</code> statement</p>
+    <pre><code rel="JS" class="js">
+      for(var userTries = 5; userTries>0; userTries--){
+        console.log(`Try: ${userTries}`);
+      }
+    </code></pre>
+  </section>
+  <section><h3><code>while</code> statement: пример 2</h3>
+    <p>Но когато не знаем предварително колко пъти ще се повтори цикъла използваме <code>while</code></p>
+    <pre style="width: 70vw;"><code rel="JS" class="js">
+      // Машината си "намисля" число:
+      var machineNumber = Math.round(Math.random() * 10);
+      console.log(`machineNumber: ${machineNumber}`);
+
+      // Потребителя "въвежда" число:
+      var userNumber = Math.round(Math.random() * 10);
+      console.log(`userNumber: ${userNumber}`);
+
+      while(userNumber != machineNumber){
+        // Потребителя "въвежда" ново число:
+        userNumber = Math.round(Math.random() * 10);
+        console.log(`new userNumber: ${userNumber}`);
+      }
+    </code></pre>
+    <p>Бихте ли могли да реализирате същата логика чрез <code>for</code> цикъл?</p>
+  </section>
+
+  <section><h3><code>do-while</code> statement: синтаксис</h3>
+    <pre style="width: 80vw"><code rel="Syntax">
+      do{
+        блок, който се изпълнява, докато condition е истина
+      } while ( condition)
+    </code></pre>
+    <dl class="fa">
+      <dt><code>do-while</code> работи по същия начин както <code>while</code>, с единствената разлика, че блокът в тялото на цикъла ще се <span class="note">изпълни поне веднъж, независимо от истинностната стойност на условието.</span> </dt>
+    </dl>
+  </section>
+  <section><h3><code>do-while</code> statement: пример</h3>
+    <pre style="width: 75vw;"><code rel="JS" class="js">
+      // Машината си "намисля" число:
+      var machineNumber = Math.round(Math.random() * 10);
+      console.log(`machineNumber: ${machineNumber}`);
+
+      do{
+        // Потребителя "въвежда" число:
+        userNumber = Math.round(Math.random() * 10);
+        console.log(`userNumber: ${userNumber}`);
+      } while(userNumber != machineNumber)
+    </code></pre>
+  </section>
+
+  <section><h3><code>break</code> и <code>continue</code></h3>
+    <dl class="fa">
+      <dt>Self-learning section:</dt>
+      <dd><a href="https://www.w3schools.com/js/js_break.asp">JavaScript Break and Continue @w3schools</a></dd>
+    </dl>
+  </section>
+</section>
+
+<section id="StatementsVsExpressions"><h2>Statements vs. Expressions</h2>
+  <section>
+    <p>В JavaScript се прави разлика между <span class="note">Statement</span> и <span class="note">Expression</span></p>
+    <dl class="fa">
+      <dt><span class="note">Expression</span> е израз, който <span class="note">може да бъде изчислен до конкретна стойност</span> от някой от примитивните типове. Expression може да се сложи на всяко едно място, където бихме могли да зададем стойност.
+        <pre><code id="test" rel="JS" class="js">
+          2+3;    // 2+3 е Expresion
+          x = 5;    // x = 5 e Expresion
+          console.log(x**6-x) // x**6-x e Expresion
+          x = y = 5;  // тук имаме 2 Expresions: (y = 5) и (x = 5)
+        </code></pre>
+      </dt>
+    </dl>
+  </section>
+  <section>
+    <dl class="fa">
+      <dt><span class="note">Statement</span> е израз, който извършва действие, но <span class="note">не се изчислява до стойност</span>! Циклите и <code>if()</code> са пример за Statements.
+        <pre><code rel="JS" class="js">
+          if(1){return 0};  // if Statement
+          while(x = 2){console.log(x)}; // while Statement
+          var x; // variable declaration Statement
+        </code></pre>
+      </dt>
+    </dl>
+  </section>
+</section>
+
+<section id="HW"><h2>Задачи за упражнение</h2>
+  <section><h3>HW1: Comparison Operators & Conditional Statement</h3>
+    <dl class="fa">
+      <dt>Описанието на задачите е дадено като коментар в съответните HTML и JS полета.</dt>
+      <dt>Работете върху дадения код като добавите код, където е необходимо и изпратете линк на вашия Пен.</p>
+    </dl>
+    <iframe height='300' scrolling='no' title='HW2: Comparison Operators & Conditional Statement' src='//codepen.io/webdesigncourse/embed/BLYJGJ/?height=300&theme-id=20230&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/webdesigncourse/pen/BLYJGJ/'>HW2: Comparison Operators & Conditional Statement</a> by Iva Popova (<a href='https://codepen.io/webdesigncourse'>@webdesigncourse</a>) on <a href='https://codepen.io'>CodePen</a>.</iframe>
+  </section>
+  <section><h3>HW2: Comparison Operators & Conditional Statement</h3>
+    <dl class="fa">
+      <dt>Описанието на задачите е дадено като коментар в JS полето.</dt>
+      <dt>Работете върху дадения код, в JS полето, където е указано. Изпратете линк на вашия Пен.</p>
+    </dl>
+      <iframe height='300' scrolling='no' title='HW1: Comparison Operators & Conditional Statement' src='//codepen.io/webdesigncourse/embed/ryLWzY/?height=300&theme-id=20230&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/webdesigncourse/pen/ryLWzY/'>HW1: Comparison Operators & Conditional Statement</a> by Iva Popova (<a href='https://codepen.io/webdesigncourse'>@webdesigncourse</a>) on <a href='https://codepen.io'>CodePen</a>.
+  </iframe>
+  </section>
+
+  <!-- <a href="http://codepen.io/collection/XOEQay/">codepen колекция с примери и задачи</a> -->
+</section>
+
+<section><h2>codepen examples</h2>
+  <p>Повече примери и задачи: <a href="https://codepen.io/collection/XOEQay/2/">JS_Basic_Syntax</a></p>
+</section>
+
+<section><h2>допълнителни ресурси по темата</h2>
+  <dl class="fa">
+    <dt><a href="https://github.com/getify/You-Dont-Know-JS/blob/master/up%20%26%20going/ch1.md">You Don't Know JS: Up & Going by Kyle Simpson</a></dt>
+    <dt><a href="http://eloquentjavascript.net/01_values.html">"Values, Types, and Operators" from "Eloquent JavaScript" by Marijn Haverbeke</a></dt>
+    <dt><a href="http://eloquentjavascript.net/02_program_structure.html">"Program Structure" from "Eloquent JavaScript" by Marijn Haverbeke</a></dt>
+  </dl>
+</section>
+
+
+
+<!--
+<section style="font-size: .8em"><h2>Exercises</h2>
+	<section><h3>Task: __task_ttile__</h3>
+		<dl class="fa">
+			<dt></dt>
+		</dl>
+	</section>
+</section> -->
+
+
+<section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
+	 <p>These slides are based on</p>
+	 <p>customised version of </p>
+	 <p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+	 <p>framework</p>
+</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+		</div>
+	</div>
+	<!-- Custom processing -->
+	<script src="../../../outfit/js/slides.js"></script>
+	<!-- external scripts -->
+	<script src="../../../lib/reveal.js/lib/js/head.min.js"></script>
+	<script src="../../../lib/reveal.js/js/reveal.js"></script>
+	<!-- init reveal -->
+	<script>
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		var highlightjsTabSize = '  ';
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			slideNumber: 'c/t',
+			keyboard: true,
+			history: true,
+			center: true,
+			width: '100%',
+			height: '100%',
+			// slide transition
+			transition: 'concave', // none/fade/slide/convex/concave/zoom
+			// Factor of the display size that should remain empty around the content
+			margin: 0.1,
+			// shift+maous click to zoom in/out element
+			zoomKey: 'ctrl',
+			// theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+			// transition: Reveal.getQueryHash().transition || 'default'
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad(); } },
+				{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+				{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
+			]
+		});
+	</script>
+	<!-- linkedin badge -->
+	<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+</body>
+</html>
