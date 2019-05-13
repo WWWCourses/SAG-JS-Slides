@@ -146,7 +146,7 @@
     </code></pre>
 
   </section>
-  <section><h3 class="advanced">Условен оператор (Conditional (ternary) Operator)</h3>
+  <section><h3>Условен оператор (Conditional (ternary) Operator)</h3>
     <pre><code rel="Syntax" class="javascript">
       Условие ? Израз1 : Израз2
     </code></pre>
@@ -160,16 +160,77 @@
       console.log(numType); // "even"
     </code></pre>
   </section>
+  <section><h3>switch <b>statement</b></h3>
+  	<pre><code rel="Syntax" class="js">
+  		switch (expression) {
+  		  case value1:
+  		    //Statements executed when the result of expression matches value1
+  		    [break;]
+  		  ...
+  		  case valueN:
+  		    //Statements executed when the result of expression matches valueN
+  		    [break;]
+  		  [default:
+  		    //Statements executed when none of the values match the value of the expression
+  		    [break;]]
+  		}
+  	</code></pre>
+  	<dl class="fa">
+  		<dt>reference: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch">switch @mdn</a></dt>
+  	</dl>
+  </section>
+  <section><h3>break in switch statement</h3>
+  	<dl class="fa">
+  		<dt class="note">If break is omitted, the program continues execution at the next statement in the switch statement!</dt>
+  	</dl>
+  	<pre><code rel="JS" class="js">
+  		// demo without break:
+  		let userCountry = 'France';
+
+  		switch (userCountry){
+  		  case 'UK':
+  		    console.log(`Welcome!`);
+  		  case 'France':
+  		    console.log(`Bienvenue!`);
+  		  case 'Bulgaria':
+  		    console.log(`Добре дошли!`);
+  		  default:
+  		    console.log(`Welcome!`);
+  		}
+  		// output - not what we want!
+  		// Bienvenue!
+  		// Добре дошли!
+  		// Welcome!
+  	</code></pre>
+  </section>
+  <section><h3>switch - example</h3>
+  	<pre><code rel="JS" class="js">
+  		let userCountry = 'France';
+
+  		switch (userCountry){
+  		  case 'UK':
+  		    console.log(`Welcome!`); break;
+  		  case 'France':
+  		    console.log(`Bienvenue!`); break;
+  		  case 'Bulgaria':
+  		    console.log(`Добре дошли!`); break;
+  		  default:
+  		    console.log(`Welcome!`); // no need for break, though we can put it.
+  		}
+  		// output
+  		Bienvenue!
+  	</code></pre>
+  </section>
 </section>
 
 <section id="CycleOperators"><h2>Цикли (Loops/Iteration Statements)</h2>
   <section><h3><code>for</code> Statement: алгоритъм</h3>
-    <pre><code rel="Syntax">
+    <pre><code rel="Syntax" class="js">
       for (init; condition; increment) {
         block
       }
     </code></pre>
-    <img src="images/for_algorithm.png">
+    <a href="images/for_algorithm.png"><img src="images/for_algorithm.png"></a>
   </section>
   <section><h3><code>for</code> Statement: пример и program flow diagram</h3>
     <a href="images/JS_Loops.png"><img src="images/JS_Loops.png"></a>
@@ -404,6 +465,46 @@
         </code></pre>
       </dt>
     </dl>
+  </section>
+  <section><h3>Semicolons - to use or not to use?</h3>
+  	<dl class="fa">
+  		<dt>No question here - <span class="note">semicolons between expressions are mandatory in EcmaScript</span>!</dt>
+  		<dt>In <span class="note">some situations</span> the parse can automatically insert semicolons (<a href="https://tc39.github.io/ecma262/#sec-rules-of-automatic-semicolon-insertion">Rules of automatic semicolon insertion @ecma262</a>)</dt>
+  		<dt>The semicolons by its own is considered an empty statement. So you can put '<code>;;;</code>' without any consequences. Which means that if you put a semicolon after a statement, where they are not required, you are not going to change your program logic or flow at all.</dt>
+  		<dt>Conclusion: it's god to know how the JS parser works, but a good practice is: <span class="note">always put explicit semicolons to separate statements</span>!</dt>
+  	</dl>
+  </section>
+  <section><h3>Semicolons - to use or not to use (examples)</h3>
+  	<pre><code rel="JS - bad practice" class="js">
+  		let x=1,y=1;
+
+  		function foo(){
+  		  return 3;
+  		}
+
+  		// semicolons are mandatory after EACH expression:
+  		x=y+ // can be a nasty bug, if you mistyped 'y++' and don't care about semicolons
+  		foo();
+
+  		console.log(`x=${x}`);
+  		console.log(`y=${y}`);
+  	</code></pre>
+  </section>
+  <section><h3>Semicolons - to use or not to use (examples)</h3>
+  	<pre><code rel="JS - good practice" class="js">
+  		let x=1,y=1;
+
+  		function foo(){
+  		  return 3;
+  		}
+
+  		// semicolons are mandatory after EACH expression:
+  		x=y+; // error - perfect, that what we want in this case!
+  		foo();
+
+  		console.log(`x=${x}`);
+  		console.log(`y=${y}`);
+  	</code></pre>
   </section>
 </section>
 

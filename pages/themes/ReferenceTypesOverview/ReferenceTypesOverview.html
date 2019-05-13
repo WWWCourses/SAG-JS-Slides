@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>ReferenceTypesOverview</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<!-- css & themes include -->
+	<link rel="stylesheet" href="../../../lib/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../../../outfit/css/themes/projector.css" id="theme">
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? '../../../lib/reveal.js/css/print/pdf.css' : '../../../lib/reveal.js/css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+	<!-- custom -->
+	<link rel="stylesheet" href="../../../outfit/css/reveal.js.css">
+	<base target="_blank">
+</head>
+<body>
+	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+		<div class="top_links">
+			<a class="home_link" href="/SAG-JS-Slides/index.html#Course_Intro" target="_top"><i class="fa fa-home"></i></a>
+			<span class="help_link" href="#"><i class="fa fa-question"></i></span>
+			<div class="help_text">
+				<div><span>N/Space</span><span>Next Slide</span></div>
+				<div><span>P</span><span>Previous Slide</span></div>
+				<div><span>O</span><span>Slides Overview</span></div>
+				<div><span>ctrl+left click</span><span>Zoom Element</span></div>
+			</div>
+		</div>
+		<div class="footer theme_switch">
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/dark.css'); return false;">Dark</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/light.css'); return false;">Light</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/projector.css'); return false;">Projector</a>
+		</div>
+		<div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>Reference Types Overview</h1></section>
+<section data-transition="zoom">
+	<section>
+		<div class="copyright">
+			<div class="note">
+				<p>Created for</p>
+			</div>
+			<div class="company">
+        <a href="https://www.softwareag.com/bg/default.html">
+        <div style="font-size:3em">Software AG</div>
+        </a>
+      </div>
+		</div>
+	</section>
+	<section class="copyright" data-transition="zoom" style="margin-top: -2em;">
+		<div class="note">
+			<p>Created by</p>
+		</div>
+		<div class="company">
+		   <div class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="vertical" data-theme="dark" data-vanity="ivapopova"><a class="LI-simple-link" href='https://bg.linkedin.com/in/ivapopova?trk=profile-badge'>Iva E. Popova</a></div>
+		</div>
+		<!-- <div class="author">
+			<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+		</div> -->
+	</section>
+</section>
+
+
+<section data-min="5"><h1>Arrays in JavaScript</h1></section>
+<section><h2>Arrays in JavaScript</h2>
+  <section><h3>___SubSectionTitle___</h3>
+
+  </section>
+</section>
+
+
+
+<section><h1>Какво представлява масива в JS?</h1></section>
+<section><h2>Какво представлява масива в JS?</h2>
+	<section>
+		<dl class="fa">
+			<dt>Досега разгледаните типове данни (numbers, strings, boolean, null и undefined) бяха прости типове данни. <span class="note">Масивът е съставен тип данни</span>!</dt>
+			<dt>Масив (Array) - последователност (<span class="note">подредена</span> съвкупност) от данни (обикновено свързани концептуално) обединени в едно цяло.</dt>
+			<dt>В JavaScript елемент на масив може да бъде <span class="note">всеки един тип данни.</span></dt>
+		</dl>
+	</section>
+	<section>
+		<a href="images/JS_Arrays_Overview.png"><img src="images/JS_Arrays_Overview.png" style=""></a>
+		<dl class="fa">
+			<dt>Редът на елементите в масива е важен!</dt>
+			<dt>Данните в масива се наричат негови <span class="note">елементи</span>.</dt>
+			<dt>Поредните номера на масива се наричат <span class="note">индекси</span>.</dt>
+			<dt>В JS, както и при всички останали езици за програмиране, <span class="note">броенето започва от 0</span>.</dt>
+		</dl>
+	</section>
+</section>
+
+<section><h1>Масиви - дефиниране (Arrays definition)</h1></section>
+<section><h2>Масиви - дефиниране (Arrays definition)</h2>
+	<section>
+		<p>Елементите на масива се изброяват в квадратни скоби '[' и ']' и се разделят със запетайка.</p>
+		<pre><code rel="JS">
+			//  масив ,  чиито   елементи   са   низове :
+			var colors = ["red", "orange", "yellow", "green", "blue"];
+
+			//  масив ,  чиито   елементи   са   различни   типове :
+			var user= ["Ada", 34, true];
+
+			//  празен   масив :
+			var arr= [];
+		</code></pre>
+	</section>
+	<section>
+		<pre><code rel="JS">
+			var fruits = ['apple', 'banana', 'strawberry'];
+		</code></pre>
+		<a href="images/arrayInRAM_1.png"><img src="images/arrayInRAM_1.png"></a>
+	</section>
+</section>
+<section><h1>Масиви – достъп до елементите (Array indexing)</h1></section>
+<section><h2>Масиви – достъп до елементите (Array indexing)</h2>
+	<section>
+		<dl class="fa">
+			<dt>Даден елемент от масива достъпваме като след името на масива в квадратни скоби поставяме индексът на дадения елемент.</dt>
+		</dl>
+		<pre><code rel="JS">
+			// дефинираме масива fruits:
+			var fruits = ['apple', 'banana', 'strawberry'];
+
+			// достъп до 1-я елемент (четене):
+			console.log("first fruit is: ", fruits[0]);
+
+			// достъп до 3-я елемент (запис):
+			fruits[2] = 'orange';
+
+			console.log("fruits=", fruits);
+			// fruits=['apple', 'banana', 'orange']
+		</code></pre>
+	</section>
+</section>
+<section><h1>Масива като обект</h1></section>
+<section><h2>Масива като обект</h2>
+	<section>
+		<p>В JavaScript, масивите са <span class="note">обекти</span> (по-детайлно са разгледани в следващите теми). Но притежават и някои своства, които са характерни само за масиви. Например:</p>
+		<pre><code rel="JS">
+			var fruits = ['apple', 'banana', 'strawberry'];
+
+			// брой на елементите на масив:
+			fruits.length; // 3
+
+			//добавяне на елемент в началото на масива:
+			fruits.unshift('orange');
+			// ["orange", "apple", "banana", "strawberry"]
+
+			//добавяне на елемент в края на масива:
+			fruits.push('lemon');
+			// ["orange", "apple", "banana", "strawberry", "lemon"]
+
+			// премахване на елемент от началото на масива:
+			fruits.shift();
+			// ["apple", "banana", "strawberry", "lemon"]
+
+			// премахване на елемент от края на масива:
+			fruits.pop();
+			// ["apple", "banana", "strawberry"]
+		</code></pre>
+	</section>
+	<section>
+		<p>Внимавайте със свойството length, тъй като при негова промяна в определени случаи бихте могли да изтриете елементи от масива:</p>
+		<pre><code rel="JS">
+			if ( fruits.length = 0 ){
+				console.log( fruits )
+			}
+		</code></pre>
+		<p>В примера, вместо сравнение (<code class="note">==</code>) погрешно е използван оператор за присвояване (<code class="note">=</code>), което води до изтриване на всички елементи на масива!</p>
+	</section>
+</section>
+
+<section><h1>Примери</h1></section>
+<section><h2>Примери</h2>
+	<section><h3>обхождане на елементите на масив,  последователно</h3>
+		<pre><code rel="JS">
+			var fruits = ['apple', 'banana', 'strawberry'];
+
+			for (var i = 0; i < fruits.length; i++) {
+				console.log(`Елемент ${i}: ${fruits[i]}`);
+			}
+		</code></pre>
+	</section>
+	<section><h3>обхождане на елементите на масив в обратен ред</h3>
+		<pre><code rel="JS">
+			for (var i = fruits.length-1; i >= 0; i--) {
+				console.log(`Елемент ${i}: ${fruits[i]}`);
+			}
+		</code></pre>
+	</section>
+	<section><h3>създаване на двумерен масив</h3>
+		<pre><code rel="JS">
+			var matrix = [
+				[ 'а', 'б', 'в' ],
+				[ 'г', 'д', 'е' ],
+				[ 'ж', 'з', 'и' ],
+			];
+			console.log("matrix:", matrix);
+		</code></pre>
+	</section>
+	<section><h3>достъп до елемент от двумерен масив</h3>
+		<pre><code rel="JS">
+			console.log("row 0, col 2: ", matrix[0][2]);
+			console.log("row 1, col 1: ", matrix[1][1]);
+			console.log("row 2, col 0: ", matrix[2][0]);
+		</code></pre>
+	</section>
+	<section><h3>обхождане на елементите на двумерен масив (по редове и колони)</h3>
+		<pre><code rel="JS" class="javascript">
+			var rows = matrix.length;
+			var cols = matrix[0].length;
+
+			for (var i = 0; i < rows; i++) {
+				console.log("row:", i);
+				for (var j = 0; j < cols; j++) {
+					console.log( matrix[i][j] + ',');
+				}
+			}
+		</code></pre>
+	</section>
+</section>
+
+
+
+<section><h1>Обекти</h1></section>
+<section><h2>Обекти</h2>
+    <section><h3>Въведение</h3>
+        <p class="note newterm bigestFont">Object = {properties + methods}</p><br>
+        <dl class="fa">
+            <dt><span class="note">Обект:</span>  структура от данни, която обединява в едно цяло данните и действията (функциите), които могат да се извършват върху тях.</dt>
+            <dt>Данните в един обект се наричат <span class="note">свойства</span> (<span class="note">properties</span>), а функциите – <span class="note">методи</span> (<span class="note">methods</span>).</dt>
+            <dt>За разлика от масивите, които са <span class="note">посредена</span> структура от данни, то обектите са <span class="note">неподредена</span> структура. Т.е. при обектите не разграничаваме първи, втори и пр. елемент.</dt>
+        </dl>
+    </section>
+    <section>
+        <dl class="fa">
+            <dt>Всяко едно свойство на обект съдържа данни - може да бъде всеки един тип данни, но за разлика от масива, данните тук се асоциират с имена (property names, keys) а не с цифрови индекси.</dt>
+            <dt>Когато в дадено свойство имаме функция, тогава това свойство се нарича <span class="note">метод</span> на обекта</dt>
+        </dl>
+    </section>
+    <section id="developerObjectByLiteral">
+        <p>Пример за обект:</p>
+        <pre style="width: 75vw;font-size: .5em"><code rel="JS" class="js bigFont">
+            var developer1 = {
+                // properties:
+                "firstName"     : "Ivan",
+                "surName"       : "Ivanov",
+                "skills"        : ["HTML", "CSS", "JavaScript"],
+                // methods:
+                "applyForJob"   : function(){
+                    console.log( this.firstName + " is applying for job!")
+                }
+            }
+        </code></pre>
+        <dl class="fa">
+            <dt class="note">Редът на създаване на свойствата няма никакво значение, тъй като данните в обектите не са подредени!</dt>
+        </dl>
+    </section>
+    <section>
+        <p>Ето как, съвсем обобщено, изглежда един обект в паметта:</p>
+        <a href="images/JS_ObjectInRAM_1.png" title="click for bigger image"><img src="images/JS_ObjectInRAM_1.png"></a>
+    </section>
+</section>
+<section><h1>Създаване на единичен обект</h1></section>
+<section><h2>Създаване на единичен обект</h2>
+    <section><h3>Чрез литерал - предпочитания вариант</h3>
+        <pre><code rel="JS" class="js">
+            // създаване празен обект:
+            var obj = {};
+
+            // създаване на обект с 4 свойства:
+            var car1 = {
+                "brand" : "ford",
+                "year"  : 2016,
+                "color" : "red",
+                "doors" : 3
+            }
+        </code></pre>
+        <p class="note">Забележете, че след последния елемент на обекта не се слага запетайка!</p>
+    </section>
+    <section><h3>Чрез глобалния обект Object</h3>
+        <pre><code rel="JS" class="js">
+            var obj = new Object();
+        </code></pre>
+        <p class="note">Този начин за създаване на обект, вече не се използва!</p>
+        <p>Внимавайте да не объркате този вариант с използването на конструктор на обекти, който ще бъде разгледан по-нататък:</p>
+        <pre><code rel="JS" class="js">
+            var obj = new Car();
+        </code></pre>
+    </section>
+</section>
+
+<section><h1>Достъп до свойствата на обект</h1></section>
+<section><h2>Достъп до свойствата на обект</h2>
+    <section><h3>Чрез точка (Dot Notation)</h3>
+        <pre><code rel="Syntax" class="js">
+            object_name.property_name
+        </code></pre>
+        <p>Ако използваме обекта <code>developer1</code>, създаден <a href="#developerObjectByLiteral">по-горе</a>, то за да достъпим неговите свойства: </p>
+        <pre><code rel="JS" class="js">
+            console.log( developer1.firstName ); //Ivan
+            console.log( developer1.surName );   //Ivanov
+
+            console.log( developer1.skills );
+            // ["HTML", "CSS", "JavaScript"]
+
+            console.log( developer1.skills[0] ); //"HTML"
+
+            console.log( developer1.applyForJob() );
+            // Ivan is applying for job!
+
+            developer1.firstName = "Stoyan";
+            // промяна на свойството "firstName"
+        </code></pre>
+    </section>
+    <section><h3>Чрез квадратни скоби (Square-bracket Notation)</h3>
+        <pre><code rel="Syntax" class="js">
+            object_name[variable_holding_property_name]
+        </code></pre>
+        <p>Отново ще използваме обекта <a href="#developerObjectByLiteral"><code>developer1</code></a></p>
+        <pre><code rel="JS" class="js">
+            // променлива, в която съхраняваме име на свойство:
+            var propName = "firstName";
+            console.log( developer1[propName] ); // Ivan
+
+            developer1[propName] = "Marin"; // променяме свойството "propName"
+        </code></pre>
+    </section>
+</section>
+
+<section><h1 class="advanced">Създаване на множество еднотипни обект</h1></section>
+<section><h2 class="advanced">Създаване на множество еднотипни обект</h2>
+    <section><h3>Чрез литерали (неефективен вариант):</h3>
+        <dl class="fa" style="font-size: .8em">
+          <dt>В реалните приложения често се налага да работим с множество еднотипни обекти - обекти, който имат еднаква структура, т.е. еднакви свойства като се различават само стойностите за тези свойства.</dt>
+          <dt>В контекста на предходните примери, ако искаме да представим информацията за два обекта от тип developer, то бихме имали доста повтарящ се код - крайно неефективен вариант:</dt>
+          <pre><code rel="JS" class="js">
+            var developer1 = {
+              "firstName" : "Ivan",
+              "surName"   : "Ivanov",
+              "skills"     : ["HTML", "CSS", "JavaScript"],
+
+              "applyForJob": function(){
+                  var skillsStr = this.skills.toString();
+
+                  console.log(`Hi, I'm ${this.firstName} ${this.surName}. My strongest skills are ${skillsStr}.`);
+              }
+            }
+            var developer2 = {
+              "firstName" : "Maria",
+              "surName"   : "Mineva",
+              "skills"     : ["Python", "Machine Learning", "Data Science"],
+
+              "applyForJob": function(){
+                  var skillsStr = this.skills.toString();
+
+                  console.log(`Hi, I'm ${this.firstName} ${this.surName}. My strongest skills are ${skillsStr}.`);
+              }
+            }
+          </code></pre>
+        </dl>
+    </section>
+    <section><h3>Чрез Factory function</h3>
+      <dl class="fa" style="font-size: .8em">
+        <dt>По-ефективно е да създадем функция, която да генерира нашите обекти. Освен, че ще намали кода, този вариант има и предимството, че всички конструирани обекти гарантирано ще имат една и съща структура (имена на свойствата).</dt>
+        <pre><code rel="JS" class="js">
+          // функция, създаваща обекти от тип Developer:
+          function developerFactory(firstName, surName, skills){
+            var obj = {};
+
+            obj.firstName = firstName;
+            obj.surName = surName;
+            obj.skills = skills;
+
+            obj.applyForJob = function(){
+              var skillsStr = this.skills.toString();
+              console.log(`Hi, I'm ${obj.firstName} ${obj.surName}. My strongest skills are ${skillsStr}.`);
+            }
+
+            return obj;
+          }
+
+          //сега лесно създаваме обектите от тип Developer:
+          var developer1 = developerFactory("Ivan", "Ivanov",
+            ["HTML", "CSS", "JavaScript"]
+          );
+          var developer2 = developerFactory("Maria", "Mineva",
+            ["Python", "Machine Learning", "Data Science"],
+          );
+        </code></pre>
+      </dl>
+    </section>
+    <section><h3>Чрез Constructor functuon</h3>
+      <dl class="fa" style="font-size: .8em">
+        <dt>За да бъде синтаксисът в JavaScript по-близък до този в класическите ООП езици (C++, Java, C# и пр.) в JavaScript може да използваме и Конструктор на обекти:</dt>
+        <pre><code rel="JS" class="js">
+          // Конструктор за обекти от тип Developer. Важно е да бъде извикан с "new"! Поради това конвенцията е името да започва с главна буква.
+          function Developer(firstName, surName, skills){
+            this.firstName = firstName;
+            this.surName = surName;
+            this.skills = skills;
+
+            this.applyForJob = function(){
+              var skillsStr = this.skills.toString();
+
+              console.log(`Hi, I'm ${this.firstName} ${this.surName}. My strongest skills are ${skillsStr}.`);
+            }
+          }
+
+          //сега лесно създаваме обектите от тип Developer:
+          var developer1 = new Developer("Ivan", "Ivanov",
+            ["HTML", "CSS", "JavaScript"]
+          );
+
+          var developer2 = new Developer("Maria", "Mineva",
+            ["Python", "Machine Learning", "Data Science"],
+          );
+        </code></pre>
+        <dt>В ES6 се добавя и синтаксис за класове (class). По-подробно тези теми се разглеждат в Advanced модула на курса.</dt>
+      </dl>
+    </section>
+</section>
+
+
+
+<section data-min="5" id="hw"><h1>HW</h1></section>
+<section><h2>HW</h2>
+  <section><h3>JS Arrays: примери и задачи в codepen</h3>
+  	<p><a href="https://codepen.io/collection/DObLNy/">JS_Loops_and_Arrays codepen колекция</a></p>
+  </section>
+  <section><h2>JS Objects: примери и задачи в codepen</h2>
+    <dl class="fa">
+        <dt>Повече примимери и задачи по темата:</dt>
+        <dd><a href="https://codepen.io/collection/XPMQxY/">JS_Objects</a> @codepen</dd>
+    </dl>
+</section>
+</section>
+
+
+<section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
+	 <p>These slides are based on</p>
+	 <p>customised version of </p>
+	 <p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+	 <p>framework</p>
+</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+		</div>
+	</div>
+	<!-- Custom processing -->
+	<script src="../../../outfit/js/slides.js"></script>
+	<!-- external scripts -->
+	<script src="../../../lib/reveal.js/lib/js/head.min.js"></script>
+	<script src="../../../lib/reveal.js/js/reveal.js"></script>
+	<!-- init reveal -->
+	<script>
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		var highlightjsTabSize = '  ';
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			slideNumber: 'c/t',
+			keyboard: true,
+			history: true,
+			center: true,
+			width: '100%',
+			height: '100%',
+			// slide transition
+			transition: 'concave', // none/fade/slide/convex/concave/zoom
+			// Factor of the display size that should remain empty around the content
+			margin: 0.1,
+			// shift+maous click to zoom in/out element
+			zoomKey: 'ctrl',
+			// theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+			// transition: Reveal.getQueryHash().transition || 'default'
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad(); } },
+				{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+				{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
+			]
+		});
+	</script>
+	<!-- linkedin badge -->
+	<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+</body>
+</html>

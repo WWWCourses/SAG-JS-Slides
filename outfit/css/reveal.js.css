@@ -50,6 +50,13 @@
   display: block;
   list-style-type: none;
 }
+.reveal section a>img{
+  display: block;
+  margin: 1.5em auto 0 auto;
+  height: 50vh;
+  width: auto;
+  box-shadow: 0 0 0.5em .1em;
+}
 .reveal section p+img{
     position: relative;
     display: block;
