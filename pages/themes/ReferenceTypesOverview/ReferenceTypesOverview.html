@@ -75,15 +75,6 @@
 </section>
 
 
-<section data-min="5"><h1>Arrays in JavaScript</h1></section>
-<section><h2>Arrays in JavaScript</h2>
-  <section><h3>___SubSectionTitle___</h3>
-
-  </section>
-</section>
-
-
-
 <section><h1>Какво представлява масива в JS?</h1></section>
 <section><h2>Какво представлява масива в JS?</h2>
 	<section>
@@ -239,203 +230,202 @@
 
 <section><h1>Обекти</h1></section>
 <section><h2>Обекти</h2>
-    <section><h3>Въведение</h3>
-        <p class="note newterm bigestFont">Object = {properties + methods}</p><br>
-        <dl class="fa">
-            <dt><span class="note">Обект:</span>  структура от данни, която обединява в едно цяло данните и действията (функциите), които могат да се извършват върху тях.</dt>
-            <dt>Данните в един обект се наричат <span class="note">свойства</span> (<span class="note">properties</span>), а функциите – <span class="note">методи</span> (<span class="note">methods</span>).</dt>
-            <dt>За разлика от масивите, които са <span class="note">посредена</span> структура от данни, то обектите са <span class="note">неподредена</span> структура. Т.е. при обектите не разграничаваме първи, втори и пр. елемент.</dt>
-        </dl>
-    </section>
-    <section>
-        <dl class="fa">
-            <dt>Всяко едно свойство на обект съдържа данни - може да бъде всеки един тип данни, но за разлика от масива, данните тук се асоциират с имена (property names, keys) а не с цифрови индекси.</dt>
-            <dt>Когато в дадено свойство имаме функция, тогава това свойство се нарича <span class="note">метод</span> на обекта</dt>
-        </dl>
-    </section>
-    <section id="developerObjectByLiteral">
-        <p>Пример за обект:</p>
-        <pre style="width: 75vw;font-size: .5em"><code rel="JS" class="js bigFont">
-            var developer1 = {
-                // properties:
-                "firstName"     : "Ivan",
-                "surName"       : "Ivanov",
-                "skills"        : ["HTML", "CSS", "JavaScript"],
-                // methods:
-                "applyForJob"   : function(){
-                    console.log( this.firstName + " is applying for job!")
-                }
-            }
-        </code></pre>
-        <dl class="fa">
-            <dt class="note">Редът на създаване на свойствата няма никакво значение, тъй като данните в обектите не са подредени!</dt>
-        </dl>
-    </section>
-    <section>
-        <p>Ето как, съвсем обобщено, изглежда един обект в паметта:</p>
-        <a href="images/JS_ObjectInRAM_1.png" title="click for bigger image"><img src="images/JS_ObjectInRAM_1.png"></a>
-    </section>
+  <section><h3>Въведение</h3>
+    <p class="note newterm bigestFont">Object = {properties + methods}</p><br>
+    <dl class="fa">
+      <dt><span class="note">Обект:</span>  структура от данни, която обединява в едно цяло данните и действията (функциите), които могат да се извършват върху тях.</dt>
+      <dt>Данните в един обект се наричат <span class="note">свойства</span> (<span class="note">properties</span>), а функциите – <span class="note">методи</span> (<span class="note">methods</span>).</dt>
+      <dt>За разлика от масивите, които са <span class="note">посредена</span> структура от данни, то обектите са <span class="note">неподредена</span> структура. Т.е. при обектите не разграничаваме първи, втори и пр. елемент.</dt>
+    </dl>
+  </section>
+  <section>
+    <dl class="fa">
+      <dt>Всяко едно свойство на обект съдържа данни - може да бъде всеки един тип данни, но за разлика от масива, данните тук се асоциират с имена (property names, keys) а не с цифрови индекси.</dt>
+      <dt>Когато в дадено свойство имаме функция, тогава това свойство се нарича <span class="note">метод</span> на обекта</dt>
+    </dl>
+  </section>
+  <section id="developerObjectByLiteral">
+    <p>Пример за обект:</p>
+    <pre style="width: 75vw;font-size: .5em"><code rel="JS" class="js bigFont">
+      var developer1 = {
+          // properties:
+          "firstName"     : "Ivan",
+          "surName"       : "Ivanov",
+          "skills"        : ["HTML", "CSS", "JavaScript"],
+          // methods:
+          "applyForJob"   : function(){
+              console.log( this.firstName + " is applying for job!")
+          }
+      }
+    </code></pre>
+    <dl class="fa">
+        <dt class="note">Редът на създаване на свойствата няма никакво значение, тъй като данните в обектите не са подредени!</dt>
+    </dl>
+  </section>
+  <section>
+    <p>Ето как, съвсем обобщено, изглежда един обект в паметта:</p>
+    <a href="images/JS_ObjectInRAM_1.png" title="click for bigger image"><img src="images/JS_ObjectInRAM_1.png"></a>
+  </section>
 </section>
 <section><h1>Създаване на единичен обект</h1></section>
 <section><h2>Създаване на единичен обект</h2>
-    <section><h3>Чрез литерал - предпочитания вариант</h3>
-        <pre><code rel="JS" class="js">
-            // създаване празен обект:
-            var obj = {};
+  <section><h3>Чрез литерал - предпочитания вариант</h3>
+    <pre><code rel="JS" class="js">
+      // създаване празен обект:
+      var obj = {};
 
-            // създаване на обект с 4 свойства:
-            var car1 = {
-                "brand" : "ford",
-                "year"  : 2016,
-                "color" : "red",
-                "doors" : 3
-            }
-        </code></pre>
-        <p class="note">Забележете, че след последния елемент на обекта не се слага запетайка!</p>
-    </section>
-    <section><h3>Чрез глобалния обект Object</h3>
-        <pre><code rel="JS" class="js">
-            var obj = new Object();
-        </code></pre>
-        <p class="note">Този начин за създаване на обект, вече не се използва!</p>
-        <p>Внимавайте да не объркате този вариант с използването на конструктор на обекти, който ще бъде разгледан по-нататък:</p>
-        <pre><code rel="JS" class="js">
-            var obj = new Car();
-        </code></pre>
-    </section>
+      // създаване на обект с 4 свойства:
+      var car1 = {
+          "brand" : "ford",
+          "year"  : 2016,
+          "color" : "red",
+          "doors" : 3
+      }
+    </code></pre>
+    <p class="note">Забележете, че след последния елемент на обекта не се слага запетайка!</p>
+  </section>
+  <section><h3>Чрез глобалния обект Object</h3>
+    <pre><code rel="JS" class="js">
+        var obj = new Object();
+    </code></pre>
+    <p class="note">Този начин за създаване на обект, вече не се използва!</p>
+    <p>Внимавайте да не объркате този вариант с използването на конструктор на обекти, който ще бъде разгледан по-нататък:</p>
+    <pre><code rel="JS" class="js">
+        var obj = new Car();
+    </code></pre>
+  </section>
 </section>
 
 <section><h1>Достъп до свойствата на обект</h1></section>
 <section><h2>Достъп до свойствата на обект</h2>
-    <section><h3>Чрез точка (Dot Notation)</h3>
-        <pre><code rel="Syntax" class="js">
-            object_name.property_name
-        </code></pre>
-        <p>Ако използваме обекта <code>developer1</code>, създаден <a href="#developerObjectByLiteral">по-горе</a>, то за да достъпим неговите свойства: </p>
-        <pre><code rel="JS" class="js">
-            console.log( developer1.firstName ); //Ivan
-            console.log( developer1.surName );   //Ivanov
+  <section><h3>Чрез точка (Dot Notation)</h3>
+    <pre><code rel="Syntax" class="js">
+        object_name.property_name
+    </code></pre>
+    <p>Ако използваме обекта <code>developer1</code>, създаден <a href="#developerObjectByLiteral">по-горе</a>, то за да достъпим неговите свойства: </p>
+    <pre><code rel="JS" class="js">
+        console.log( developer1.firstName ); //Ivan
+        console.log( developer1.surName );   //Ivanov
 
-            console.log( developer1.skills );
-            // ["HTML", "CSS", "JavaScript"]
+        console.log( developer1.skills );
+        // ["HTML", "CSS", "JavaScript"]
 
-            console.log( developer1.skills[0] ); //"HTML"
+        console.log( developer1.skills[0] ); //"HTML"
 
-            console.log( developer1.applyForJob() );
-            // Ivan is applying for job!
+        console.log( developer1.applyForJob() );
+        // Ivan is applying for job!
 
-            developer1.firstName = "Stoyan";
-            // промяна на свойството "firstName"
-        </code></pre>
-    </section>
-    <section><h3>Чрез квадратни скоби (Square-bracket Notation)</h3>
-        <pre><code rel="Syntax" class="js">
-            object_name[variable_holding_property_name]
-        </code></pre>
-        <p>Отново ще използваме обекта <a href="#developerObjectByLiteral"><code>developer1</code></a></p>
-        <pre><code rel="JS" class="js">
-            // променлива, в която съхраняваме име на свойство:
-            var propName = "firstName";
-            console.log( developer1[propName] ); // Ivan
+        developer1.firstName = "Stoyan";
+        // промяна на свойството "firstName"
+    </code></pre>
+  </section>
+  <section><h3>Чрез квадратни скоби (Square-bracket Notation)</h3>
+    <pre><code rel="Syntax" class="js">
+      object_name[variable_holding_property_name]
+    </code></pre>
+    <p>Отново ще използваме обекта <a href="#developerObjectByLiteral"><code>developer1</code></a></p>
+    <pre><code rel="JS" class="js">
+      // променлива, в която съхраняваме име на свойство:
+      var propName = "firstName";
+      console.log( developer1[propName] ); // Ivan
 
-            developer1[propName] = "Marin"; // променяме свойството "propName"
-        </code></pre>
-    </section>
+      developer1[propName] = "Marin"; // променяме свойството "propName"
+    </code></pre>
+  </section>
 </section>
 
-<section><h1 class="advanced">Създаване на множество еднотипни обект</h1></section>
-<section><h2 class="advanced">Създаване на множество еднотипни обект</h2>
-    <section><h3>Чрез литерали (неефективен вариант):</h3>
-        <dl class="fa" style="font-size: .8em">
-          <dt>В реалните приложения често се налага да работим с множество еднотипни обекти - обекти, който имат еднаква структура, т.е. еднакви свойства като се различават само стойностите за тези свойства.</dt>
-          <dt>В контекста на предходните примери, ако искаме да представим информацията за два обекта от тип developer, то бихме имали доста повтарящ се код - крайно неефективен вариант:</dt>
-          <pre><code rel="JS" class="js">
-            var developer1 = {
-              "firstName" : "Ivan",
-              "surName"   : "Ivanov",
-              "skills"     : ["HTML", "CSS", "JavaScript"],
+<section><h1>Създаване на множество еднотипни обект</h1></section>
+<section><h2>Създаване на множество еднотипни обект</h2>
+  <section><h3>Чрез литерали (неефективен вариант):</h3>
+    <dl class="fa" style="font-size: .8em">
+      <dt>В реалните приложения често се налага да работим с множество еднотипни обекти - обекти, който имат еднаква структура, т.е. еднакви свойства като се различават само стойностите за тези свойства.</dt>
+      <dt>В контекста на предходните примери, ако искаме да представим информацията за два обекта от тип developer, то бихме имали доста повтарящ се код - крайно неефективен вариант:</dt>
+      <pre><code rel="JS" class="js">
+        var developer1 = {
+          "firstName" : "Ivan",
+          "surName"   : "Ivanov",
+          "skills"     : ["HTML", "CSS", "JavaScript"],
 
-              "applyForJob": function(){
-                  var skillsStr = this.skills.toString();
-
-                  console.log(`Hi, I'm ${this.firstName} ${this.surName}. My strongest skills are ${skillsStr}.`);
-              }
-            }
-            var developer2 = {
-              "firstName" : "Maria",
-              "surName"   : "Mineva",
-              "skills"     : ["Python", "Machine Learning", "Data Science"],
-
-              "applyForJob": function(){
-                  var skillsStr = this.skills.toString();
-
-                  console.log(`Hi, I'm ${this.firstName} ${this.surName}. My strongest skills are ${skillsStr}.`);
-              }
-            }
-          </code></pre>
-        </dl>
-    </section>
-    <section><h3>Чрез Factory function</h3>
-      <dl class="fa" style="font-size: .8em">
-        <dt>По-ефективно е да създадем функция, която да генерира нашите обекти. Освен, че ще намали кода, този вариант има и предимството, че всички конструирани обекти гарантирано ще имат една и съща структура (имена на свойствата).</dt>
-        <pre><code rel="JS" class="js">
-          // функция, създаваща обекти от тип Developer:
-          function developerFactory(firstName, surName, skills){
-            var obj = {};
-
-            obj.firstName = firstName;
-            obj.surName = surName;
-            obj.skills = skills;
-
-            obj.applyForJob = function(){
-              var skillsStr = this.skills.toString();
-              console.log(`Hi, I'm ${obj.firstName} ${obj.surName}. My strongest skills are ${skillsStr}.`);
-            }
-
-            return obj;
-          }
-
-          //сега лесно създаваме обектите от тип Developer:
-          var developer1 = developerFactory("Ivan", "Ivanov",
-            ["HTML", "CSS", "JavaScript"]
-          );
-          var developer2 = developerFactory("Maria", "Mineva",
-            ["Python", "Machine Learning", "Data Science"],
-          );
-        </code></pre>
-      </dl>
-    </section>
-    <section><h3>Чрез Constructor functuon</h3>
-      <dl class="fa" style="font-size: .8em">
-        <dt>За да бъде синтаксисът в JavaScript по-близък до този в класическите ООП езици (C++, Java, C# и пр.) в JavaScript може да използваме и Конструктор на обекти:</dt>
-        <pre><code rel="JS" class="js">
-          // Конструктор за обекти от тип Developer. Важно е да бъде извикан с "new"! Поради това конвенцията е името да започва с главна буква.
-          function Developer(firstName, surName, skills){
-            this.firstName = firstName;
-            this.surName = surName;
-            this.skills = skills;
-
-            this.applyForJob = function(){
+          "applyForJob": function(){
               var skillsStr = this.skills.toString();
 
               console.log(`Hi, I'm ${this.firstName} ${this.surName}. My strongest skills are ${skillsStr}.`);
-            }
+          }
+        }
+        var developer2 = {
+          "firstName" : "Maria",
+          "surName"   : "Mineva",
+          "skills"     : ["Python", "Machine Learning", "Data Science"],
+
+          "applyForJob": function(){
+              var skillsStr = this.skills.toString();
+
+              console.log(`Hi, I'm ${this.firstName} ${this.surName}. My strongest skills are ${skillsStr}.`);
+          }
+        }
+      </code></pre>
+    </dl>
+  </section>
+  <section><h3>Чрез Factory function</h3>
+    <dl class="fa" style="font-size: .8em">
+      <dt>По-ефективно е да създадем функция, която да генерира нашите обекти. Освен, че ще намали кода, този вариант има и предимството, че всички конструирани обекти гарантирано ще имат една и съща структура (имена на свойствата).</dt>
+      <pre><code rel="JS" class="js">
+        // функция, създаваща обекти от тип Developer:
+        function developerFactory(firstName, surName, skills){
+          var obj = {};
+
+          obj.firstName = firstName;
+          obj.surName = surName;
+          obj.skills = skills;
+
+          obj.applyForJob = function(){
+            var skillsStr = this.skills.toString();
+            console.log(`Hi, I'm ${obj.firstName} ${obj.surName}. My strongest skills are ${skillsStr}.`);
           }
 
-          //сега лесно създаваме обектите от тип Developer:
-          var developer1 = new Developer("Ivan", "Ivanov",
-            ["HTML", "CSS", "JavaScript"]
-          );
+          return obj;
+        }
 
-          var developer2 = new Developer("Maria", "Mineva",
-            ["Python", "Machine Learning", "Data Science"],
-          );
-        </code></pre>
-        <dt>В ES6 се добавя и синтаксис за класове (class). По-подробно тези теми се разглеждат в Advanced модула на курса.</dt>
-      </dl>
-    </section>
+        //сега лесно създаваме обектите от тип Developer:
+        var developer1 = developerFactory("Ivan", "Ivanov",
+          ["HTML", "CSS", "JavaScript"]
+        );
+        var developer2 = developerFactory("Maria", "Mineva",
+          ["Python", "Machine Learning", "Data Science"],
+        );
+      </code></pre>
+    </dl>
+  </section>
+  <section><h3>Чрез Constructor functuon</h3>
+    <dl class="fa" style="font-size: .8em">
+      <dt>За да бъде синтаксисът в JavaScript по-близък до този в класическите ООП езици (C++, Java, C# и пр.) в JavaScript може да използваме и Конструктор на обекти:</dt>
+      <pre><code rel="JS" class="js">
+        // Конструктор за обекти от тип Developer. Важно е да бъде извикан с "new"! Поради това конвенцията е името да започва с главна буква.
+        function Developer(firstName, surName, skills){
+          this.firstName = firstName;
+          this.surName = surName;
+          this.skills = skills;
+
+          this.applyForJob = function(){
+            var skillsStr = this.skills.toString();
+
+            console.log(`Hi, I'm ${this.firstName} ${this.surName}. My strongest skills are ${skillsStr}.`);
+          }
+        }
+
+        //сега лесно създаваме обектите от тип Developer:
+        var developer1 = new Developer("Ivan", "Ivanov",
+          ["HTML", "CSS", "JavaScript"]
+        );
+
+        var developer2 = new Developer("Maria", "Mineva",
+          ["Python", "Machine Learning", "Data Science"],
+        );
+      </code></pre>
+      <dt>В ES6 се добавя и синтаксис за класове (class). По-подробно тези теми се разглеждат в Advanced модула на курса.</dt>
+    </dl>
+  </section>
 </section>
-
 
 
 <section data-min="5" id="hw"><h1>HW</h1></section>
