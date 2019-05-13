@@ -1,2 +1,2 @@
 # SAG-JS-Slides
-JavaScript-Advanced course created for Software AG
+JavaScript course created for Software AG
