@@ -81,7 +81,7 @@ function attachEvents(){
 function setThemeURL(){
     // wrap H3 text into link, with href == section.id path
         // <h3 data-wip>__themeTitle__</h3> =>
-        // <h3><a title="slides" href="/ProgressBG-JS-Advanced_React/pages/themes/__themeTitle__/__themeTitle__.html">__themeTitle__</a></h3>
+        // <h3><a title="slides" href="/SAG-JS-Slides/pages/themes/__themeTitle__/__themeTitle__.html">__themeTitle__</a></h3>
 
     for (let i = 0, len = themes.length; i < len ; i++){
         // do not set link for elements in WIP mode or non-id elements:

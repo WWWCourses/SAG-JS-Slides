@@ -1,2 +1,2 @@
-# ProgressBG-JS-Advanced_React
-JavaScript-Advanced course at Progressbg Educational Centre
+# SAG-JS-Slides
+JavaScript-Advanced course created for Software AG
