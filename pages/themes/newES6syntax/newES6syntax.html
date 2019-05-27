@@ -239,7 +239,9 @@
         'exp': function(){
           console.log(this === lexicalThis);
         },
-        'arr': ()=>{console.log(this === lexicalThis)}
+        'arr': ()=>{
+          console.log(this === lexicalThis)
+        }
       }
 
 
@@ -276,6 +278,21 @@
       // SyntaxError: invalid arrow-function arguments
 
       cb = cb || (() => {});  // ok
+    </code></pre>
+  </section>
+  <section><h3>When <span class="note">not</span> to use arrow functions</h3>
+    <dl class="fa">
+      <dt>As object methods</dt>
+    </dl>
+    <pre><code rel="JS" class="js">
+      let student1 = {
+        name: 'Pesho',
+        greet: () => {
+          console.log(`Hi, I'm ${this.name}`);
+        }
+      }
+
+      // Hi, I'm undefined
     </code></pre>
   </section>
   <section><h3>Notes</h3>
@@ -685,7 +702,7 @@
       <dt>Refactor the solution of <a href="https://wwwcourses.github.io/SAG-JS-Slides/pages/themes/prototypalInheritance/prototypalInheritance.html#/DeveloperManagerPersonTaskDescription">Developer_Manager_Person Task</a> using this time the Class Syntax</dt>
       <dt>Your new code must produce the same results for same input data, as in the old solution.</dt>
     </dl>
-  </section>    
+  </section>
 </section>
 
 

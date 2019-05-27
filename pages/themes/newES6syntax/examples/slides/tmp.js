@@ -1,9 +1,14 @@
-let p1 = {
+let student1 = {
   name: 'Pesho',
-  greet(){
+  greet: () => {
     console.log(`Hi, I'm ${this.name}`);
   }
 }
 
 
-p1.greet();
+student1.greet();
+
+var cat = {
+  lives: 9,
+  jump: () => { this.lives--; }
+}
