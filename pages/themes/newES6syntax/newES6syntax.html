@@ -252,22 +252,30 @@
   <section><h3>lexical arguments</h3>
     <dl class="fa">
       <dt>the <code>arguments</code> object in arrow function is reference to the arguments object in the enclosing scope</dt>
+      <dt>More on <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments">arguments object @mdn</a></dt>
     </dl>
     <pre><code rel="JS" class="javascript">
-      let logArgs = ()=>{
-        for (var i = 0; i < arguments.length; i++) {
-          console.log(arguments[i]);
-        }
-        console.dir(arguments);
+      // arrow syntax
+      let logArgsArrow = ()=>{
+        console.log(arguments.length);
+      }
+
+      // function expression
+      let logArgs = function(){
+        console.log(arguments.length);
       }
 
       logArgs(1,2,3);
+      // 3
+      logArgsArrow(1,2,3);
+      // 0
     </code></pre>
   </section>
-  <section><h3>loose binding</h3>
+  <section><h3 class="advanced">loose binding</h3>
     <pre><code rel="JS" class="javascript">
-      const f = x => (x % 2) === 0 ? x : 0;
-      console.log(f(6));
+      const f = x => (x % 2) === 0 ? 'Even' : 'Odd';
+      console.log( f(6) );
+      // "Even"
     </code></pre>
     <pre><code rel="JS" class="javascript">
       let cb;

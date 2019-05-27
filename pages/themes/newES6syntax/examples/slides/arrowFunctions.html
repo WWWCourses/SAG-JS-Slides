@@ -22,7 +22,6 @@
 			console.log(`circleArea(2) = ${circleAreaArr1(2)}`);
 			console.log(`circleArea(2) = ${circleAreaArr2(2)}`);
 			console.log(`circleArea(2) = ${circleAreaArr3(2)}`);
-
 		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
 		'thisValue': function(){
@@ -43,14 +42,16 @@
 		},
 		'arguments': function(){
 		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
-			let logArgs = ()=>{
-				for (var i = 0; i < arguments.length; i++) {
-					console.log(arguments[i]);
-				}
-				console.dir(arguments);
+			let logArgsArrow = ()=>{
+				console.log(arguments.length);
 			}
 
-			logArgs(1,2,3)
+			let logArgs = function(){
+				console.log(arguments.length);
+			}
+
+			logArgs(1,2,3);
+			logArgsArrow(1,2,3);
 		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
 		'swapArray': function(){
@@ -153,7 +154,7 @@
 		},
 	}
 
-	examples.filterEven();
+	examples.arguments();
 </script>
 </body>
 </html>
