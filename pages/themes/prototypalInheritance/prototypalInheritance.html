@@ -303,6 +303,41 @@
 			tom.eat();
 		</code></pre>
 	</section>
+	<section><h3>Methods overloading</h3>
+		<pre><code rel="JS" class="js">
+			// Person constructor
+			let Person = function(name, age){
+			  this.name = name;
+			  this.age = age;
+			}
+			// Person methods
+			Person.prototype.greet = function(){
+			  console.log(`Hi, I'm ${this.name} and I'm ${this.age} years old`);
+			}
+
+
+			// Developer constructor
+			let Developer = function(name, age, skillset){
+			  Person.call(this, name, age);
+			  this.skillset = skillset;
+			}
+			// Developer objects should inherit all methods from Person:
+			Developer.prototype = Object.create(Person.prototype);
+
+			Developer.prototype.greet = function(){
+			  // call greet on Person 
+			  Person.prototype.greet.call(this);
+			  // log skills
+			  console.log( `My skills are: ${this.skillset}\n`);
+			}
+
+			let pesho = new Developer('Petar', 23, ['Python', 'Django']);
+			let maria = new Developer('Maria', 19, ['CSS','HTML', 'Javascript']);
+
+			pesho.greet();
+			maria.greet();
+		</code></pre>
+	</section>
 
 	<!-- <section><h3>Prototypal Inheritance - How it works?</h3>
 		<img src="images/Prototype Inheritance.png">
