@@ -85,7 +85,7 @@
   	</dl>
   	<a href="images/map_function.png"><img src="images/map_function.png"></a>
   </section>
-  <section><h3>Example</h3>
+  <section><h3>Example 1</h3>
   	<pre><code rel="JS" class="js">
   		let input = ['a', 'b', 'c', 'd'];
   		let output = input.map( (e)=>e.toUpperCase())
@@ -93,6 +93,17 @@
   		console.log(`input: ${input}`);
   		console.log(`output: ${output}`);
   	</code></pre>
+  </section>
+  <section><h3>Example 2</h3>
+    <pre><code rel="JS" class="js">
+      let obj = {
+        'a' : 2,
+        'b' : 3,
+        'c' : 4,
+      }
+
+      console.log( Object.keys(obj).map( e=> obj[e]**2 ) );  // [4, 9, 16]
+    </code></pre>
   </section>
   <section><h3>Reference</h3>
   	<dl class="fa">
