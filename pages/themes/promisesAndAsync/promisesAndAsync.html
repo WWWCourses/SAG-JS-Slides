@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>promisesAndAsync</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<!-- css & themes include -->
+	<link rel="stylesheet" href="../../../lib/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../../../outfit/css/themes/projector.css" id="theme">
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? '../../../lib/reveal.js/css/print/pdf.css' : '../../../lib/reveal.js/css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+	<!-- custom -->
+	<link rel="stylesheet" href="../../../outfit/css/reveal.js.css">
+	<base target="_blank">
+</head>
+<body>
+	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+		<div class="top_links">
+			<a class="home_link" href="/SAG-JS-Slides/index.html#promisesAndAsync" target="_top"><i class="fa fa-home"></i></a>
+			<span class="help_link" href="#"><i class="fa fa-question"></i></span>
+			<div class="help_text">
+				<div><span>N/Space</span><span>Next Slide</span></div>
+				<div><span>P</span><span>Previous Slide</span></div>
+				<div><span>O</span><span>Slides Overview</span></div>
+				<div><span>ctrl+left click</span><span>Zoom Element</span></div>
+			</div>
+		</div>
+		<div class="footer theme_switch">
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/dark.css'); return false;">Dark</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/light.css'); return false;">Light</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/projector.css'); return false;">Projector</a>
+		</div>
+		<div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>Promises and Asynchronous Programming in JS</h1></section>
+<section data-transition="zoom">
+	<section>
+		<div class="copyright">
+			<div class="note">
+				<p>Created for</p>
+			</div>
+			<div class="company">
+        <a href="https://www.softwareag.com/bg/default.html">
+        <div style="font-size:3em">Software AG</div>
+        </a>
+      </div>
+		</div>
+	</section>
+	<section class="copyright" data-transition="zoom" style="margin-top: -2em;">
+		<div class="note">
+			<p>Created by</p>
+		</div>
+		<div class="company">
+		   <div class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="vertical" data-theme="dark" data-vanity="ivapopova"><a class="LI-simple-link" href='https://bg.linkedin.com/in/ivapopova?trk=profile-badge'>Iva E. Popova</a></div>
+		</div>
+		<!-- <div class="author">
+			<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+		</div> -->
+	</section>
+</section>
+
+<section data-min="5"><h1>Asynchrony in JavaScript</h1></section>
+<section><h2>Asynchrony in JavaScript</h2>
+	<section><h3>What is multitasking?</h3>
+		<a href="images/driver_multitasking.jpg" style="display: block; margin-top: -.8em;"><img src="images/driver_multitasking.jpg" style="height: 50vh;"></a>
+		<a href="images/driver_multitasking_diagram.png" style="display: block; margin-top: -.8em;"><img src="images/driver_multitasking_diagram.png" style="height: 15vh; width: 40vw;"></a>
+	</section>
+	<section><h3>Multitasking in JS</h3>
+		<dl class="fa">
+			<dt>Multitasking (concurrency) is usually achieved by <a href="https://en.wikipedia.org/wiki/Multithreading_(computer_architecture)">multi-threading</a> or <a href="https://en.wikipedia.org/wiki/Multiprocessing">multiprocessing</a>.</dt>
+			<dt class="note">A JavaScript program runs on a single thread!</dt>
+			<dt>But the host environment (node.js/browsers/etc.) allows us to achieve a kind of multitasking programs using <span class="note">asynchronous code execution</span></dt>
+			<dt>More on asynchronous JavaScript, event loop: <a href="https://blog.bitsrc.io/understanding-asynchronous-javascript-the-event-loop-74cd408419ff">Understanding Asynchronous JavaScript</a></dt>
+		</dl>
+	</section>
+  <section><h3>Synchronous vs. Asynchronous Overview</h3>
+  	<a href="images/sync_execution.png"><img src="images/sync_execution.png" style="height: 30vh"></a>
+  	<a href="images/async_execution.png"><img src="images/async_execution.png" style="height: 30vh;"></a>
+  </section>
+  <section><h3>Synchronous vs. Asynchronous Demo</h3>
+  	<pre><code rel="JS" class="js">
+  		function syncDemo(){
+  		  console.time('syncDemo');
+  		  console.log(`1`);
+  		  console.log(`2`);
+  		  console.log(`3`);
+  		  console.timeEnd('syncDemo');
+  		}
+
+  		function asyncDemo(){
+  		  //setTimeout is executed asynchronous and is not blocking the rest of the code!
+  		  console.time('asyncDemo');
+  		  setTimeout(()=>{console.log(`1`)}, 1500)
+  		  setTimeout(()=>{console.log(`2`)}, 1000)
+  		  setTimeout(()=>{console.log(`3`)}, 500)
+  		  console.timeEnd('asyncDemo');
+  		}
+
+  		console.log(`~~~~~ Sync execution ~~~~~`);
+  		syncDemo();
+
+  		console.log(`\n~~~~~ Async execution ~~~~~`);
+  		asyncDemo();
+
+  		// output:
+  		~~~~~ Sync execution ~~~~~
+  		1
+  		2
+  		3
+  		syncDemo: 0.317ms
+
+  		~~~~~ Async execution ~~~~~
+  		asyncDemo: 0.620ms
+  		3
+  		2
+  		1
+  	</code></pre>
+  </section>
+</section>
+
+<section data-min="5"><h1>Promises</h1></section>
+<section><h2>Promises</h2>
+  <section><h3>Overview</h3>
+  	<dl class="fa">
+  		<dt>A Promise is an object representing the <span class="note">eventual completion or failure</span> of an <span class="note">asynchronous operation</span></dt>
+      <dt>Essentially, a promise is a returned object to which you attach callbacks, instead of passing callbacks into a function.</dt>
+  	</dl>
+  </section>
+  <section><h3>The meaning</h3>
+    <dl class="fa">
+      <dt>NLP case: "If you keep your promise to clean the room, then we are going to eat icecream</dt>
+    </dl>
+    <pre><code rel="JS" class="js">
+      let cleanRoom = new Promise(function(resolve, reject) {
+        setTimeout(function() {
+          resolve(`cleanRoom: resolved after 1s`);
+        }, 1000);
+      });
+
+
+      let eatIcecream = function(){
+        return new Promise(function (resolve, reject){
+          console.log(`Icecream time! `);
+          setTimeout( _=>{
+            resolve('eatIcecream: resolved after 2s')
+          },2000)
+        })
+      }
+
+      cleanRoom.then(eatIcecream)
+    </code></pre>
+  </section>
+  <section style="font-size: .8em"><h3>Promise Constructor</h3>
+  	<pre><code rel="Syntax" class="js">
+  		let promise = new Promise(function(resolve, reject) {
+  		  // do something async...
+
+  		  if (/* everything turned out fine */) {
+  		    resolve("Promise fulfilled!");
+  		  }
+  		  else {
+  		    reject("Promise rejected");
+  		  }
+  		}
+  	</code></pre>
+  	<dl class="fa">
+  		<dt>The Promise constructor takes one function (called <span class="note">executor</span>), which is executed immediately by the Promise implementation, passing <span class="note">resolve and reject functions</span></dt>
+  		<dt>With Promise we can associate handlers with an asynchronous action's eventual success value or failure reason</dt>
+  		<dt>This lets asynchronous methods return values like synchronous methods: instead of immediately returning the final value, the asynchronous method returns a promise to supply the value at some point in the future.</dt>
+  	</dl>
+  </section>
+  <section><h3>example</h3>
+  	<pre><code rel="JS" class="js">
+  		// define the promise
+  		let getDataPromise = new Promise(function(resolve, reject) {
+  		  setTimeout( ()=>{
+  		    resolve('Here are the data!')
+  		  }, 2000);
+  		})
+
+  		// usage
+  		getDataPromise
+  		  .then( data=>console.log(data) )
+  	</code></pre>
+  </section>
+  <section><h3>Promise states</h3>
+  	<p>A Promise can be in one of these states:</p>
+  	<dl class="fa">
+  		<dt><span class="note">pending</span>: initial state, neither fulfilled nor rejected.</dt>
+  		<dt><span class="note">fulfilled</span>: meaning that the operation completed successfully.</dt>
+  		<dt><span class="note">rejected</span>: meaning that the operation failed.</dt>
+  	</dl>
+  </section>
+  <section><h3>Promise usage - then() method</h3>
+  	<pre><code rel="JS" class="js">
+  		promise.then( (value)=>{// on fulfilled actions}, (err)=>{//on rejected actions} )
+  	</code></pre>
+  	<dl class="fa">
+  		<dt>The then() method takes up to two arguments: callback functions for the fulfilled and rejected states of the Promise.</dt>
+  		<dt>It returns a Promise (meaning you can chain then() methods )</dt>
+  	</dl>
+  </section>
+  <section>
+  	<p>Live demos and examples</p>
+  </section>
+  <section><h3>Reference</h3>
+    <dl class="fa">
+      <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises">Using promises @mdn</a></dt>
+      <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise Constructor @mdn</a></dt>
+    </dl>
+  </section>
+</section>
+
+<section data-min="5"><h1>Async</h1></section>
+<section><h2>Async</h2>
+  <section><h3>Overview</h3>
+    <dl class="fa">
+      <dt>An asynchronous function is a function which operates asynchronously via the event loop, using an implicit Promise to return its result. </dt>
+      <dt>The syntax and structure of a code using async functions is much more like using standard synchronous functions.</dt>
+      <dt>The async function declaration defines an asynchronous function, which returns an AsyncFunction object.</dt>
+      <dt>Reference: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function">async_function @mdn</a></dt>
+    </dl>
+  </section>
+  <section><h3>Example</h3>
+
+  </section>
+</section>
+
+<!--
+<section data-min="5" id="hw"><h1>HW</h1></section>
+<section><h2>Task 1</h2>
+  <section><h3>Description</h3>
+
+  </section>
+</section>
+ -->
+
+<section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
+	 <p>These slides are based on</p>
+	 <p>customised version of </p>
+	 <p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+	 <p>framework</p>
+</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+		</div>
+	</div>
+	<!-- Custom processing -->
+	<script src="../../../outfit/js/slides.js"></script>
+	<!-- external scripts -->
+	<script src="../../../lib/reveal.js/lib/js/head.min.js"></script>
+	<script src="../../../lib/reveal.js/js/reveal.js"></script>
+	<!-- init reveal -->
+	<script>
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		var highlightjsTabSize = '  ';
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			slideNumber: 'c/t',
+			keyboard: true,
+			history: true,
+			center: true,
+			width: '100%',
+			height: '100%',
+			// slide transition
+			transition: 'concave', // none/fade/slide/convex/concave/zoom
+			// Factor of the display size that should remain empty around the content
+			margin: 0.1,
+			// shift+maous click to zoom in/out element
+			zoomKey: 'ctrl',
+			// theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+			// transition: Reveal.getQueryHash().transition || 'default'
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad(); } },
+				{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+				{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
+			]
+		});
+	</script>
+	<!-- linkedin badge -->
+	<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+</body>
+</html>

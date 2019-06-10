@@ -4,7 +4,7 @@ const fs = require('fs');
 function readFile(fileName,enc) {
   return new Promise(function(resolve, reject){
     fs.readFile(fileName, enc, (err, data) => {
-        err ? reject(err) : resolve(data);
+        err ? reject(new Error(`Can not read from ${fileName}`)) : resolve(data);
     });
   });
 }
@@ -25,11 +25,14 @@ function sortMapByValue(m){
 		[...m].sort((a, b) => b[1] - a[1])
 	);
 }
+function handleError(err){
+  console.log(err);
+}
 
 
 
-let fileName = 'sample_data/lorem.txt';
+let fileName = 'sample_data/lorem.tx';
 
 readFile(fileName,'utf8')
 	.then(countWords)
-	.catch('Error')
+	.catch( handleError )

@@ -6,15 +6,11 @@ let promiseForEven = new Promise( (resolve, reject)=>{
 		if(num%2 === 0){
 			resolve(num)
 		}else{
-			reject(num)
+			reject(new Error(`${num} is not even!`))
 		}
 	},2000)
 
 })
-
-function promiseFulfilled(num){
-	console.log('Do something with '+num);
-}
 
 function promiseRejected(num){
 	console.log('Error: '+num);
@@ -22,8 +18,12 @@ function promiseRejected(num){
 
 
 promiseForEven
-	.then( promiseFulfilled )
-	.catch( promiseRejected )
+	.then( num => {
+		console.log(`I have an EVEN number: ${num}`);
+	})
+	.catch( (err) => {
+		console.log(err);
+	} )
 
 
 console.log(`I'm doing something important`);

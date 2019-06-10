@@ -1,5 +1,5 @@
 
-let getData = new Promise( function(res, rej){
+let getData = new Promise( function(resolve, rej){
 		// create an XMLHttpRequest object
 		var xhr = window.XMLHttpRequest ? new XMLHttpRequest() :
 						new ActiveXObject("Microsoft.XMLHTTP");
@@ -12,7 +12,7 @@ let getData = new Promise( function(res, rej){
 		xhr.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
 				data = this.responseText;
-				res(data)
+				resolve(data)
 			}
 		};
 
@@ -24,7 +24,7 @@ let getData = new Promise( function(res, rej){
 
 getData
 	.then( doSomethingWithData )
-	.catch( function(msg){console.log(msg);})
+	.catch( function(msg){console.log(msg)})
 
 
 function doSomethingWithData(data){

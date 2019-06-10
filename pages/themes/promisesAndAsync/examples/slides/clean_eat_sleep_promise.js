@@ -23,4 +23,6 @@ let goToBed = function(msg){
 
 
 
-cleanRoom.then(eatIcecream).then(goToBed);
+cleanRoom
+  .then(eatIcecream)
+  .then(goToBed);
