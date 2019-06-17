@@ -31,7 +31,7 @@ function handleError(err){
 
 
 
-let fileName = 'sample_data/lorem.tx';
+let fileName = 'sample_data/lorem.txt';
 
 readFile(fileName,'utf8')
 	.then(countWords)

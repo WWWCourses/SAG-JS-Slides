@@ -15,8 +15,7 @@ let countUniqueWords = function(data){
   let wordsCount = new Map();
 
   let dataArr = data.split(' ');
-  // [ 'one', 'two', 'one', 'two', 'three', 'one' ]
-  // console.log(dataArr);
+
   dataArr.forEach( function(e){
     if( wordsCount.has(e) ){
       wordsCount.set(e, wordsCount.get(e)+1 )
@@ -28,11 +27,19 @@ let countUniqueWords = function(data){
   console.log(wordsCount);
 }
 
-(async () => {
-  let fileName = 'sample_data/lorem.txt';
+function doSomethingWithData(data){
+  console.log(data);
+}
 
-  const content = await read(fileName);
-  console.log(content);
+let fileName = 'sample_data/lorem.txt';
 
-  countUniqueWords(content);
-})();
+async function main(){
+  const data = await read(fileName);
+  doSomethingWithData(data);
+
+  // console.log(data);
+
+  // countUniqueWords(data);
+};
+main();
+
