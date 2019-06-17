@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>DOMmanipulations</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<!-- css & themes include -->
+	<link rel="stylesheet" href="../../../lib/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../../../outfit/css/themes/projector.css" id="theme">
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? '../../../lib/reveal.js/css/print/pdf.css' : '../../../lib/reveal.js/css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+	<!-- custom -->
+	<link rel="stylesheet" href="../../../outfit/css/reveal.js.css">
+	<base target="_blank">
+</head>
+<body>
+	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+		<div class="top_links">
+			<a class="home_link" href="/SAG-JS-Slides/index.html#DOMmanipulations" target="_top"><i class="fa fa-home"></i></a>
+			<span class="help_link" href="#"><i class="fa fa-question"></i></span>
+			<div class="help_text">
+				<div><span>N/Space</span><span>Next Slide</span></div>
+				<div><span>P</span><span>Previous Slide</span></div>
+				<div><span>O</span><span>Slides Overview</span></div>
+				<div><span>ctrl+left click</span><span>Zoom Element</span></div>
+			</div>
+		</div>
+		<div class="footer theme_switch">
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/dark.css'); return false;">Dark</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/light.css'); return false;">Light</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/projector.css'); return false;">Projector</a>
+		</div>
+		<div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>DOM Manipulations</h1></section>
+<section data-transition="zoom">
+	<section>
+		<div class="copyright">
+			<div class="note">
+				<p>Created for</p>
+			</div>
+			<div class="company">
+        <a href="https://www.softwareag.com/bg/default.html">
+        <div style="font-size:3em">Software AG</div>
+        </a>
+      </div>
+		</div>
+	</section>
+	<section class="copyright" data-transition="zoom" style="margin-top: -2em;">
+		<div class="note">
+			<p>Created by</p>
+		</div>
+		<div class="company">
+		   <div class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="vertical" data-theme="dark" data-vanity="ivapopova"><a class="LI-simple-link" href='https://bg.linkedin.com/in/ivapopova?trk=profile-badge'>Iva E. Popova</a></div>
+		</div>
+		<!-- <div class="author">
+			<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+		</div> -->
+	</section>
+</section>
+
+
+
+
+<!-- DOM -->
+<section><h1>DOM bases</h1></section>
+<section><h2>Overview</h2>
+	<section>
+	   <dl class="fa">
+			<dt><abbr>DOM</abbr><dfn><span>Document</span><span>Object</span><span>Model</span></dfn></dt>
+			<dt><span class="note">A platform-independent</span> and <span class="note">language agnostic</span> convention for representing and manipulating the objects in <span class="code">HTML</span>, <span class="code">XHTML</span> и <span class="code">XML</span> documents.</dt>
+			<dt>Web Browsers represent internally the HTML/CSS code in a structure, very close to DOM, called <abbr><a href="https://en.wikipedia.org/wiki/Browser_Object_Model">BOM</a></abbr><dfn><span>Browser</span><span>Object</span><span>Model</span></dfn>.</dt>
+		</dl>
+	</section>
+	<section><h3>DOM/BOM/JS objects(API)</h3>
+		<a href="images/windowObjects.png"><img src="images/windowObjects.png" alt="windowObjects"></a>
+	</section>
+	<section><h3>The DOM tree</h3>
+		<pre><code rel="HTML" class="html">
+			&lt;!DOCTYPE html&gt;
+			&lt;html&gt;
+				&lt;head&gt;
+				  &lt;title&gt;My title&lt;/title&gt;
+				&lt;/head&gt;
+				&lt;body&gt;
+				  &lt;h1&gt;A heading&lt;/h1&gt;
+				  &lt;a href=&quot;#&quot;&gt;Link text&lt;/a&gt;
+				&lt;/body&gt;
+			&lt;/html&gt;
+		</code></pre>
+	</section>
+	<section><h3>The DOM tree</h3>
+		<a href="images/DOM-model.svg.png"><img src="images/DOM-model.svg.png" style="height: 70vh;"></a>
+	</section>
+	<section>
+		<dl class="fa">
+			<dt>DOM is an hierarchical structure.</dt>
+			<dt>DOM defines next object types, called nodes</dt>
+			<dd><span class="note code">document node</span>.</dd>
+			<dd><span class="note code">elements nodes</span></dd>
+			<dd><span class="note code">attribute nodes</span></dd>
+			<dd><span class="note code">text node</span></dd>
+			<dd><span class="note code">comment node</span></dd>
+		</dl>
+	</section>
+</section>
+<section><h2>The Document Object</h2>
+	<section>
+		<dl class="fa">
+			<dt>The html element is represented by the <span class="note code">document object</span>.</dt>
+			<dd><a href="http://www.w3schools.com/jsref/dom_obj_document.asp">w3schools: The HTML DOM Document Object</a></dd>
+		</dl>
+	</section>
+	<section><h3>Example:</h3>
+		<pre><code rel="HTML">
+			&lt;body&gt;
+				<p id="p1">Paragraph <b>1</b>!</p>
+
+				<script type="text/javascript">
+					console.log("The Document node object:");
+					console.dir(document);
+				</script>
+			&lt;/body&gt;
+		</code></pre>
+	</section>
+</section>
+<section><h2>The Element Object</h2>
+	<section>
+		<dl class="fa">
+			<dt>Every HTML element is represented by an object of type <span class="code note">element object</span></dt>
+			<dt>Each <span class="code note">element node</span> could be a parent node for: element nodes, text nodes or comment nodes</dt>
+			<dt><a href="http://www.w3schools.com/jsref/dom_obj_all.asp">The HTML DOM Element Object</a></dt>
+		</dl>
+	</section>
+	<section><h3>Example:</h3>
+		<pre><code rel="HTML">
+			&lt;body&gt;
+				<p id="p1">Paragraph <b>1</b>!</p>
+
+				<script type="text/javascript">
+					console.log("The p Element node object:");
+					var elementNode = document.getElementById("p1");
+					console.dir(elementNode);
+				</script>
+			&lt;/body&gt;
+		</code></pre>
+	</section>
+</section>
+<section><h2>The Attribute Object</h2>
+	<section>
+		<dl class="fa">
+			<dt>Every HTMl attribute is represented as object of type: <span class="note code">attribute object</span></dt>
+			<dt>an attribute object is always a part of an element object.</dt>
+			<dt><a href="http://www.w3schools.com/jsref/dom_obj_attributes.asp">The HTML DOM Attribute Object</a></dt>
+			<dt>We rarely use in practice an attribute object to manipulate an element attributes. Each element object has properties and methods to read/write attributes, like <code>getAttribute()/setAttribute()/removeAttribute()</code></dt>
+		</dl>
+	</section>
+	<section><h3>Example:</h3>
+		<pre><code rel="HTML">
+			&lt;body&gt;
+				<p id="p1">Paragraph <b>1</b>!</p>
+
+				<script type="text/javascript">
+					console.log("The id Attribute node object:");
+					var atributeNode = document.body.childNodes[1].getAttributeNode('id');
+					console.dir( atributeNode );
+				</script>
+			&lt;/body&gt;
+		</code></pre>
+	</section>
+</section>
+
+<section><h2>The Text Object</h2>
+	<section>
+		<dl class="fa">
+			<dt class="note">The text content of an HTML element or HTML attribute is represented as object of type <span class="note">text object</span></dt>
+			<dt><a href="https://www.w3schools.com/xml/dom_text.asp">XML DOM - The Text Object</a></dt>
+			<dt>In practice, to manipulate the text content of an element, we use the element methods: <code>innerHTML</code> or <code>innerText</code></dt>
+		</dl>
+	</section>
+	<section><h3>Example:</h3>
+		<pre><code rel="HTML">
+			&lt;body&gt;
+				<p id="p1">Paragraph <b>1</b>!</p>
+
+				<script type="text/javascript">
+					console.log("The 'Paragraph' text node object:");
+					var textNode = document.body.childNodes[1].childNodes[0];
+					console.dir( textNode );
+				</script>
+			&lt;/body&gt;
+		</code></pre>
+	</section>
+</section>
+
+<section><h2>The Comment Object</h2>
+	<section>
+		<dl class="fa">
+			<dt class="note">HTML comments are represented as objects of type <span class="note">Comment Object</span></dt>
+			<dt><a href="https://www.w3schools.com/xml/dom_comment.asp">XML DOM - The Comment Object</a></dt>
+		</dl>
+	</section>
+	<section><h3>Example:</h3>
+		<pre><code rel="HTML">
+			&lt;body&gt;
+				<p id="p1">Paragraph <b>1</b>!</p>
+				<!-- some comment -->
+
+				<script type="text/javascript">
+					console.log("The Comment node object:");
+					var commentNode = document.body.childNodes[3];
+					console.dir( commentNode );
+				</script>
+			&lt;/body&gt;
+		</code></pre>
+	</section>
+</section>
+
+<section><h2>Numerical Node Types</h2>
+	<section>
+		<dl class="fa">
+			<dt>Each DOM object type has an associated number. Thus, it could be dynamically determined what's the type of an object.</dt>
+			<dt>Browsers use the <code>nodeType</code> object property to represent the object numerical type</dt>
+			<dt><a href="https://www.w3schools.com/xml/dom_nodetype.asp">XML DOM Node Types</a></dt>
+		</dl>
+	</section>
+</section>
+
+<section><h2>Methods for accessing Element Nodes</h2>
+	<section><h3><a href="https://www.w3schools.com/jsref/met_document_getelementbyid.asp">getElementById()</a></h3>
+		<dl class="fa">
+			<dt>returns the object, representing the HTML element with the given</dt>
+		</dl>
+		<pre><code rel="JS">
+			var node = document.getElementById('test');
+		</code></pre>
+	</section>
+	<section><h3><a href="https://www.w3schools.com/jsref/met_document_getelementsbyclassname.asp">getElementsByClassName()</a></h3>
+		<dl class="fa">
+			<dt>Returns NodeList - a collection of all objects, representing the HTML elements with the given class</dt>
+			<dt>NodeList is a structure similar, but not exactly, to JavaScript arrays</dt>
+			<dt>To get a given HTML element from the collection we have to use the <span class="note">[]</span> notation.</dt>
+		</dl>
+		<pre><code rel="JS">
+			var allRedNodes = document.getElementsByClassName('red');
+			var firstRedNode = allRedNodes[0];
+		</code></pre>
+	</section>
+	<section><h3><a href="https://www.w3schools.com/jsref/met_document_getelementsbytagname.asp">getElementsByTagName()</a></h3>
+		<dl class="fa">
+			<dt>Returns NodeList - a collection of all objects, representing the HTML elements with the given tag Name</dt>
+		</dl>
+		<pre><code rel="JS">
+			var allParagraphNodes = document.getElementsByTagName('p');
+			var firstParagraph = allParagraphNodes[0];
+		</code></pre>
+	</section>
+	<section><h3><a href="https://www.w3schools.com/jsref/met_document_queryselector.asp">querySelector()</a></h3>
+		<dl class="fa">
+			<dt>Return an object representing the first HTML element, which could be selected by the given selector.</dt>
+		</dl>
+		<pre><code rel="JS">
+			var firstLI = document.querySelector("ul>li:nth-of-type(1)");
+		</code></pre>
+	</section>
+	<section><h3><a href="https://www.w3schools.com/jsref/met_document_queryselectorall.asp">querySelectorAll()</a></h3>
+		<dl class="fa">
+			<dt>Return NodeList of all objects, representing the HTML elements, which could be selected by the given selector.</dt>
+		</dl>
+		<pre><code rel="JS">
+			var allFooterLI = document.querySelectorAll('footer ul>li');
+		</code></pre>
+	</section>
+</section>
+
+
+
+
+
+<!-- <section data-min="5" id="hw"><h1>HW</h1></section>
+<section><h2>Task 1</h2>
+  <section><h3>Description</h3>
+
+  </section>
+</section> -->
+
+
+<section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
+	 <p>These slides are based on</p>
+	 <p>customised version of </p>
+	 <p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+	 <p>framework</p>
+</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+		</div>
+	</div>
+	<!-- Custom processing -->
+	<script src="../../../outfit/js/slides.js"></script>
+	<!-- external scripts -->
+	<script src="../../../lib/reveal.js/lib/js/head.min.js"></script>
+	<script src="../../../lib/reveal.js/js/reveal.js"></script>
+	<!-- init reveal -->
+	<script>
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		var highlightjsTabSize = '  ';
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			slideNumber: 'c/t',
+			keyboard: true,
+			history: true,
+			center: true,
+			width: '100%',
+			height: '100%',
+			// slide transition
+			transition: 'concave', // none/fade/slide/convex/concave/zoom
+			// Factor of the display size that should remain empty around the content
+			margin: 0.1,
+			// shift+maous click to zoom in/out element
+			zoomKey: 'ctrl',
+			// theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+			// transition: Reveal.getQueryHash().transition || 'default'
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad(); } },
+				{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+				{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
+			]
+		});
+	</script>
+	<!-- linkedin badge -->
+	<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+</body>
+</html>

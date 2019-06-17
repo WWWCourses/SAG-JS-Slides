@@ -1,13 +1,18 @@
 {
     "spellright.language": [
-        "English (American)",
-        "English (British)"
+        "English (American)"
     ],
     "spellright.documentTypes": [
         "markdown",
         "latex",
         "plaintext",
-        "python"
+        "python",
+        "html"
     ],
     "editor.fontSize": 16,
+    "workbench.colorCustomizations": {
+        "editorError.foreground":   "#00000033",
+        "editorWarning.foreground": "#00000033",
+        "editorInfo.foreground":    "#00000033"
+    }
 }

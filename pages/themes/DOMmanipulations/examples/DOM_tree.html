@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My title</title>
+</head>
+<body>
+  <p id="p1">Paragraph <b>1</b>!</p>
+
+  <script type="text/javascript">
+    var p1Node = document.body.childNodes[1];
+    console.dir( p1Node );
+    console.dir(p1Node.attributes);
+
+    p1Node.setAttribute('class', 'red');
+  </script>
+</body>
+</html>
