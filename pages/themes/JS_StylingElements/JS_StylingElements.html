@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 	<!-- css & themes include -->
 	<link rel="stylesheet" href="../../../lib/reveal.js/css/reveal.css">
-	<link rel="stylesheet" href="../../../outfit/css/themes/projector.css" id="theme">
+	<link rel="stylesheet" href="../../../outfit/css/themes/dark.css" id="theme">
 	<!-- Printing and PDF exports -->
 	<script>
 		var link = document.createElement( 'link' );
@@ -47,7 +47,7 @@
 ##################### SLIDES START #####################
 ########################################################
 -->
-<section><h1>JS_StylingElements</h1></section>
+<section><h1>Styling elements with JavaScript</h1></section>
 <section data-transition="zoom">
 	<section>
 		<div class="copyright">
@@ -76,12 +76,13 @@
 
 
 
-
 <section><h2>HTML DOM Style Object</h2>
     <section>
         <dl class="fa">
             <dt>CSS декларациите се представят в DOM като свойства на обект от тип:</dt>
-            <dd><a href="https://www.w3schools.com/jsref/dom_obj_style.asp">Style object (CSSStyleDeclaration)</a></dd>
+			<dd><a href="https://www.w3schools.com/jsref/dom_obj_style.asp">Style object (CSSStyleDeclaration)</a></dd>
+			<dt>На всяко CSS property се съпоставя CSSStyleDeclaration (т.е. JS ) property,  като се спазва конвенцията за Camel Case именуване.</dt>
+			<dd><code>background-color</code> => <code>backgroundColor</code></dd>
         </dl>
     </section>
     <section>
@@ -90,8 +91,10 @@
     </section>
     <section>
         <dl class="fa">
-            <dt>За всеки HTML елемент, стилът дефиниран чрез <span class="note"><code>style</code> атрибута</span>, се представя в отделен CSSStyleDeclaration обект.</dt>
-            <dt>Всичкият приложен CSS върху даден елемент, т.нар. <span class="note"><code>computed style</code></span> се представя в отделен CSSStyleDeclaration обект.</dt>
+			<dt>За всеки HTML елемент, стилът дефиниран чрез <span class="note"><code>style</code> атрибута</span>, се представя в отделен CSSStyleDeclaration обект.</dt>
+			<dd>Достъпен чрез <code>element.style</code></dd>
+			<dt>Всичкият приложен CSS върху даден елемент, т.нар. <span class="note"><code>computed style</code></span> се представя в отделен CSSStyleDeclaration обект.</dt>
+			<dd>Достъпен чрез <code>window.getComputedStyle( element )</code></dd>
             <dt>Стилът, зададен в head секцията, не може да бъде достъпен като CSSStyleDeclaration обект, а единствено като съдържание(<code>innerHTML</code> или <code>contentText</code>) на <code>style</code> елемента. </dt>
         </dl>
     </section>

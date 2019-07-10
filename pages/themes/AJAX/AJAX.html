@@ -48,20 +48,29 @@
 -->
 <section><h1>AJAX: consuming Remote Data with JavaScript</h1></section>
 <section data-transition="zoom">
-	<div class="copyright">
+	<section>
+		<div class="copyright">
+			<div class="note">
+				<p>Created for</p>
+			</div>
+			<div class="company">
+        <a href="https://www.softwareag.com/bg/default.html">
+        <div style="font-size:3em">Software AG</div>
+        </a>
+      </div>
+		</div>
+	</section>
+	<section class="copyright" data-transition="zoom" style="margin-top: -2em;">
 		<div class="note">
-			<p>Created for</p>
+			<p>Created by</p>
 		</div>
 		<div class="company">
-			<a href="http://progressbg.net/kurs-po-web-design/">
-			<img style="height:80%" src="../../../outfit/images/logos/ProgressBG_logo_529_127.png">
-			</a>
+		   <div class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="vertical" data-theme="dark" data-vanity="ivapopova"><a class="LI-simple-link" href='https://bg.linkedin.com/in/ivapopova?trk=profile-badge'>Iva E. Popova</a></div>
 		</div>
-		<div class="author">
-			<span>Iva E. Popova, 2018-2019,</span>
+		<!-- <div class="author">
 			<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
-		</div>
-	</div>
+		</div> -->
+	</section>
 </section>
 
 <section><h2>What is AJAX?</h2>
@@ -98,6 +107,34 @@
 			<dd>the use of JavaScript and HTML DOM (to display or use the data)</dd>
 		</dl>
 	</section>
+</section>
+
+<section><h2>Examples</h2>
+	<section><h3>example: songs lyrics</h3>
+		<a href="examples/songLyricsAjaxLoad/songLyricsAjaxLoad.html">Load Song Lyrics By AJAX</a>
+	</section>
+	<section><h3>Task: songs lyrics</h3>
+		<dl class="fa">
+			<dt>Create a similar page, with your favorite artists and songs</dt>
+			<dt>For getting the lyrics data, use the three approaches for making AJAX requests:</dt>
+			<dd>by XMLHttpRequest object</dd>
+			<dd>by Fetch APIs</dd>
+			<dd>by jQuery get() or load() methods</dd>
+		</dl>
+	</section>
+	<section><h3>example: simple Shopping Cart</h3>
+		<a href="examples/ShoppingCart/index.html">Shopping Cart</a>
+		<p>* created by Martin Harsovski *</p>
+	</section>
+	<!--
+	<section><h3>task: simple Shopping Cart</h3>
+		<dl class="fa">
+			<dt>Create the simple Shopping Cart page by yourself, with the similar functionality, but <span class="note">fix the bug</span> of products disappearing from list after being added to shopping cart. Instead, fade them a little by css.</dt>
+			<dt>The products are generated dynamically, using the information in <code><a href="https://raw.githubusercontent.com/ProgressBG-WWW-Courses/JavaScript-Advanced/gh-pages/downloads/products.json">https://raw.githubusercontent.com/ProgressBG-WWW-Courses/JavaScript-Advanced/gh-pages/downloads/products.json</a> file</code></dt>
+			<dt>You can use the Martin's html and css (<a href="https://github.com/ProgressBG-WWW-Courses/JavaScript-Advanced/raw/gh-pages/downloads/ShoppingCartMartinBase.zip">ShoppingCartMartinBase.zip</a>), or create your own style.</dt>
+		</dl>
+	</section>
+	-->
 </section>
 
 <section><h2>the XMLHttpRequest object</h2>
@@ -238,31 +275,7 @@
 		</code></pre>
 	</section>
 </section>
-<section><h2>Examples</h2>
-	<section><h3>example: songs lyrics</h3>
-		<a href="examples/songLyricsAjaxLoad/songLyricsAjaxLoad.html">Load Song Lyrics By AJAX</a>
-	</section>
-	<section><h3>Task: songs lyrics</h3>
-		<dl class="fa">
-			<dt>Create a similar page, with your favorite artists and songs</dt>
-			<dt>For getting the lyrics data, use the three approaches for making AJAX requests:</dt>
-			<dd>by XMLHttpRequest object</dd>
-			<dd>by Fetch APIs</dd>
-			<dd>by jQuery get() or load() methods</dd>
-		</dl>
-	</section>
-	<section><h3>example: simple Shopping Cart</h3>
-		<a href="examples/ShoppingCart/index.html">Shopping Cart</a>
-		<p>* created by Martin Harsovski *</p>
-	</section>
-	<section><h3>task: simple Shopping Cart</h3>
-		<dl class="fa">
-			<dt>Create the simple Shopping Cart page by yourself, with the similar functionality, but <span class="note">fix the bug</span> of products disappearing from list after being added to shopping cart. Instead, fade them a little by css.</dt>
-			<dt>The products are generated dynamically, using the information in <code><a href="https://raw.githubusercontent.com/ProgressBG-WWW-Courses/JavaScript-Advanced/gh-pages/downloads/products.json">https://raw.githubusercontent.com/ProgressBG-WWW-Courses/JavaScript-Advanced/gh-pages/downloads/products.json</a> file</code></dt>
-			<dt>You can use the Martin's html and css (<a href="https://github.com/ProgressBG-WWW-Courses/JavaScript-Advanced/raw/gh-pages/downloads/ShoppingCartMartinBase.zip">ShoppingCartMartinBase.zip</a>), or create your own style.</dt>
-		</dl>
-	</section>
-</section>
+
 <section><h2>Appendix</h2>
 	<dl class="fa">
 		<dt>List of public APIs</dt>
